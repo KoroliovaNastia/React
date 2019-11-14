@@ -5,7 +5,7 @@ module.exports = (env) => {
     return{
         //context: path.join(__dirname, 'src'),
 
-        entry: './src/index.js',
+        entry: './src/app.js',
         
         output: {
             filename: 'result.js',
@@ -19,11 +19,6 @@ module.exports = (env) => {
             modules: [path.join(__dirname, "src"),
             "node_modules"]
         },
-
-        resolveLoader: {
-            modules: ["node_modules"]
-        },
-
         module: {
             rules: [
                 {
