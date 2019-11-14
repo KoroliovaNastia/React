@@ -1,17 +1,18 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = (NODE_ENV) => {
+module.exports = (env) => {
     return{
-        context: path.join(__dirname, 'src'),
+        //context: path.join(__dirname, 'src'),
 
-        entry: './index.js',
-
+        entry: './src/index.js',
+        
         output: {
             filename: 'result.js',
             path: path.join(__dirname, 'dist'),
         },
 
-        devtool: NODE_ENV === 'production' ? 'none' : 'source-map',
+        devtool: env.NODE_ENV === 'production' ? 'none' : 'source-map',
 
         resolve: {
             extensions: ['.js', '.jsx'],
@@ -33,6 +34,12 @@ module.exports = (NODE_ENV) => {
                   },
                 }
               ]
-        }
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: "src/index.html",
+                inject: "body"
+            })
+        ]
     }
 };

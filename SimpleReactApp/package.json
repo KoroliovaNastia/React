@@ -6,8 +6,8 @@
     "start": "node server.js",
     "build": "webpack",
     "test": "echo\"Error: no test soecified\" && exit 1",
-    "test-dev": "webpack --NODE_ENV=development",
-    "test-prod": "webpack --NODE_ENV=production"
+    "test-dev": "webpack --env.NODE_ENV=development",
+    "test-prod": "webpack --env.NODE_ENV=production"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -28,7 +28,9 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "6.24.1",
     "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
     "style-loader": "1.0.0",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   }
 }
