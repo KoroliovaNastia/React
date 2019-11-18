@@ -1,5 +1,6 @@
 import React, { Component} from "react";
 import DefaultImage from './images/movie-default.jpg'
+import {Grid, Row, Col} from 'react-bootstrap'
 
 class Main extends Component {
     constructor() {
@@ -11,26 +12,29 @@ class Main extends Component {
     render() {
         return (
         <div class="container">
-            <div class="uk-grid-column-small uk-child-width-1-3@s uk-text-center" uk-grid="true">
-                {this.state.items.map((item)=> <Item key={item.id} item={item}/>)}
-            </div>
+            <Grid>
+                <Row>
+                    <Col lg={8}>
+                        <Row>
+                        {this.state.items.map((item)=> <Col><Item key={item.id} item={item}/></Col>)}
+                        </Row>
+                    </Col>
+                </Row>
+            </Grid>
         </div>
         );
     }
 }
+
 
 class Item extends Component {
     render(){
         return (
             <div class='item'>
                 <Image image={this.props.item.image} />
-                <MetadataBox>
-                    <Title title={this.props.item.title} />
-                    <Genre releaseDate={this.props.item.genre} />
-                </MetadataBox>
-                <MetadataBox>
-                    <ReleaseDate releaseDate={this.props.item.releaseDate} />
-                </MetadataBox>
+                <Title title={this.props.item.title} />
+                <Genre releaseDate={this.props.item.genre} />
+                <ReleaseDate releaseDate={this.props.item.releaseDate} />
             </div>
         );
     }

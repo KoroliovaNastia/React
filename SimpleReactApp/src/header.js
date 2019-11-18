@@ -16,6 +16,10 @@ var searchStyle = {
     backgroundColor: '#2323237f' 
 };
 
+var searchInput = {
+    
+};
+
 class Search extends Component {
     render() {
         return (
