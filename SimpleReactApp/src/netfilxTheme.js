@@ -1,16 +1,19 @@
 import React from 'react'
+import {createUseStyles} from 'react-jss'
 
-var logoStyle = {
-    color: '#f65261',
-    paddingTop: '16px',
-    fontSize: '20px',
-    span: {
-        fontFamily:'Arial Black'
+var logoStyle = createUseStyles({
+    logo:{
+        color: '#f65261',
+        paddingTop: '16px',
+        fontSize: '20px',
+        '& span': {
+            fontFamily:'Arial Black'
+        }
     }
-};
+});
 
 export const LogoText = () => (
-    <p style={logoStyle}>
+    <p className={logoStyle}>
       <span>netflix</span>roulete
     </p>
 );

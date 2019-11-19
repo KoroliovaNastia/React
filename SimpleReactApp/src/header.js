@@ -1,9 +1,6 @@
 import React, { Component} from "react";
 import Image from './images/header-image.jpg'
 import {LogoText, Button, FuilterButton} from './netfilxTheme'
-const { StyleSheet } = jss;
-const jss = jss.default;
-jss.setup(jssPreset.default());
 
 const Header = () => (
     <>
@@ -13,7 +10,7 @@ const Header = () => (
     </>
 )
 
-var searchStyle = {
+const  searchStyle = {
     minWidth: "1200px",
     backgroundImage: 'url(' + Image + ')',
     backgroundColor: '#2323237f' 
