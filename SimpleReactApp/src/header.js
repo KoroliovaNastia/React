@@ -1,6 +1,9 @@
 import React, { Component} from "react";
 import Image from './images/header-image.jpg'
-import Theme, {LogoText, Button} from './netfilxTheme'
+import {LogoText, Button, FuilterButton} from './netfilxTheme'
+const { StyleSheet } = jss;
+const jss = jss.default;
+jss.setup(jssPreset.default());
 
 const Header = () => (
     <>
@@ -16,10 +19,6 @@ var searchStyle = {
     backgroundColor: '#2323237f' 
 };
 
-var searchInput = {
-    
-};
-
 class Search extends Component {
     render() {
         return (
@@ -28,6 +27,10 @@ class Search extends Component {
                     <input class="uk-search-field" type="search" placeholder="search..."/>
                     <Button />
                 </form>
+                <Filter title="search by">
+                    <FuilterButton checked="true" value="title"/>
+                    <FuilterButton checked="false" value="genre"/>
+                </Filter>
             </div>
         );
     }
@@ -37,7 +40,12 @@ class SearchNavigation extends Component {
     render(){
         return (
         <div class="box">
-        </div>)
+            <Filter title="sort by">
+                <FuilterButton checked="true" value="Release date"/>
+                <FuilterButton checked="false" value="rating"/>
+            </Filter>
+        </div>
+        )
     }
 };
 
@@ -47,8 +55,15 @@ const Logo = () => (
     </div>
     );
 
-/*const SearchBox = (searchMove) => (
-        <input class="uk-search-field" type="search" placeholder="search..."/>
-        <button class="uk-search-close" type="reset"></button> );
-*/
+class Filter extends Component{
+    render(){
+        return(
+            <form>
+            <p>{this.props.title}</p>
+            {this.props.children}
+        </form>
+        )
+    }
+}
+
 export default Header

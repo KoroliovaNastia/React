@@ -18,3 +18,9 @@ export const LogoText = () => (
 export const Button = () => (
     <button class="uk-button" type="reset">Serach</button>
 );
+
+export const FuilterButton = ({checked, value}) => (
+    <label class="btn">
+        <input type="button" value={value} checked={checked}/>
+    </label>
+);
