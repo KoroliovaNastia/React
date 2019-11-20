@@ -1,13 +1,13 @@
 import React from "react";
-import {LogoText} from './netfilxTheme'
+import {LogoText, Box} from './netfilxTheme'
 
 const $logo = window.$logo;
 
 const Footer = () => ( 
-<footer className="box">
-    <div>
+<footer>
+    <Box>
         <LogoText/>
-    </div>
+    </Box>
 </footer> 
 );
 
