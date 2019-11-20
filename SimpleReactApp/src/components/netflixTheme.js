@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import {createUseStyles} from 'react-jss'
+import React, { Component } from 'react';
+import {createUseStyles} from 'react-jss';
 
 var logoStyle = createUseStyles({
     logo: {
@@ -35,24 +35,12 @@ var logoStyle = createUseStyles({
     }
 });
 
-export const LogoText = () => (
-    <p className={logoStyle().logo}>
-      <span>netflix</span>roulete
-    </p>
-);
-
 export const Button = () => {
     const classes = logoStyle();
     return(<button className={[classes.button, classes.searchButon].join(' ')} type="reset">Serach</button>)
 };
 
-export const FuilterButton = ({checked, value}) => (
-    <label>
-        <input className={[logoStyle().button, logoStyle().filterButton].join(' ')} type="button" value={value} /*checked={checked}*//>
-    </label>
-);
-
-export class Box extends Component{
+export default class Box extends Component{
     render(){
         let box = {
             backgroundColor: "#555555",
@@ -65,28 +53,3 @@ export class Box extends Component{
         )
     }
 };
-
-export class Filter extends Component{
-    render(){
-        let style = {
-            textTransform: "uppercase",
-            fontSize: "16px",
-            color: "fff important!",
-            display: "inline-block"
-        }
-        let formStyle = {
-            display: "inline-block",
-            marginLeft: "10px"
-        }
-        return(
-            <>
-                <div style={style}>
-                    <p>{this.props.title}</p>
-                </div>
-                <div style={formStyle}>
-                    {this.props.children}
-                </div>
-            </>
-        )
-    }
-}
