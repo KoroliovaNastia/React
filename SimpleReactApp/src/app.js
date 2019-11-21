@@ -1,36 +1,27 @@
-import React, { Component, PureComponent } from "react";
+import React, { Component} from "react";
 import ReactDOM from "react-dom";
-import Footer from './components/footer';
-import Main from './components/main';
-import Logo from './components/logo';
-import Header from './components/header';
-import Search from './components/search';
-import SearchNavigation from './components/searchNavigation';
-import Box from './components/box';
+import DefaultImage from './images/movie-default.jpg';
+import SearchPage from './components/searchPage';
+import ResultPage from './components/resultPage';
 
 import '../src/css/main.css';
 
 class Root extends Component {
   constructor(){
     super();
-    this.state = {logo: 'netflixroulete'}
+    this.state = {
+      logo: 'netflixroulete',
+      movieList: [{id: '1', image: DefaultImage, title:'Soon...', genre:'Drama', releaseDate:'2020'}, 
+      {id: '2', image: DefaultImage, title:'Soon...', genre:'Drama', releaseDate:'2020'},
+       {id: '3', image: DefaultImage, title:'Soon...', genre:'Drama', releaseDate:'2020'}]
+    }
   }
   render() {
+    const {movieList, logo} = this.state;
     return (
       <>
-        <Header>
-          <Logo logo = {this.state.logo}/>
-          <Search/>
-          <Box>
-            <SearchNavigation/>
-          </Box>
-        </Header>
-        <Main />
-        <Footer>
-          <Box>
-            <Logo logo = {this.state.logo}/>
-          </Box>
-        </Footer>
+        <SearchPage movieList={movieList} logo={logo}/>
+        <ResultPage/>
       </>
     );
   }
