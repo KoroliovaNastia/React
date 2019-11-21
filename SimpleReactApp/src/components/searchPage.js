@@ -7,15 +7,18 @@ import Search from './search';
 import SearchNavigation from './searchNavigation';
 import Box from './box';
 
-const SearchPage = ({logo, movieList}) => 
+const SearchPage = ({logo, movieList, filters}) => {
+    const {searchFilterInfo, navigationFilterInfo} = filters
+    return(
     <>
         <Header>
             <Logo logo = {logo}/>
-            <Search/>
-            <Box>
-                <SearchNavigation/>
-            </Box>
+            <Search filterInfo={searchFilterInfo}/>
         </Header>
+        <Box>
+            <p>{movieList.length} movie found</p>
+            <SearchNavigation filterInfo={navigationFilterInfo}/>
+        </Box>
         <Main movieList={movieList}/>
         <Footer>
             <Box>
@@ -23,5 +26,7 @@ const SearchPage = ({logo, movieList}) =>
             </Box>
         </Footer>
     </>
+    )
+}
 
 export default SearchPage
