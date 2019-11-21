@@ -1,6 +1,6 @@
 import React, { Component} from "react";
 import Image from '../images/header-image.jpg';
-import {Button} from './netflixTheme';
+import Button from './button';
 import Filter from './filter';
 import FilterButton from './filterButton';
 

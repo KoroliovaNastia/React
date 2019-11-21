@@ -34,22 +34,3 @@ var logoStyle = createUseStyles({
         }
     }
 });
-
-export const Button = () => {
-    const classes = logoStyle();
-    return(<button className={[classes.button, classes.searchButon].join(' ')} type="reset">Serach</button>)
-};
-
-export default class Box extends Component{
-    render(){
-        let box = {
-            backgroundColor: "#555555",
-            height: "65px"
-        }
-        return(
-        <div style={box}>
-            {this.props.children}
-        </div>
-        )
-    }
-};

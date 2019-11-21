@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Logo = () => (
+const Logo = ({logo}) => (
     <div className="logo">
         <p /*className={logoStyle().logo*}*/>
-        <span>netflix</span>roulete
+        {logo}
         </p>
     </div>
 );

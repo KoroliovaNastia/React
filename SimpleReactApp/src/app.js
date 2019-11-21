@@ -6,19 +6,20 @@ import Logo from './components/logo';
 import Header from './components/header';
 import Search from './components/search';
 import SearchNavigation from './components/searchNavigation';
-import Box from './components/netflixTheme';
+import Box from './components/box';
 
 import '../src/css/main.css';
 
 class Root extends Component {
   constructor(){
     super();
+    this.state = {logo: 'netflixroulete'}
   }
   render() {
     return (
       <>
         <Header>
-          <Logo />
+          <Logo logo = {this.state.logo}/>
           <Search/>
           <Box>
             <SearchNavigation/>
@@ -27,7 +28,7 @@ class Root extends Component {
         <Main />
         <Footer>
           <Box>
-            <Logo/>
+            <Logo logo = {this.state.logo}/>
           </Box>
         </Footer>
       </>
