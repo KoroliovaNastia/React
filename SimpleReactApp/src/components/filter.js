@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FilterButton from './filterButton';
 
 class Filter extends Component{
     render(){
@@ -19,7 +20,7 @@ class Filter extends Component{
                     <p>{title}</p>
                 </div>
                 <div style={formStyle}>
-                    {buttons}
+                    {buttons.map((button) => <FilterButton key={button.id} data={button}/> )}
                 </div>
             </>
         )

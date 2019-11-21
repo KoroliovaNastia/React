@@ -2,7 +2,6 @@ import React, { Component} from "react";
 import Image from '../images/header-image.jpg';
 import Button from './button';
 import Filter from './filter';
-import FilterButton from './filterButton';
 
 const  searchStyle = {
     minWidth: "1200px",
@@ -33,6 +32,8 @@ class Search extends Component {
             marginTop: "50px",
             position: "absolute"
         }
+
+        const {searchTitle, buttonList} = this.state
         return (
             <div className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style={searchStyle} uk-img="true">
                 <div className="uk-search">
@@ -40,7 +41,7 @@ class Search extends Component {
                     <Button />
                 </div>
                 <div style={filter}>
-                    <Filter title={this.state.searchTitle} buttons = {this.state.buttonList.map((button) => <FilterButton key={button.id} data={button}/> )}/>
+                    <Filter title={searchTitle} buttons = {buttonList}/>
                 </div>
             </div>
         );

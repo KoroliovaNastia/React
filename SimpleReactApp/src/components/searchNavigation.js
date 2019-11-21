@@ -1,6 +1,5 @@
 import React, { Component} from "react";
 import Filter from './filter';
-import FilterButton from './filterButton';
 
 export default class SearchNavigation extends Component {
     constructor(props){
@@ -11,8 +10,9 @@ export default class SearchNavigation extends Component {
         }
     }
     render(){
+        const {searchTitle, buttonList} = this.state
         return (
-            <Filter title={this.state.searchTitle} buttons = {this.state.buttonList.map((button) => <FilterButton key={button.id} data={button}/> )}/>
+            <Filter title={searchTitle} buttons = {buttonList}/>
         )
     }
 };
