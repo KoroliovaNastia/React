@@ -3,14 +3,6 @@ import Button from './button';
 import Filter from './filter';
 
 class Search extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            searchTitle: "search by",
-            buttonList: [{id: "b1", text: "title", checked: "true"}, {id: "b2", text: "genre", checked: "false"}],
-            searchButtonText : "Search"
-        }
-    }
     render() {
         let input = {
             width: "600px",
@@ -27,7 +19,8 @@ class Search extends Component {
             position: "absolute"
         }
 
-        const {searchTitle, buttonList, searchButtonText} = this.props.filterInfo
+        const {title, buttonList} = this.props.filterInfo;
+        const {searchButtonText} = this.props;
         return (
             <>
                 <div className="uk-search">
@@ -35,7 +28,7 @@ class Search extends Component {
                     <button>{searchButtonText}</button>
                 </div>
                 <div style={filter}>
-                    <Filter title={searchTitle} buttons = {buttonList}/>
+                    <Filter title={title} buttons = {buttonList}/>
                 </div>
             </>
         );

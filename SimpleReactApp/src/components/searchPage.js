@@ -7,13 +7,13 @@ import Search from './search';
 import SearchNavigation from './searchNavigation';
 import Box from './box';
 
-const SearchPage = ({logo, movieList, filters}) => {
+const SearchPage = ({logo, movieList, filters, searchButtonText}) => {
     const {searchFilterInfo, navigationFilterInfo} = filters
     return(
     <>
         <Header>
             <Logo logo = {logo}/>
-            <Search filterInfo={searchFilterInfo}/>
+            <Search filterInfo={searchFilterInfo} searchButtonText={searchButtonText}/>
         </Header>
         <Box>
             <p>{movieList.length} movie found</p>
