@@ -12,7 +12,7 @@ class Filter extends Component{
         });
       }
     updateButton(button, checkedButton){
-        return {id: button.id, text: button.text, checked: (button === checkedButton)}
+        return {id: button.id, text: button.text, checked: (button.id === checkedButton.id)}
     }  
     render(){
         const {title} = this.props;
