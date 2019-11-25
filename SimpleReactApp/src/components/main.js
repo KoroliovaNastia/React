@@ -15,9 +15,16 @@ class Main extends Component {
         {
             return (
             <div className="container">
-                    <div className="row">
-                        {movieList.map((movie)=> <div key={movie.id} className="col-lg-4"><Movie key={movie.id} movie={movie}/></div>)}
-                    </div>
+                <div className="row">
+                    {
+                        movieList.map((movie)=> {
+                            if(movie.isShowing)
+                            {
+                                return <div key={movie.id} className="col-lg-4"><Movie key={movie.id} movie={movie}/></div>
+                            }
+                        })
+                    }
+                </div>
             </div>
             );
         }

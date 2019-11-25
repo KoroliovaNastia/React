@@ -6,7 +6,7 @@ import Box from './box'
 import Footer from './footer'
 import Main from './main'
 
-const ResultPage = ({logo, movie, filteredMovieList}) => 
+const DescriptionPage = ({logo, movie, filteredMovieList}) => 
     <>
         <Header>
             <Logo logo = {logo}/>
@@ -24,4 +24,4 @@ const ResultPage = ({logo, movie, filteredMovieList}) =>
         </Footer>
     </>
 
-export default ResultPage
+export default DescriptionPage

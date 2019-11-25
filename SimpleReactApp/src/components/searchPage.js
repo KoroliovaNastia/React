@@ -10,20 +10,17 @@ import Box from './box';
 class SearchPage extends Component {
     constructor(props){
         super(props);
-        this.state ={movieList: this.props.movieList}
     }
-    onChangeList(updatedMovies){
-        this.setState({movieList: updatedMovies})
-    }
+
     render(){
-        const {logo, searchButtonText} = this.props;
+        const {logo, searchButtonText, movieList, onSearchClick, handleChange} = this.props;
         const {searchFilterInfo, navigationFilterInfo} = this.props.filters
-        const {movieList} = this.state;
+
         return(
         <>
             <Header>
                 <Logo logo = {logo}/>
-                <Search filterInfo={searchFilterInfo} searchButtonText={searchButtonText} movieList={movieList} onChangeList={this.onChangeList.bind(this)}/>
+                <Search filterInfo={searchFilterInfo} searchButtonText={searchButtonText} movieList={movieList} onSearchClick={onSearchClick} handleChange={handleChange}/>
             </Header>
             <Box>
                 <p>{movieList.length} movie found</p>
@@ -36,7 +33,7 @@ class SearchPage extends Component {
                 </Box>
             </Footer>
         </>
-        )}
+    )}
 }
 
 export default SearchPage

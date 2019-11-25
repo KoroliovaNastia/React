@@ -9,43 +9,8 @@ class Search extends Component {
         super(props);
         this.state = { 
             query: '',
-            movieList: this.props.movieList,
             filteredMovies: this.props.movieList
         };
-        
-        this.onSearchClick = this.onSearchClick.bind(this);
-        //this.onEnterClick = this.onEnterBound.bind(this);
-    }
-
-    /*componentDidMount(){
-
-    }*/
-    /*static componentWillMount() {
-        this.setState(
-          {
-            movieList: this.props.movieList,
-            filteredMovies: this.props.movieList
-          }
-        );
-      }*/
-
-    onSearchClick(){
-        /*this.setState({
-            query: this.search.value
-        })*/
-        
-        let {query, movieList} = this.state;
-        var updatedList = movieList;
-
-        updatedList = updatedList.filter((movie) => {
-            Object.keys(movie).filter(key => key !=="image").some(key => movie[key].toLowerCase().indexOf(query.toLowerCase() !== -1));
-        })
-        /*updatedList = updatedList.filter(function(movie){
-            return movie.title.search()
-        })*/
-
-        this.setState({filteredMovies: updatedList});
-        this.props.onChangeList(this.state.filteredMovies);
     }
 
     /*onEnterClick(event) {
@@ -70,12 +35,12 @@ class Search extends Component {
         }
 
         const {title, buttonList} = this.props.filterInfo;
-        const {searchButtonText} = this.props;
+        const {searchButtonText, handleChange, onSearchClick} = this.props;
         return (
             <>
                 <div className="uk-search">
-                    <input style={input} className="uk-search-field" type="search" placeholder="SEARCH" onChange={event => this.setState({query: event.target.value})}/>
-                    <button onClick={this.onSearchClick}>{searchButtonText}</button>
+                    <input style={input} className="uk-search-field" type="search" placeholder="SEARCH" value={this.state.value} onChange={handleChange}/>
+                    <button onClick={onSearchClick}>{searchButtonText}</button>
                 </div>
                 <div style={filter}>
                     <Filter title={title} buttons = {buttonList}/>
