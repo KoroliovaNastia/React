@@ -7,16 +7,22 @@ class Filter extends Component{
         this.state = {buttons : props.buttons}
     }
     toggleChange(checkedButton){
+
+        const {type} = this.props;
+        const {buttons} = {...this.state}
+        const newButtons = buttons.map(button => { return {...button, checked: (button.id === checkedButton.id)}})
         this.setState({
-            buttons : this.state.buttons.map(button => this.updateButton(button, checkedButton))
+                buttons: newButtons
         });
+
+        this.props.updateFilterButtons(newButtons, type)
       }
-    updateButton(button, checkedButton){
+    /*updateButton(button, checkedButton){
         return {id: button.id, text: button.text, checked: (button.id === checkedButton.id)}
-    }  
+    }  */
     render(){
-        const {title} = this.props;
-        const {buttons} = this.state;
+        const {title, buttons} = this.props;
+        //const {buttons} = this.state;
         let style = {
             textTransform: "uppercase",
             fontSize: "16px",

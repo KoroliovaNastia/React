@@ -34,8 +34,8 @@ class Search extends Component {
             position: "absolute"
         }
 
-        const {title, buttonList} = this.props.filterInfo;
-        const {searchButtonText, handleChange, onSearchClick} = this.props;
+        const {title, buttonList, type} = this.props.filterInfo;
+        const {searchButtonText, handleChange, onSearchClick, updateFilterButtons} = this.props;
         return (
             <>
                 <div className="uk-search">
@@ -43,7 +43,7 @@ class Search extends Component {
                     <button onClick={onSearchClick}>{searchButtonText}</button>
                 </div>
                 <div style={filter}>
-                    <Filter title={title} buttons = {buttonList}/>
+                    <Filter title={title} buttons={buttonList} type={type} updateFilterButtons={updateFilterButtons}/>
                 </div>
             </>
         );
