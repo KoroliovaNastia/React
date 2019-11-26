@@ -6,7 +6,7 @@ import Box from './box'
 import Footer from './footer'
 import Main from './main'
 
-const DescriptionPage = ({logo, movie, filteredMovieList}) => 
+const DescriptionPage = ({logo, movie, filteredMovieList, sortParam}) => 
     <>
         <Header>
             <Logo logo = {logo}/>
@@ -16,7 +16,7 @@ const DescriptionPage = ({logo, movie, filteredMovieList}) =>
         <Box>
             <p>Films by {movie.genre} genre</p>
         </Box>
-        <Main movieList={filteredMovieList}/>
+        <Main movieList={filteredMovieList} sortParam={sortParam}/>
         <Footer>
             <Box>
             <Logo logo = {logo}/>

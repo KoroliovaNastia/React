@@ -13,7 +13,7 @@ class SearchPage extends Component {
     }
 
     render(){
-        const {logo, searchButtonText, movieList, onSearchClick, handleChange, updateFilterButtons} = this.props;
+        const {logo, searchButtonText, movieList, onSearchClick, handleChange, updateFilterButtons, sortParam} = this.props;
         const {searchFilterInfo, navigationFilterInfo} = this.props.filters
 
         return(
@@ -26,7 +26,7 @@ class SearchPage extends Component {
                 <p>{movieList.length} movie found</p>
                 <SearchNavigation filterInfo={navigationFilterInfo} updateFilterButtons={updateFilterButtons}/>
             </Box>
-            <Main movieList={movieList}/>
+            <Main movieList={movieList} sortParam={sortParam}/>
             <Footer>
                 <Box>
                 <Logo logo = {logo}/>

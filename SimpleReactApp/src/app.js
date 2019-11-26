@@ -15,20 +15,20 @@ class Root extends Component {
       logo: 'netflixroulete',
       searchButtonText : "Search",
       query: "",
-      movieList: [{id: '1', image: DefaultImage, title:'Not yet...', genre:'Adventure', releaseDate:'2019', rating: '4.3', duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true}, 
-                  {id: '2', image: DefaultImage, title:'Soon...', genre:'Horror', releaseDate:'2020', rating: '4.3', duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true},
-                  {id: '3', image: DefaultImage, title:'Future...', genre:'Psychology', releaseDate:'2021', rating: '4.3', duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true},
-                  {id: '4', image: DefaultImage, title:'Ones upon a time', genre:'Adventure', releaseDate:'2021', rating: '4.3', duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true}],
+      movieList: [{id: '1', image: DefaultImage, title:'Not yet...', genre:'Adventure', release_date: 2022, rating: 5.0, duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true}, 
+                  {id: '2', image: DefaultImage, title:'Soon...', genre:'Horror', release_date: 2020, rating: 4.1, duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true},
+                  {id: '3', image: DefaultImage, title:'Future...', genre:'Psychology', release_date: 2019, rating: 5.0, duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true},
+                  {id: '4', image: DefaultImage, title:'Ones upon a time', genre:'Adventure', release_date: 2021, rating: 4.3, duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true}],
 
       filters: {
                 searchFilterInfo: {type: "searchFilterInfo", title : "search by", buttonList: [{id: "b1", text: "title", checked: true}, {id: "b2", text: "genre", checked: false}]},
                 navigationFilterInfo: {type: "navigationFilterInfo", title: "sort by", buttonList: [{id: "f1", text: "Release date", checked: true}, {id: "f2", text: "rating", checked: false}]}
       },
 
-      moviesDescriptionPage: [{id: '1', image: DefaultImage, title:'Not yet...', genre:'Adventure', releaseDate:'2019', rating: '4.3', duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true}, 
-                  {id: '2', image: DefaultImage, title:'Soon...', genre:'Horror', releaseDate:'2020', rating: '4.3', duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true},
-                  {id: '3', image: DefaultImage, title:'Future...', genre:'Psychology', releaseDate:'2021', rating: '4.3', duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true},
-                  {id: '4', image: DefaultImage, title:'Ones upon a time', genre:'Adventure', releaseDate:'2021', rating: '4.3', duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true}]
+      moviesDescriptionPage: [{id: '1', image: DefaultImage, title:'Not yet...', genre:'Adventure', release_date: 2022, rating: 5.0, duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true}, 
+                  {id: '2', image: DefaultImage, title:'Soon...', genre:'Horror', release_date: 2020, rating: 4.1, duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true},
+                  {id: '3', image: DefaultImage, title:'Future...', genre:'Psychology', release_date: 2019, rating: 5.0, duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true},
+                  {id: '4', image: DefaultImage, title:'Ones upon a time', genre:'Adventure', release_date: 2021, rating: 4.3, duration: '154', description:'lorem ipsum lorem ipsum', isShowing: true}]
     };
 
     this.onSearchClick = this.onSearchClick.bind(this);
@@ -40,7 +40,7 @@ class Root extends Component {
     const {query, movieList, filters: {searchFilterInfo}} = {...this.state};
     var updatedList = movieList;
 
-    var currentFilter = searchFilterInfo.buttonList.filter(filter => filter.checked)[0].text;
+    var currentFilter = this.getCheckedFilterButton(searchFilterInfo);
 
     updatedList = this.filterMoviesByParamAndQuery(updatedList, currentFilter, query);
     this.setState({movieList: updatedList});
@@ -66,13 +66,18 @@ class Root extends Component {
     this.setState({query: event.target.value});
   }
 
+  getCheckedFilterButton(filterInfo){
+    return filterInfo.buttonList.filter(filter => filter.checked)[0].text;
+  }
+
   render() {
     const {movieList, moviesDescriptionPage, logo, filters, searchButtonText} = this.state;
     let filteredMoviesByGenre = this.filterMoviesByParamAndQuery(moviesDescriptionPage, "genre", moviesDescriptionPage[0].genre)
+    let sortParam = this.getCheckedFilterButton(filters.navigationFilterInfo);
     return (
       <ErrorBoundary>
-        <SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} onSearchClick={this.onSearchClick} handleChange={this.handleChange} updateFilterButtons={this.updateFilterButtons}/>
-        <DescriptionPage logo={logo} movie={moviesDescriptionPage[0]} filteredMovieList={filteredMoviesByGenre}/>
+        <SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} sortParam={sortParam} onSearchClick={this.onSearchClick} handleChange={this.handleChange} updateFilterButtons={this.updateFilterButtons}/>
+        <DescriptionPage logo={logo} movie={moviesDescriptionPage[0]} filteredMovieList={filteredMoviesByGenre} sortParam={sortParam}/>
       </ErrorBoundary>
     );
   }
