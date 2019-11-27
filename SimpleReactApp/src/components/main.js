@@ -2,15 +2,9 @@ import React, { Component} from "react";
 import Movie from './movie'
 
 class Main extends Component {
-    sortMovies(){
-        const {movieList, sortParam} = this.props;
-        let param = sortParam.replace(' ', '_').toLowerCase();
-        const sortedMovies = movieList.sort((a, b) => a[param] > b[param]);
-        return sortedMovies
-    }
 
     render() {
-        const movieList = this.sortMovies();
+        const {movieList} = this.props;
         if (movieList.length == 0){
             return (
                 <div className="container">

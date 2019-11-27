@@ -17,9 +17,7 @@ class Filter extends Component{
 
         this.props.updateFilterButtons(newButtons, type)
       }
-    /*updateButton(button, checkedButton){
-        return {id: button.id, text: button.text, checked: (button.id === checkedButton.id)}
-    }  */
+
     render(){
         const {title, buttons} = this.props;
         //const {buttons} = this.state;
