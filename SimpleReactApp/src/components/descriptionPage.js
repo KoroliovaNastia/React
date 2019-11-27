@@ -10,18 +10,13 @@ import Main from './main'
 
 class DescriptionPage extends Component {
 
-    filterMoviesByParamAndQuery(movies, filter, query){
-        const updatedMovies =  movies.map( movie => {
-          return {...movie, isShowing: movie[filter].toLowerCase().indexOf(query.toLowerCase()) !== -1};
-        })
-        
-        return updatedMovies;
-      }
 
     render() {
-        const {logo, movieId, movieList} = this.props;
+        const {logo, movieId, movieList, filterMoviesByParamAndQuery} = this.props;
+        const movie = movieList[movieId];
 
-        const filteredMoviesByGenre = this.filterMoviesByParamAndQuery(movieList, "genre", moviesDescriptionPage[movieId].genre)
+        const filteredMoviesByGenre = filterMoviesByParamAndQuery(movieList, "genre", movie.genre); 
+        filteredMoviesByGenre[movieId] = {...filteredMoviesByGenre[movieId], isShowing: false};
       
         return (
         <>

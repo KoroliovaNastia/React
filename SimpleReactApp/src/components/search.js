@@ -7,10 +7,6 @@ const ENTER_KEY = 13;
 class Search extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            query: '',
-            filteredMovies: this.props.movieList
-        };
     }
 
     /*onEnterClick(event) {
@@ -34,12 +30,11 @@ class Search extends Component {
             position: "absolute"
         }
 
-        const {title, buttonList, type} = this.props.filterInfo;
-        const {searchButtonText, handleChange, onSearchClick, updateFilterButtons} = this.props;
+        const {searchButtonText, handleChange, onSearchClick, updateFilterButtons, query, filterInfo:{title, buttonList, type}} = this.props;
         return (
             <>
                 <div className="uk-search">
-                    <input style={input} className="uk-search-field" type="search" placeholder="SEARCH" value={this.state.value} onChange={handleChange}/>
+                    <input style={input} className="uk-search-field" type="search" placeholder="SEARCH" value={query} onChange={handleChange}/>
                     <button onClick={onSearchClick}>{searchButtonText}</button>
                 </div>
                 <div style={filter}>

@@ -25,16 +25,21 @@ class Root extends Component {
     };
 
     this.updateFilterButtons = this.updateFilterButtons.bind(this);
+    this.filterMoviesByParamAndQuery = this.filterMoviesByParamAndQuery.bind(this);
   }
 
   updateFilterButtons(buttons, type){
-    const filter = this.state.filters[type];
-    const currentState = {...filter, buttonList: buttons};
-    this.setState({filter: currentState});
+    const {filters} = this.state;
+    const currentState = {...filters[type], buttonList: buttons};
+    this.setState({...filters[type] = currentState});
   }
 
-  getCheckedFilterButton(filterInfo){
-    return filterInfo.buttonList.filter(filter => filter.checked)[0].text;
+  filterMoviesByParamAndQuery(movies, filter, query){
+    const updatedMovies =  movies.map( movie => {
+      return {...movie, isShowing: movie[filter].toLowerCase().indexOf(query.toLowerCase()) !== -1};
+    })
+    
+    return updatedMovies;
   }
 
   render() {
@@ -42,8 +47,8 @@ class Root extends Component {
 
     return (
       <ErrorBoundary>
-        <SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={this.updateFilterButtons} getCheckedFilterButton={getCheckedFilterButton} getCheckedFilterButton={getCheckedFilterButton}/>
-        <DescriptionPage logo={logo} movieId={1} movieList={filteredMoviesByGenre}/>
+        <SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={this.updateFilterButtons} filterMoviesByParamAndQuery={this.filterMoviesByParamAndQuery}/>
+        <DescriptionPage logo={logo} movieId={1} movieList={movieList} filterMoviesByParamAndQuery={this.filterMoviesByParamAndQuery}/>
       </ErrorBoundary>
     );
   }

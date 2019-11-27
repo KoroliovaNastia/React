@@ -11,19 +11,21 @@ class SearchPage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            query: ""
+            query: "",
+            movieList: props.movieList
         },
 
         this.onSearchClick = this.onSearchClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.getCheckedFilterButton = this.getCheckedFilterButton.bind(this);
     }
 
     onSearchClick(){
-        const {query, movieList, filters: {searchFilterInfo}} = {...this.state};
-        const {getCheckedFilterButton, filterMoviesByParamAndQuery} = this.props;
+        const {query, movieList} = this.state;
+        const {filterMoviesByParamAndQuery, filters: {searchFilterInfo}} = this.props;
         var updatedList = movieList;
     
-        var currentFilter = getCheckedFilterButton(searchFilterInfo);
+        var currentFilter = this.getCheckedFilterButton(searchFilterInfo);
     
         updatedList = filterMoviesByParamAndQuery(updatedList, currentFilter, query);
         this.setState({movieList: updatedList});
@@ -34,15 +36,18 @@ class SearchPage extends Component {
     }
 
     sortMovies(sortParam){
-        const {movieList} = this.props;
+        const {movieList} = this.state;
         let param = sortParam.replace(' ', '_').toLowerCase();
         const sortedMovies = movieList.sort((a, b) => a[param] < b[param]);
         return sortedMovies
     }
 
+    getCheckedFilterButton(filterInfo){
+        return filterInfo.buttonList.filter(filter => filter.checked)[0].text;
+      }
+
     render(){
-        const {logo, searchButtonText, updateFilterButtons} = this.props;
-        const {searchFilterInfo, navigationFilterInfo} = this.props.filters
+        const {logo, searchButtonText, updateFilterButtons, filters: {searchFilterInfo, navigationFilterInfo}} = this.props;
 
         const sortParam = this.getCheckedFilterButton(navigationFilterInfo);
         const sortedMovies = this.sortMovies(sortParam);

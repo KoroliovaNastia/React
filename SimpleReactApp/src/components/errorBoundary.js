@@ -14,20 +14,22 @@ class ErrorBoundary extends Component {
     }
 
     render() {
-        if (this.state.errorInfo) {
+        const {error, errorInfo} = this.state;
+        const {children} = this.props;
+        if (errorInfo) {
             return (
                 <>
                     <h2>Oops.... something went wrong.</h2>
                     <details style={{ whiteSpace: 'pre-wrap' }}>
-                        {this.state.error && this.state.error.toString()}
+                        {error && error.toString()}
                         <br />
-                        {this.state.errorInfo.componentStackS}
+                        {errorInfo.componentStackS}
                     </details>
                 </>
             )
         }
 
-        return this.props.children;
+        return children;
     }
 }
 

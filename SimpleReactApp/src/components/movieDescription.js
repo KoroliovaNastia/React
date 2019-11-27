@@ -7,10 +7,14 @@ class MovieDescription extends Component {
         return(
             <>
                 <Image image={image}/>
-                <p>{title}</p>
-                <p>{rating}</p>
-                <p>{releaseDate} year {duration} min</p>
-                <p>{description}</p>
+                <div>
+                    <p>{title}</p>
+                    <p>{rating}</p>
+                </div>
+                <div>
+                    <p>{releaseDate} year {duration} min</p>
+                    <p>{description}</p>
+                </div>
             </>
         )
     }
