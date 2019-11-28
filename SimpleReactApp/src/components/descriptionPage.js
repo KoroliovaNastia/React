@@ -10,13 +10,22 @@ import Main from './main'
 
 class DescriptionPage extends Component {
 
+    filterMoviesByGenre(mainMovie){
+        const {movieList, setIsShowing} = this.props;
+
+        const filteredMovies = movieList.filter(movie => movie.id !== mainMovie.id).map(movie => {
+            const isShowing = movie.genre === mainMovie.genre;
+            return setIsShowing(movie, isShowing)}
+            )
+        
+        return filteredMovies;    
+    }
 
     render() {
-        const {logo, movieId, movieList, filterMoviesByParamAndQuery} = this.props;
-        const movie = movieList[movieId];
+        const {logo, movieId, movieList} = this.props;
+        const movie = movieList.find(movie => movie.id === movieId);
 
-        const filteredMoviesByGenre = filterMoviesByParamAndQuery(movieList, "genre", movie.genre); 
-        filteredMoviesByGenre[movieId] = {...filteredMoviesByGenre[movieId], isShowing: false};
+        const filteredMoviesByGenre = this.filterMoviesByGenre(movie);
       
         return (
         <>

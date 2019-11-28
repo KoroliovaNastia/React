@@ -18,27 +18,36 @@ class SearchPage extends Component {
         this.onSearchClick = this.onSearchClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.getCheckedFilterButton = this.getCheckedFilterButton.bind(this);
+        this.filterMoviesByParamAndQuery = this.filterMoviesByParamAndQuery.bind(this);
     }
+
+    filterMoviesByParamAndQuery(movies, filter, query){
+        const {setIsShowing} = this.props;
+        const updatedMovies =  movies.map( movie => {
+          const isShowing = movie[filter].toLowerCase().indexOf(query.toLowerCase()) !== -1;
+          return setIsShowing(movie, isShowing);
+        })
+        
+        return updatedMovies;
+      }
 
     onSearchClick(){
         const {query, movieList} = this.state;
-        const {filterMoviesByParamAndQuery, filters: {searchFilterInfo}} = this.props;
-        var updatedList = movieList;
-    
+        const {filters: {searchFilterInfo}} = this.props;
         var currentFilter = this.getCheckedFilterButton(searchFilterInfo);
     
-        updatedList = filterMoviesByParamAndQuery(updatedList, currentFilter, query);
+        var updatedList = this.filterMoviesByParamAndQuery(movieList, currentFilter, query);
         this.setState({movieList: updatedList});
       }
 
-    handleChange(){
+    handleChange(event){
     this.setState({query: event.target.value});
     }
 
     sortMovies(sortParam){
         const {movieList} = this.state;
         let param = sortParam.replace(' ', '_').toLowerCase();
-        const sortedMovies = movieList.sort((a, b) => a[param] < b[param]);
+        const sortedMovies = movieList.sort((a, b) => a[param] - b[param]);
         return sortedMovies
     }
 

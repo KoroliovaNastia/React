@@ -25,7 +25,7 @@ class Root extends Component {
     };
 
     this.updateFilterButtons = this.updateFilterButtons.bind(this);
-    this.filterMoviesByParamAndQuery = this.filterMoviesByParamAndQuery.bind(this);
+    this.setIsShowing = this.setIsShowing.bind(this);
   }
 
   updateFilterButtons(buttons, type){
@@ -33,13 +33,10 @@ class Root extends Component {
     const currentState = {...filters[type], buttonList: buttons};
     this.setState({...filters[type] = currentState});
   }
-
-  filterMoviesByParamAndQuery(movies, filter, query){
-    const updatedMovies =  movies.map( movie => {
-      return {...movie, isShowing: movie[filter].toLowerCase().indexOf(query.toLowerCase()) !== -1};
-    })
-    
-    return updatedMovies;
+  
+  setIsShowing(movie, isShowing)
+  {
+    return {...movie, isShowing: isShowing};
   }
 
   render() {
@@ -47,8 +44,8 @@ class Root extends Component {
 
     return (
       <ErrorBoundary>
-        <SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={this.updateFilterButtons} filterMoviesByParamAndQuery={this.filterMoviesByParamAndQuery}/>
-        <DescriptionPage logo={logo} movieId={1} movieList={movieList} filterMoviesByParamAndQuery={this.filterMoviesByParamAndQuery}/>
+        <SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={this.updateFilterButtons} setIsShowing={this.setIsShowing}/>
+        <DescriptionPage logo={logo} movieId={"1"} movieList={movieList} setIsShowing={this.setIsShowing}/>
       </ErrorBoundary>
     );
   }

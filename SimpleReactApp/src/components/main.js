@@ -18,11 +18,8 @@ class Main extends Component {
             <div className="container">
                 <div className="row">
                     {
-                        movieList.map((movie)=> {
-                            if(movie.isShowing)
-                            {
-                                return <div key={movie.id} className="col-lg-4"><Movie key={movie.id} movie={movie}/></div>
-                            }
+                        movieList.filter(movie => movie.isShowing).map((movie) => {
+                            return <div key={movie.id} className="col-lg-4"><Movie key={movie.id} movie={movie}/></div>
                         })
                     }
                 </div>
