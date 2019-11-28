@@ -9,9 +9,8 @@ configure({ adapter: new Adapter() });
 
 describe('Movie component', () => {
     it('should be render correctly', () => {
-        const releaseDate = 2019;
-        const rating = 5.0;
-        const component = shallow(<Movie title="title" genre="Horror" release_date={releaseDate} rating={rating}/>)
+        const movie = {image: "", title: "title", genre: "Horror", release_date: 2019, rating: 5.0}
+        const component = shallow(<Movie movie={movie} />)
         expect(component).toMatchSnapshot();
     })
 })

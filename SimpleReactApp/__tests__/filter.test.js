@@ -1,8 +1,9 @@
 import React from 'react';
 import { shallow, configure, mount, render } from 'enzyme';
-import jest from 'jest'
 import FilterButton from '../src/components/filterButton'
-import { exportAllDeclaration } from '@babel/types';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 describe('FilterButton component', () =>{
     const data = {text: "test", checked: false}
@@ -10,8 +11,10 @@ describe('FilterButton component', () =>{
         const toggleChange = jest.fn();
         const component = mount(<FilterButton data={data} toggleChange={toggleChange}/>);
         const checkbox = () => component.find('input');
-        checkbox().should.not.be.checked();
+       // expect(checkbox()).toHaveProperty("checked", false);
+       // checkbox().should.not.be.checked();
         checkbox().simulate('change', {target: {checked: true}});
         expect(toggleChange).toHaveBeenCalled();
+        //expect(checkbox()).toHaveProperty("checked", true);
     })
 })
