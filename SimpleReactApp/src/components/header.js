@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Image from '../images/header-image.jpg';
 
 const  searchStyle = {

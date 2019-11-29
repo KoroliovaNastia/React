@@ -34,14 +34,14 @@ class Filter extends Component{
             marginLeft: "10px"
         }
         return(
-            <>
+            <div className="filter-container">
                 <div style={style}>
                     <p>{title}</p>
                 </div>
                 <div style={formStyle}>
                     {buttons.map((button) => <FilterButton key={button.id} data={button} toggleChange={this.toggleChange}/>)}
                 </div>
-            </>
+            </div>
         )
     }
 }

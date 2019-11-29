@@ -35,7 +35,7 @@ class Search extends Component {
             <>
                 <div className="uk-search">
                     <input style={input} className="uk-search-field" type="search" placeholder="SEARCH" value={query} onChange={handleChange}/>
-                    <button onClick={onSearchClick}>{searchButtonText}</button>
+                    <button className="search-button" data-cy="search" onClick={onSearchClick}>{searchButtonText}</button>
                 </div>
                 <div style={filter}>
                     <Filter title={title} buttons={buttonList} type={type} updateFilterButtons={updateFilterButtons}/>
