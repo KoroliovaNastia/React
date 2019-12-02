@@ -1,0 +1,170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DescriptionPage component should render correctly 1`] = `
+<Fragment>
+  <Header>
+    <Logo
+      logo="netflixroulete"
+    />
+    <button />
+    <MovieDescription
+      movie={
+        Object {
+          "description": "lorem ipsum lorem ipsum",
+          "duration": "154",
+          "genre": "Adventure",
+          "id": "1",
+          "image": "../src/images/movie-default.jpg",
+          "isShowing": true,
+          "rating": "5.0",
+          "release_date": "2022",
+          "title": "Not yet...",
+        }
+      }
+    />
+  </Header>
+  <Box>
+    <p>
+      Films by 
+      Adventure
+       genre
+    </p>
+  </Box>
+  <Main
+    movieList={
+      Array [
+        undefined,
+      ]
+    }
+  />
+  <Footer>
+    <Box>
+      <Logo
+        logo="netflixroulete"
+      />
+    </Box>
+  </Footer>
+</Fragment>
+`;
+
+exports[`SearchPage component should render correctly 1`] = `
+<Fragment>
+  <Header>
+    <Logo
+      logo="netflixroulete"
+    />
+    <Search
+      filterInfo={
+        Object {
+          "buttonList": Array [
+            Object {
+              "checked": true,
+              "id": "b1",
+              "text": "title",
+            },
+            Object {
+              "checked": false,
+              "id": "b2",
+              "text": "genre",
+            },
+          ],
+          "title": "search by",
+          "type": "searchFilterInfo",
+        }
+      }
+      handleChange={[Function]}
+      movieList={
+        Array [
+          Object {
+            "description": "lorem ipsum lorem ipsum",
+            "duration": "154",
+            "genre": "Horror",
+            "id": "2",
+            "image": "../src/images/movie-default.jpg",
+            "isShowing": true,
+            "rating": "4.1",
+            "release_date": "2020",
+            "title": "Soon...",
+          },
+          Object {
+            "description": "lorem ipsum lorem ipsum",
+            "duration": "154",
+            "genre": "Adventure",
+            "id": "1",
+            "image": "../src/images/movie-default.jpg",
+            "isShowing": true,
+            "rating": "5.0",
+            "release_date": "2022",
+            "title": "Not yet...",
+          },
+        ]
+      }
+      onSearchClick={[Function]}
+      searchButtonText="Search"
+      updateFilterButtons={[MockFunction]}
+    />
+  </Header>
+  <Box>
+    <p>
+      2
+       movie found
+    </p>
+    <SearchNavigation
+      filterInfo={
+        Object {
+          "buttonList": Array [
+            Object {
+              "checked": true,
+              "id": "f1",
+              "text": "Release date",
+            },
+            Object {
+              "checked": false,
+              "id": "f2",
+              "text": "rating",
+            },
+          ],
+          "title": "sort by",
+          "type": "navigationFilterInfo",
+        }
+      }
+      updateFilterButtons={[MockFunction]}
+    />
+  </Box>
+  <Main
+    movieList={
+      Array [
+        Object {
+          "description": "lorem ipsum lorem ipsum",
+          "duration": "154",
+          "genre": "Horror",
+          "id": "2",
+          "image": "../src/images/movie-default.jpg",
+          "isShowing": true,
+          "rating": "4.1",
+          "release_date": "2020",
+          "title": "Soon...",
+        },
+        Object {
+          "description": "lorem ipsum lorem ipsum",
+          "duration": "154",
+          "genre": "Adventure",
+          "id": "1",
+          "image": "../src/images/movie-default.jpg",
+          "isShowing": true,
+          "rating": "5.0",
+          "release_date": "2022",
+          "title": "Not yet...",
+        },
+      ]
+    }
+  />
+  <Footer>
+    <Box>
+      <Logo
+        logo="netflixroulete"
+      />
+    </Box>
+  </Footer>
+</Fragment>
+`;

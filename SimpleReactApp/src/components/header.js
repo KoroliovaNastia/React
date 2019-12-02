@@ -1,9 +1,10 @@
 import React from 'react';
-import Image from '../images/header-image.jpg';
+//import headerImage from '../images/header-image.jpg';
 
 const  searchStyle = {
     minWidth: "1200px",
-    backgroundImage: 'url(' + Image + ')',
+    //backgroundImage: 'url('+ headerImage +')',
+    backgroundImage: 'url(../images/header-image.jpg)',
     backgroundColor: '#2323237f' 
 };
 

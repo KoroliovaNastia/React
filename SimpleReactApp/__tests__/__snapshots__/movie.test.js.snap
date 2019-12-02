@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Movie component should be render correctly 1`] = `
+<Movie
+  movie={
+    Object {
+      "description": "lorem ipsum lorem ipsum loremipsum",
+      "duration": "154",
+      "genre": "Horror",
+      "id": "m1",
+      "image": "",
+      "rating": 5,
+      "release_date": 2019,
+      "title": "title",
+    }
+  }
+>
+  <div
+    className="movie"
+  >
+    <Image
+      image=""
+    >
+      <img
+        src=""
+      />
+    </Image>
+    <p>
+      title
+    </p>
+    <p>
+      Horror
+    </p>
+    <p>
+      2019
+    </p>
+    <p>
+      5
+    </p>
+  </div>
+</Movie>
+`;

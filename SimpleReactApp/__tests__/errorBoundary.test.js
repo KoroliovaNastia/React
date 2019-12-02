@@ -1,7 +1,8 @@
 import React from 'react';
-import {mount, configure} from 'enzyme';
+import {mount, configure, shallow} from 'enzyme';
 import ErrorBoundary from '../src/components/errorBoundary';
 import Adapter from 'enzyme-adapter-react-16';
+//import {expect} from 'chai'
 
 configure({ adapter: new Adapter() });
 const NewComponent = () => null;
@@ -17,6 +18,6 @@ describe('ErrorBoundary component', () => {
         const error = new Error('test error');
 
         wrapper.find(NewComponent).simulateError(error);
-        expect(wrapper).toHaveProperty('error', true);
+        expect(wrapper.state('error')).toEqual(error);
     })
 })
