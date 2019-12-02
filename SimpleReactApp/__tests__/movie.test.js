@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, configure, mount, render } from 'enzyme';
 import Movie from '../src/components/movie';
-import MovieDescription from '../src/components/descriptionPage';
+import MovieDescription from '../src/components/movieDescription';
 import { shallowToJson } from 'enzyme-to-json';
 import Adapter from 'enzyme-adapter-react-16';
 

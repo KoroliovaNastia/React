@@ -40,3 +40,46 @@ exports[`Movie component should be render correctly 1`] = `
   </div>
 </Movie>
 `;
+
+exports[`Movie description component should be render correctly 1`] = `
+<MovieDescription
+  movie={
+    Object {
+      "description": "lorem ipsum lorem ipsum loremipsum",
+      "duration": "154",
+      "genre": "Horror",
+      "id": "m1",
+      "image": "",
+      "rating": 5,
+      "release_date": 2019,
+      "title": "title",
+    }
+  }
+>
+  <Image
+    image=""
+  >
+    <img
+      src=""
+    />
+  </Image>
+  <div>
+    <p>
+      title
+    </p>
+    <p>
+      5
+    </p>
+  </div>
+  <div>
+    <p>
+       year 
+      154
+       min
+    </p>
+    <p>
+      lorem ipsum lorem ipsum loremipsum
+    </p>
+  </div>
+</MovieDescription>
+`;

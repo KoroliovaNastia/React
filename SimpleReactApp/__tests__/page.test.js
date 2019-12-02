@@ -25,14 +25,14 @@ const setIsShowing = jest.fn();
 
 describe('SearchPage component', () => {
     it('should render correctly', () => {
-        const component = shallow(<SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={updateFilterButtons} setIsShowing={setIsShowing}/>);
+        const component = mount(<SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={updateFilterButtons} setIsShowing={setIsShowing}/>);
         expect(shallowToJson(component)).toMatchSnapshot();
     })
 })
 
 describe('DescriptionPage component', () => {
     it('should render correctly', () => {
-        const component = shallow(<DescriptionPage logo={logo} movieId={"1"} movieList={movieList} setIsShowing={setIsShowing}/>);
+        const component = mount(<DescriptionPage logo={logo} movieId={"1"} movieList={movieList} setIsShowing={setIsShowing}/>);
         expect(shallowToJson(component)).toMatchSnapshot();
     })
 })
