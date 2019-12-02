@@ -21,9 +21,10 @@ class SearchPage extends Component {
         this.filterMoviesByParamAndQuery = this.filterMoviesByParamAndQuery.bind(this);
     }
 
-    filterMoviesByParamAndQuery(movies, filter, query){
+    filterMoviesByParamAndQuery(filter, query){
         const {setIsShowing} = this.props;
-        const updatedMovies =  movies.map( movie => {
+        const {movieList} = this.state;
+        const updatedMovies =  movieList.map( movie => {
           const isShowing = movie[filter].toLowerCase().indexOf(query.toLowerCase()) !== -1;
           return setIsShowing(movie, isShowing);
         })
@@ -32,11 +33,11 @@ class SearchPage extends Component {
       }
 
     onSearchClick(){
-        const {query, movieList} = this.state;
+        const {query} = this.state;
         const {filters: {searchFilterInfo}} = this.props;
         var currentFilter = this.getCheckedFilterButton(searchFilterInfo);
     
-        var updatedList = this.filterMoviesByParamAndQuery(movieList, currentFilter, query);
+        var updatedList = this.filterMoviesByParamAndQuery(currentFilter, query);
         this.setState({movieList: updatedList});
       }
 

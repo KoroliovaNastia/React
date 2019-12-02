@@ -1,52 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DescriptionPage component should render correctly 1`] = `
-<Fragment>
-  <Header>
-    <Logo
-      logo="netflixroulete"
-    />
-    <button />
-    <MovieDescription
-      movie={
-        Object {
-          "description": "lorem ipsum lorem ipsum",
-          "duration": "154",
-          "genre": "Adventure",
-          "id": "1",
-          "image": "../src/images/movie-default.jpg",
-          "isShowing": true,
-          "rating": "5.0",
-          "release_date": "2022",
-          "title": "Not yet...",
-        }
-      }
-    />
-  </Header>
-  <Box>
-    <p>
-      Films by 
-      Adventure
-       genre
-    </p>
-  </Box>
-  <Main
-    movieList={
-      Array [
-        undefined,
-      ]
-    }
-  />
-  <Footer>
-    <Box>
-      <Logo
-        logo="netflixroulete"
-      />
-    </Box>
-  </Footer>
-</Fragment>
-`;
-
 exports[`SearchPage component should render correctly 1`] = `
 <SearchPage
   filters={
@@ -90,7 +43,7 @@ exports[`SearchPage component should render correctly 1`] = `
     Array [
       Object {
         "description": "lorem ipsum lorem ipsum",
-        "duration": "154",
+        "duration": "153",
         "genre": "Horror",
         "id": "2",
         "image": "../src/images/movie-default.jpg",
@@ -122,7 +75,7 @@ exports[`SearchPage component should render correctly 1`] = `
       style={
         Object {
           "backgroundColor": "#2323237f",
-          "backgroundImage": "url(../images/header-image.jpg)",
+          "backgroundImage": "url(test-file-stub)",
           "minWidth": "1200px",
         }
       }
@@ -163,7 +116,7 @@ exports[`SearchPage component should render correctly 1`] = `
           Array [
             Object {
               "description": "lorem ipsum lorem ipsum",
-              "duration": "154",
+              "duration": "153",
               "genre": "Horror",
               "id": "2",
               "image": "../src/images/movie-default.jpg",
@@ -449,7 +402,7 @@ exports[`SearchPage component should render correctly 1`] = `
       Array [
         Object {
           "description": "lorem ipsum lorem ipsum",
-          "duration": "154",
+          "duration": "153",
           "genre": "Horror",
           "id": "2",
           "image": "../src/images/movie-default.jpg",
@@ -487,7 +440,7 @@ exports[`SearchPage component should render correctly 1`] = `
             movie={
               Object {
                 "description": "lorem ipsum lorem ipsum",
-                "duration": "154",
+                "duration": "153",
                 "genre": "Horror",
                 "id": "2",
                 "image": "../src/images/movie-default.jpg",

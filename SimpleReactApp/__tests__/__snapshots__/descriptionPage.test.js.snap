@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DescriptionPage component should render correctly 1`] = `
+<DescriptionPage
+  logo="netflixroulete"
+  movieId="1"
+  movieList={
+    Array [
+      Object {
+        "description": "lorem ipsum lorem ipsum",
+        "duration": "154",
+        "genre": "Adventure",
+        "id": "1",
+        "image": "../src/images/movie-default.jpg",
+        "isShowing": true,
+        "rating": "5.0",
+        "release_date": "2022",
+        "title": "Not yet...",
+      },
+      Object {
+        "description": "lorem ipsum lorem ipsum",
+        "duration": "154",
+        "genre": "Horror",
+        "id": "2",
+        "image": "../src/images/movie-default.jpg",
+        "isShowing": true,
+        "rating": "4.1",
+        "release_date": "2020",
+        "title": "Soon...",
+      },
+    ]
+  }
+  setIsShowing={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "description": "lorem ipsum lorem ipsum",
+            "duration": "154",
+            "genre": "Horror",
+            "id": "2",
+            "image": "../src/images/movie-default.jpg",
+            "isShowing": true,
+            "rating": "4.1",
+            "release_date": "2020",
+            "title": "Soon...",
+          },
+          false,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": Object {
+            "description": "lorem ipsum lorem ipsum",
+            "duration": "154",
+            "genre": "Horror",
+            "id": "2",
+            "image": "../src/images/movie-default.jpg",
+            "isShowing": false,
+            "rating": "4.1",
+            "release_date": "2020",
+            "title": "Soon...",
+          },
+        },
+      ],
+    }
+  }
+>
+  <Header>
+    <div
+      className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
+      style={
+        Object {
+          "backgroundColor": "#2323237f",
+          "backgroundImage": "url(test-file-stub)",
+          "minWidth": "1200px",
+        }
+      }
+      uk-img="true"
+    >
+      <Logo
+        logo="netflixroulete"
+      >
+        <div
+          className="logo"
+        >
+          <p>
+            netflixroulete
+          </p>
+        </div>
+      </Logo>
+      <button />
+      <MovieDescription
+        movie={
+          Object {
+            "description": "lorem ipsum lorem ipsum",
+            "duration": "154",
+            "genre": "Adventure",
+            "id": "1",
+            "image": "../src/images/movie-default.jpg",
+            "isShowing": true,
+            "rating": "5.0",
+            "release_date": "2022",
+            "title": "Not yet...",
+          }
+        }
+      >
+        <Image
+          image="../src/images/movie-default.jpg"
+        >
+          <img
+            src="../src/images/movie-default.jpg"
+          />
+        </Image>
+        <div>
+          <p>
+            Not yet...
+          </p>
+          <p>
+            5.0
+          </p>
+        </div>
+        <div>
+          <p>
+             year 
+            154
+             min
+          </p>
+          <p>
+            lorem ipsum lorem ipsum
+          </p>
+        </div>
+      </MovieDescription>
+    </div>
+  </Header>
+  <Box>
+    <div
+      style={
+        Object {
+          "backgroundColor": "#555555",
+          "height": "65px",
+        }
+      }
+    >
+      <p>
+        Films by 
+        Adventure
+         genre
+      </p>
+    </div>
+  </Box>
+  <Main
+    movieList={
+      Array [
+        Object {
+          "description": "lorem ipsum lorem ipsum",
+          "duration": "154",
+          "genre": "Horror",
+          "id": "2",
+          "image": "../src/images/movie-default.jpg",
+          "isShowing": false,
+          "rating": "4.1",
+          "release_date": "2020",
+          "title": "Soon...",
+        },
+      ]
+    }
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="row"
+      />
+    </div>
+  </Main>
+  <Footer>
+    <footer>
+      <Box>
+        <div
+          style={
+            Object {
+              "backgroundColor": "#555555",
+              "height": "65px",
+            }
+          }
+        >
+          <Logo
+            logo="netflixroulete"
+          >
+            <div
+              className="logo"
+            >
+              <p>
+                netflixroulete
+              </p>
+            </div>
+          </Logo>
+        </div>
+      </Box>
+    </footer>
+  </Footer>
+</DescriptionPage>
+`;
