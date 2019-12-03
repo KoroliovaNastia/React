@@ -1,10 +1,10 @@
 import React, { Component} from "react";
-import DefaultImage from '../src/images/movie-default.jpg';
+import DefaultImage from '../images/movie-default.jpg';
 import SearchPage from './searchPage';
 import DescriptionPage from './descriptionPage';
 import ErrorBoundary from './errorBoundary';
 
-import '../src/css/main.css';
+import '../css/main.css';
 
 class Root extends Component {
   constructor(){
