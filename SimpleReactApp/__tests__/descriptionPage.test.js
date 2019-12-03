@@ -1,11 +1,8 @@
 import React from 'react';
-import { shallow, configure, mount, render } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import DescriptionPage from '../src/components/descriptionPage';
 import { shallowToJson } from 'enzyme-to-json';
 import Adapter from 'enzyme-adapter-react-16';
-//import defaultImage from '../src/images/movie-default.jpg';
-//import headerImage from '../src/images/header-image.jpg';
-
 
 configure({ adapter: new Adapter() });
 

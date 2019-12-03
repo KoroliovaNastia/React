@@ -1,8 +1,7 @@
 import React from 'react';
-import {mount, configure, shallow} from 'enzyme';
+import {mount, configure } from 'enzyme';
 import ErrorBoundary from '../src/components/errorBoundary';
 import Adapter from 'enzyme-adapter-react-16';
-//import {expect} from 'chai'
 
 configure({ adapter: new Adapter() });
 const NewComponent = () => null;

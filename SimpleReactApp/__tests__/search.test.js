@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, configure, mount, render, drive } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import SearchPage from '../src/components/searchPage';
 import { shallowToJson } from 'enzyme-to-json';
 import Adapter from 'enzyme-adapter-react-16';
@@ -19,23 +19,20 @@ const filters = {
 const updateFilterButtons = jest.fn()
 
 const setIsShowing = jest.fn((movie, isShowing) => { return {...movie, isShowing: isShowing}; })
+const component = mount(<SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={updateFilterButtons} setIsShowing={setIsShowing}/>);
  
 describe('SearchPage component', () => {
     it('should render correctly', () => {
-        const component = mount(<SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={updateFilterButtons} setIsShowing={setIsShowing}/>);
         expect(shallowToJson(component)).toMatchSnapshot();
     })
 
-    const wrapper = shallow(<SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={updateFilterButtons} setIsShowing={setIsShowing}/>);
-    
     it('should filter movies by params and query correctly', () => {
-        //const wrapper = shallow(<SearchPage movieList={movieList} logo={logo} filters={filters} searchButtonText={searchButtonText} updateFilterButtons={updateFilterButtons} setIsShowing={setIsShowing}/>);
-        const result = wrapper.instance().filterMoviesByParamAndQuery("title", "Not");
+        const result = component.instance().filterMoviesByParamAndQuery("title", "Not");
         expect(result.find(movie => !movie.isShowing).title).toEqual("Soon...");
     })
 
     it('should sort movies correctly', () => {
-        const result = wrapper.instance().sortMovies("duration");
+        const result = component.instance().sortMovies("duration");
         expect(result[0].duration).toEqual("153");
     })
 })
