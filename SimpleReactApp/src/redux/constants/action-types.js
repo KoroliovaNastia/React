@@ -1,0 +1,2 @@
+export const FILTER_MOVIES = "FILTER_MOVIES";
+export const SEARCH_RESULTS = "SEARCH_RESULTS";

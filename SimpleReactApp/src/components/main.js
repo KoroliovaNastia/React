@@ -1,5 +1,10 @@
 import React, { Component} from "react";
-import Movie from './movie'
+import Movie from './movie';
+import {connect} from "react-redux";
+
+const mapStateToProps = state => {
+    return {movieList: state.movieList};
+}
 
 class Main extends Component {
 
@@ -29,4 +34,6 @@ class Main extends Component {
     }
 }
 
-export default Main
+
+
+export default connect(mapStateToProps)(Main)
