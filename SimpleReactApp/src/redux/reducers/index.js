@@ -1,3 +1,4 @@
+import {combineReducers} from 'redux'
 import {FILTER_MOVIES, SEARCH_RESULTS} from "../constants/action-types"
 
 const initialState = {
@@ -8,11 +9,20 @@ const initialState = {
     movieList: []
 }
 
-function rootReducer(state, action){
+function movieReducer(state = initialState, action){
     if (action.type === SEARCH_RESULTS) {
-        return Object.assign({}, state, {movieList: action.result});
+        return { ...state, movieList: action.movieList};
     }
     return state;
-};
+}
+
+function filterReducer(state = initialState, action){
+    return state;
+}
+
+const rootReducer = combineReducers({
+    movieState: movieReducer,
+    filterState: filterReducer
+});
 
 export default rootReducer

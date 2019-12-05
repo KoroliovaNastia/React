@@ -6,9 +6,11 @@ import Header from './header';
 import Search from './search';
 import SearchNavigation from './searchNavigation';
 import Box from './box';
+import store from "../redux/store"
 
 import {connect} from 'react-redux';
 import {searchResults} from "../redux/actions"
+import {SEARCH_RESULTS} from "../redux/constants/action-types"
 
 const apiURL = "https://reactjs-cdp.herokuapp.com/movies";
 
@@ -84,11 +86,15 @@ class SearchPage extends Component {
             }
         }).then((response) => {
             response.json().then((result) => {
-                this.props.searchResults(result.data);
-                this.setState({
-                    total: result.total
+                store.dispatch({
+                    type: SEARCH_RESULTS,
+                    movieList: result.data
                 })
-                return result.data;
+                // this.props.searchResults(result.data);
+                // this.setState({
+                //     total: result.total
+                // })
+                // return result.data;
             })
         })
     }
@@ -105,8 +111,8 @@ class SearchPage extends Component {
       }
 
     render(){
-        const {logo, searchButtonText, updateFilterButtons, filters: {searchFilterInfo, navigationFilterInfo}} = this.props;
-        const {total, movieList} = this.state;
+        const {logo, searchButtonText, updateFilterButtons, movieList, filters: {searchFilterInfo, navigationFilterInfo}} = this.props;
+        const {total} = this.state;
 
         const sortParam = this.getCheckedFilterButton(navigationFilterInfo);
         // const sortedMovies = this.sortMovies(sortParam);
@@ -122,7 +128,7 @@ class SearchPage extends Component {
                 <p>{total} movie found</p>
                 <SearchNavigation filterInfo={navigationFilterInfo} updateFilterButtons={updateFilterButtons}/>
             </Box>
-            <Main movieList={/*sortedMovies*/this.state.results}/>
+            <Main movieList={/*sortedMovies*/movieList}/>
             <Footer>
                 <Box>
                 <Logo logo = {logo}/>
@@ -132,4 +138,10 @@ class SearchPage extends Component {
     )}
 }
 
-export default connect(null, {searchResults})(SearchPage);
+const mapStateToProps = function(store) {
+    return {
+      movieList: store.movieState.movieList
+    };
+  }
+
+export default connect(mapStateToProps)(SearchPage);

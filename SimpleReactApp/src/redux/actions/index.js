@@ -9,6 +9,6 @@ export function fiterMovies(payload) {
 export function searchResults(results) {
     return {
         type: SEARCH_RESULTS,
-        results
+        movieList
     }
 };  

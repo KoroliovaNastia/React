@@ -1,12 +1,11 @@
 import React, { Component} from "react";
 import Movie from './movie';
 import {connect} from "react-redux";
+import store from "../redux/store";
 
-const mapStateToProps = state => {
-    return {movieList: state.movieList};
-}
 
 class Main extends Component {
+
 
     render() {
         const {movieList} = this.props;
@@ -23,7 +22,7 @@ class Main extends Component {
             <div className="container">
                 <div className="row">
                     {
-                        movieList.filter(movie => movie.isShowing).map((movie) => {
+                        movieList/*.filter(movie => movie.isShowing)*/.map((movie) => {
                             return <div key={movie.id} className="col-lg-4"><Movie key={movie.id} movie={movie}/></div>
                         })
                     }
@@ -34,6 +33,10 @@ class Main extends Component {
     }
 }
 
-
+const mapStateToProps = function(store) {
+    return {
+      movieList: store.movieState.movieList
+    };
+  }
 
 export default connect(mapStateToProps)(Main)
