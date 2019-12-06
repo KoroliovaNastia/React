@@ -6,11 +6,11 @@ import Box from './box'
 import Footer from './footer'
 import Main from './main'
 import store from '../redux/store'
-import {getMovie} from "../redux/actions"
+//import {setMovie} from "../redux/actions"
+import {getMovies, getMovieById} from "../redux/actions/get"
 
 import {connect} from 'react-redux';
-import {GET_MOVIE} from "../redux/constants/action-types" 
-import { bindActionCreators } from '../../../../../../../AppData/Local/Microsoft/TypeScript/3.6/node_modules/redux'
+
 
 const apiURL = "https://reactjs-cdp.herokuapp.com/movies";
 
@@ -18,8 +18,12 @@ class DescriptionPage extends Component {
 
     constructor(props){
         super(props);
-        this.getMovieById = this.getMovieById.bind(this);
-        this.getMovieById(this.props.movieId);
+        //this.getMovieById = this.getMovieById.bind(this);
+       /// this.getMovieById(this.props.movieId);
+    }
+
+    componentDidMount(){
+         this.props.getMovie(this.props.movieId)
     }
 
     filterMoviesByGenre(mainMovie){
@@ -33,23 +37,12 @@ class DescriptionPage extends Component {
         return filteredMovies;    
     }
 
-    getMovieById(movieId){
-        let URL = apiURL + "/" + movieId;
-        fetch(URL, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then((response) => {
-            response.json().then((result) => {
-                this.props.dispatch(getMovie(result))
-            }
-        )}
-    )}
-
     render() {
-        const {logo, movie, movieId, movieList} = this.props;
+        const {logo, movie} = this.props;
+
+        if(movie === null) return <p>No film</p>
+
+        const filteredMovies = getMovies("", "", "", movie.genres[0])
         //const movie = movieList.find(movie => movie.id === movieId);
         //const movie = this.getMovieById
 
@@ -62,9 +55,9 @@ class DescriptionPage extends Component {
                 <MovieDescription movie={movie}/>
             </Header>
             <Box>
-                <p>Films by {movie} genre</p>
+                <p>Films by {movie.genres[0]} genre</p>
             </Box>
-            <Main movieList={movieList}/>
+            <Main movieList={filteredMovies}/>
             <Footer>
                 <Box>
                 <Logo logo = {logo}/>
@@ -75,15 +68,19 @@ class DescriptionPage extends Component {
     }
 }
 
-function mapStateToProps(store){
-    return {
-      movieList: store.movieState.movieListByGenre,
-      //movie: store.movieState.movie
-    };
-}
+ function mapStateToProps(store){
 
-// function mapDispatchToProps(dispatch){
-//     return bindActionCreators({getMovie}, dispatch)
-// }
+     //const filteredMovies = getMovies("", "", "", store.movie.genre[0])
+     return {
+       //movieList: filteredMovies,
+       movie: store.movieState.movie
+     };
+ }
 
-export default connect(mapStateToProps)(DescriptionPage)
+ function mapDispatchToProps(dispatch){
+     return {
+         getMovie: id => getMovieById(id)
+    } 
+ }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DescriptionPage)

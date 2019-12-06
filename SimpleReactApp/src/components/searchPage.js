@@ -9,9 +9,8 @@ import Box from './box';
 import store from "../redux/store"
 
 import {connect} from 'react-redux';
-import {searchResults} from "../redux/actions"
-
-const apiURL = "https://reactjs-cdp.herokuapp.com/movies";
+import {changeQuery} from "../redux/actions"
+import {getMovies} from "../redux/actions/get"
 
 
 class SearchPage extends Component {
@@ -26,74 +25,27 @@ class SearchPage extends Component {
         this.onSearchClick = this.onSearchClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.getCheckedFilterButton = this.getCheckedFilterButton.bind(this);
+        //this.props.getMovieList(getMovies("", "vote_average", "title", ""));
         //this.filterMoviesByParamAndQuery = this.filterMoviesByParamAndQuery.bind(this);
-        this.getMovies = this.getMovies.bind(this);
-        this.getMovies("vote_average", "", "title");
+        //this.getMovies = this.getMovies.bind(this);
+        //this.getMovies("vote_average", "", "title");
     }
 
-    // filterMoviesByParamAndQuery(filter, query){
-    //     let URL = apiURL + '?search=' + query + '&searchBy=' + filter;
-    //     fetch(URL, {
-    //         method: 'GET',
-    //         headers: {
-    //             Accept: 'application/json',
-    //             'Content-Type': 'application/json'
-    //         }
-    //     }).then((response) => {
-    //         response.json().then((result) => {
-    //             this.setState({
-    //                 movieList : result.data,
-    //                 total: result.total
-    //             })
-            
-    //         })
-    //     } )
-    //   }
+    componentDidMount(){
+        //const movies = getMovies("", "vote_average", "title", "");
+        this.props.getMovieList("", "vote_average", "title", "");
+    }
 
     onSearchClick(){
-        const {query} = this.state;
-        const {filters: {searchFilterInfo}} = this.props;
-        var currentFilter = this.getCheckedFilterButton(searchFilterInfo);
-    
-        //var updatedList = this.filterMoviesByParamAndQuery(currentFilter, query);
-        //this.setState({movieList: updatedList});
-        this.getMovies("vote_average", query, currentFilter);
-      }
+        // const {query, filters: {searchFilterInfo}} = this.props;
+        // var currentFilter = this.getCheckedFilterButton(searchFilterInfo);
+        // this.getMovies("vote_average", query, currentFilter);
+        this.props.getQuery(this.state.query);
+    }
 
     handleChange(event){
     this.setState({query: event.target.value});
     }
-
-    getMovies(sortParam, query, filter){
-        //const {query} = this.state;
-        //const {filters: {searchFilterInfo}} = this.props;
-        //var filter = this.getCheckedFilterButton(searchFilterInfo);
-
-        let URL = apiURL + '?search=' + query + '&searchBy=' + filter + '&sortBy=' +sortParam;
-        fetch(URL, {
-            method: 'GET',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }).then((response) => {
-            response.json().then((result) => {
-                this.props.dispatch(searchResults(result.data))
-                })
-                // this.props.searchResults(result.data);
-                // this.setState({
-                //     total: result.total
-                // })
-                // return result.data;
-        })
-    }
-
-    // sortMovies(sortParam){
-    //     const {movieList} = this.state;
-    //     let param = sortParam.replace(' ', '_').toLowerCase();
-    //     const sortedMovies = movieList.sort((a, b) => a[param] - b[param]);
-    //     return sortedMovies
-    // }
 
     getCheckedFilterButton(filterInfo){
         return filterInfo.buttonList.filter(filter => filter.checked)[0].text;
@@ -103,9 +55,8 @@ class SearchPage extends Component {
         const {logo, searchButtonText, updateFilterButtons, movieList, filters: {searchFilterInfo, navigationFilterInfo}} = this.props;
         const {total} = this.state;
 
-        const sortParam = this.getCheckedFilterButton(navigationFilterInfo);
-        // const sortedMovies = this.sortMovies(sortParam);
-        /*const sortedMovies = *///this.getMovies("vote_average");
+        const searchBy = this.getCheckedFilterButton(navigationFilterInfo).replace(' ', '_').toLowerCase();;
+        this.props.getMovieList(this.props.query, "vote_average", searchBy, "")
 
         return(
         <>
@@ -127,11 +78,19 @@ class SearchPage extends Component {
     )}
 }
 
-const mapStateToProps = function(store) {
+function mapStateToProps(store) {
     return {
-      //movieList: store.movieState.movieList,
-      filters: store.filterState.filters
+      movieList: store.movieState.movieList,
+      filters: store.filterState.filters,
+      query: store.movieState.query
     };
   }
 
-export default connect(mapStateToProps)(SearchPage);
+  function mapDispatchToProps(dispatch) {
+    return {
+        getMovieList: (query, sortBy, searchBy, filter) => getMovies(query, sortBy, searchBy, filter),
+        getQuery: currentQuery => dispatch(changeQuery(currentQuery))
+    }
+   }  
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

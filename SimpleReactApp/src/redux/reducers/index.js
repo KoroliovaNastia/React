@@ -1,27 +1,33 @@
 import {combineReducers} from 'redux'
-import {CHANGE_FILTERS, SEARCH_RESULTS, GET_MOVIE} from "../constants/action-types"
+import {CHANGE_FILTERS, SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types"
 
-const initialState = {
+const initialMovieState = {
+    movieList: null,
+    movie: null,
+    query: ""
+}
+
+const initialFilterState = {
     filters: {
         searchFilterInfo: {type: "searchFilterInfo", title : "search by", buttonList: [{id: "b1", text: "title", checked: true}, {id: "b2", text: "genre", checked: false}]},
         navigationFilterInfo: {type: "navigationFilterInfo", title: "sort by", buttonList: [{id: "f1", text: "Release date", checked: true}, {id: "f2", text: "rating", checked: false}]}
-    },
-    movieList: [],
-    movieListByGenre: [], 
-    movie: null
+    }
 }
 
-function movieReducer(state = initialState, action){
+function movieReducer(state = initialMovieState, action){
     if (action.type === SEARCH_RESULTS) {
         return { ...state, movieList: action.movieList};
     }
-    if (action.type === GET_MOVIE) {
+    if (action.type === SET_MOVIE) {
         return {...state, movie: action.movie};
+    }
+    if (action.type === CHANGE_QUERY) {
+        return {...state, query: action.query};
     }
     return state;
 }
 
-function filterReducer(state = initialState, action){
+function filterReducer(state = initialFilterState, action){
     if (action.type === CHANGE_FILTERS){
         return { ...state, filters: action.filters}
     }

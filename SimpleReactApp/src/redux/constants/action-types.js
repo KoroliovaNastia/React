@@ -1,3 +1,4 @@
 export const CHANGE_FILTERS = "CHANGE_FILTERS";
 export const SEARCH_RESULTS = "SEARCH_RESULTS";
-export const GET_MOVIE = "GET_MOVIE";
+export const SET_MOVIE = "GET_MOVIE";
+export const CHANGE_QUERY = "CHANGE_QUERY";

@@ -24,6 +24,7 @@ footer {
 
 .container {
     min-height: 900px;
+    min-width: 1780px;
     margin: 70px 60px;
 }
 

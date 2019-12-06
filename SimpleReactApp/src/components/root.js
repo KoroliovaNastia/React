@@ -44,7 +44,7 @@ class Root extends Component {
     return (
       <ErrorBoundary>
         <SearchPage /*movieList={movieList}*/ logo={logo} /*filters={filters}*/ searchButtonText={searchButtonText} updateFilterButtons={this.updateFilterButtons} setIsShowing={this.setIsShowing}/>
-        <DescriptionPage logo={logo} movieId={"348350"} /*movieList={movieList}*/ setIsShowing={this.setIsShowing}/>
+        <DescriptionPage logo={logo} movieId="348350" /*movieList={movieList}*/ setIsShowing={this.setIsShowing}/>
       </ErrorBoundary>
     );
   }
