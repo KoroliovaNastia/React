@@ -3,12 +3,14 @@ import Image from "./image";
 
 class Movie extends Component {
     render(){
-        const {image, title, genre, release_date, rating} = this.props.movie;
+        const {poster_path, title, genres, release_date, rating} = this.props.movie;
         return (
             <div className='movie'>
-                <Image image={image} />
+                <Image image={poster_path} />
                 <p>{title}</p>
-                <p>{genre}</p>
+                <ul>
+                    {genres.map( genre => <p key={title + genre}>{genre}</p>)}
+                </ul>
                 <p>{release_date}</p>
                 <p>{rating}</p>
             </div>

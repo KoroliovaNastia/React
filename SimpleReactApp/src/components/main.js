@@ -22,8 +22,8 @@ class Main extends Component {
             <div className="container">
                 <div className="row">
                     {
-                        movieList/*.filter(movie => movie.isShowing)*/.map((movie) => {
-                            return <div key={movie.id} className="col-lg-4"><Movie key={movie.id} movie={movie}/></div>
+                        movieList.map((movie) => {
+                            return <div key={movie.id} className="col-lg-3"><Movie key={movie.id} movie={movie}/></div>
                         })
                     }
                 </div>

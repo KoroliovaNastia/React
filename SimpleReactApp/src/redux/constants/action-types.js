@@ -1,2 +1,3 @@
-export const FILTER_MOVIES = "FILTER_MOVIES";
+export const CHANGE_FILTERS = "CHANGE_FILTERS";
 export const SEARCH_RESULTS = "SEARCH_RESULTS";
+export const GET_MOVIE = "GET_MOVIE";

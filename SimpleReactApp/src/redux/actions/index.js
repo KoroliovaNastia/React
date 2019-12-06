@@ -1,14 +1,22 @@
-import {FILTER_MOVIES, SEARCH_RESULTS} from "../constants/action-types";
+import {CHANGE_FILTERS, SEARCH_RESULTS, GET_MOVIE} from "../constants/action-types";
 
-export function fiterMovies(payload) {
+export function fiterMovies(filters) {
     return { 
-        type: FILTER_MOVIES, 
-        payload }
+        type: CHANGE_FILTERS, 
+        filters 
+    }
   };
 
-export function searchResults(results) {
+export function searchResults(movieList) {
     return {
         type: SEARCH_RESULTS,
         movieList
     }
-};  
+};
+
+export function getMovie(movie){
+    return {
+        type: GET_MOVIE,
+        movie
+    }
+}
