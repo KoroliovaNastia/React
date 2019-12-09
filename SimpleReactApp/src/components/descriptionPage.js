@@ -23,7 +23,8 @@ class DescriptionPage extends Component {
     }
 
     componentDidMount(){
-         this.props.getMovie(this.props.movieId)
+        const {movieId, movie, getMovie, getMovieList} = this.props;
+        getMovie(movieId)
     }
 
     filterMoviesByGenre(mainMovie){
@@ -38,11 +39,13 @@ class DescriptionPage extends Component {
     }
 
     render() {
-        const {logo, movie} = this.props;
+        const {logo, movie, movieList, getMovieList} = this.props;
 
         if(movie === null) return <p>No film</p>
 
-        const filteredMovies = getMovies("", "", "", movie.genres[0])
+        getMovieList(movie.genres)
+
+        //const filteredMovies = getMovies("", "", "", movie.genres, null)
         //const movie = movieList.find(movie => movie.id === movieId);
         //const movie = this.getMovieById
 
@@ -55,9 +58,9 @@ class DescriptionPage extends Component {
                 <MovieDescription movie={movie}/>
             </Header>
             <Box>
-                <p>Films by {movie.genres[0]} genre</p>
+                <p>Films by {movie.genres.map( (genre, index) => <span key={movie.title + index}>{genre + " "}</span> )}genres</p>
             </Box>
-            <Main movieList={filteredMovies}/>
+            <Main movieList={movieList}/>
             <Footer>
                 <Box>
                 <Logo logo = {logo}/>
@@ -72,15 +75,18 @@ class DescriptionPage extends Component {
 
      //const filteredMovies = getMovies("", "", "", store.movie.genre[0])
      return {
-       //movieList: filteredMovies,
+       movieList: store.movieState.filteredMoviesByGenre,
        movie: store.movieState.movie
      };
  }
 
  function mapDispatchToProps(dispatch){
      return {
-         getMovie: id => getMovieById(id)
+         getMovie: id => getMovieById(id),
+         getMovieList: (genres) => getMovies("", "", "", genres)
     } 
  }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(DescriptionPage)

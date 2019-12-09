@@ -3,16 +3,16 @@ import Image from './image'
 
 class MovieDescription extends Component {
     render(){
-        const {image, title, releaseDate, rating, duration, description} = this.props.movie;
+        const {poster_path, title, release_date, vote_average, duration, description} = this.props.movie;
         return(
             <>
-                <Image image={image}/>
+                <Image image={poster_path}/>
                 <div>
                     <p>{title}</p>
-                    <p>{rating}</p>
+                    <p>{vote_average}</p>
                 </div>
                 <div>
-                    <p>{releaseDate} year {duration} min</p>
+                    <p>{release_date} year {duration} min</p>
                     <p>{description}</p>
                 </div>
             </>

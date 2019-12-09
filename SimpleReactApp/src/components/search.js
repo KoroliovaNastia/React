@@ -1,5 +1,6 @@
 import React, { Component} from "react";
 import Filter from './filter';
+import {connect} from 'react-redux';
 
 
 const ENTER_KEY = 13;
@@ -45,4 +46,11 @@ class Search extends Component {
     }
 }
 
-export default Search
+function mapStateToProps(store) {
+    return {
+        filterInfo: store.filterState.searchFilterInfo,
+        query: store.movieState.query
+    };
+  }
+
+export default connect(mapStateToProps)(Search)

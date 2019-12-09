@@ -1,17 +1,17 @@
 import {combineReducers} from 'redux'
-import {CHANGE_FILTERS, SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types"
+import {CHANGE_NAVIGATION_FILTERS, CHANGE_SEARCH_FILTERS, SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY, FILTERED_BY_GENRE} from "../constants/action-types"
 
 const initialMovieState = {
     movieList: null,
     movie: null,
-    query: ""
+    query: "", 
+    filteredMoviesByGenre: null
 }
 
 const initialFilterState = {
-    filters: {
-        searchFilterInfo: {type: "searchFilterInfo", title : "search by", buttonList: [{id: "b1", text: "title", checked: true}, {id: "b2", text: "genre", checked: false}]},
-        navigationFilterInfo: {type: "navigationFilterInfo", title: "sort by", buttonList: [{id: "f1", text: "Release date", checked: true}, {id: "f2", text: "rating", checked: false}]}
-    }
+    searchFilterInfo: {type: "CHANGE_SEARCH_FILTERS", title : "search by", buttonList: [{id: "b1", text: "title", checked: true}, {id: "b2", text: "genre", checked: false}]},
+    navigationFilterInfo: {type: "CHANGE_NAVIGATION_FILTERS", title: "sort by", buttonList: [{id: "f1", text: "Release date", checked: true}, {id: "f2", text: "rating", checked: false}]}
+    
 }
 
 function movieReducer(state = initialMovieState, action){
@@ -24,12 +24,18 @@ function movieReducer(state = initialMovieState, action){
     if (action.type === CHANGE_QUERY) {
         return {...state, query: action.query};
     }
+    if (action.type === FILTERED_BY_GENRE) {
+        return {...state, filteredMoviesByGenre: action.filteredMovies}
+    }
     return state;
 }
 
 function filterReducer(state = initialFilterState, action){
-    if (action.type === CHANGE_FILTERS){
-        return { ...state, filters: action.filters}
+    if (action.type === CHANGE_SEARCH_FILTERS){
+        return { ...state, searchFilterInfo: { ...state.searchFilterInfo, buttonList: action.filters}}
+    }
+    if (action.type === CHANGE_NAVIGATION_FILTERS){
+        return { ...state, navigationFilterInfo: { ...state.navigationFilterInfo, buttonList: action.filters}}
     }
     return state;
 }

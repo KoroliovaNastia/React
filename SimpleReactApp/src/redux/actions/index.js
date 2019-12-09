@@ -1,8 +1,8 @@
-import {CHANGE_FILTERS, SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types";
+import {SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY, FILTERED_BY_GENRE} from "../constants/action-types";
 
-export function fiterMovies(filters) {
+export function updateFilters(type, filters) {
     return { 
-        type: CHANGE_FILTERS, 
+        type, 
         filters 
     }
   };
@@ -25,5 +25,12 @@ export function changeQuery(query){
     return {
         type: CHANGE_QUERY,
         query
+    }
+}
+
+export function setFilteredMovies(filteredMovies) {
+    return {
+        type: FILTERED_BY_GENRE,
+        filteredMovies
     }
 }
