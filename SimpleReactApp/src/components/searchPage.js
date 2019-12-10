@@ -31,10 +31,10 @@ class SearchPage extends Component {
         updateMovieList(navigationFilters, queryString, searchFilters);
     }
     
-    // componentWillUpdate(){
-    //     const {navigationFilters, queryString, searchFilters} = this.props;
-    //     updateMovieList(navigationFilters, queryString, searchFilters);
-    // }
+    componentWillUpdate(){
+         const {navigationFilters, queryString, searchFilters} = this.props;
+         updateMovieList(navigationFilters, queryString, searchFilters);
+     }
 
     onSearchClick(){
         const {navigationFilters, getQuery, searchFilters} = this.props;
