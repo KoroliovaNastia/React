@@ -10,10 +10,10 @@ class Filter extends Component{
         this.toggleChange = this.toggleChange.bind(this)
     }
 
-    componentDidMount(){
-        const {navigationFilters, query, searchFilters} = this.props;
-        updateMovieList(navigationFilters, query, searchFilters);
-     }
+    // componentDidMount(){
+    //     const {navigationFilters, query, searchFilters} = this.props;
+    //     updateMovieList(navigationFilters, query, searchFilters);
+    //  }
 
     toggleChange(checkedButton){
 

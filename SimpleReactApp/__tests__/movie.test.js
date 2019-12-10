@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-const movie = {id: "m1", image: "", title: "title", genre: "Horror", release_date: 2019, rating: 5.0, duration: "154", description: "lorem ipsum lorem ipsum loremipsum"}
+const movie = {id: "m1", poster_path: "", title: "title", genres: "Horror", release_date: "2019", vote_average: 5.0, duration: "154", description: "lorem ipsum lorem ipsum loremipsum"}
 
 describe('Movie component', () => {
     it('should be render correctly', () => {

@@ -18,16 +18,20 @@ class DescriptionPage extends Component {
 
     constructor(props){
         super(props);
+        this.state = {
+            movieId: "348350",
+            logo: 'netflixroulete'
+        }
         //this.getMovieById = this.getMovieById.bind(this);
        /// this.getMovieById(this.props.movieId);
     }
 
     componentDidMount(){
-        const {movieId, movie, getMovie, getMovieList} = this.props;
-        getMovie(movieId)
+        const { movie, getMovie, getMovieList} = this.props;
+        getMovie(this.state.movieId)
     }
     componentDidUpdate(){
-        const {movieId, movie, getMovie, getMovieList} = this.props;
+        const {movie, getMovie, getMovieList} = this.props;
         getMovieList(movie.genres)
     }
 
@@ -43,7 +47,7 @@ class DescriptionPage extends Component {
     }
 
     render() {
-        const {logo, movie, movieList, getMovieList} = this.props;
+        const {movie, movieList, getMovieList} = this.props;
 
         if(movie === null) return <p>No film</p>
 
@@ -57,7 +61,7 @@ class DescriptionPage extends Component {
         return (
         <>
             <Header>
-                <Logo logo = {logo}/>
+                <Logo logo = {this.state.logo}/>
                 <button/>
                 <MovieDescription movie={movie}/>
             </Header>
@@ -67,7 +71,7 @@ class DescriptionPage extends Component {
             <Main movieList={movieList}/>
             <Footer>
                 <Box>
-                <Logo logo = {logo}/>
+                <Logo logo = {this.state.logo}/>
                 </Box>
             </Footer>
         </>  
@@ -86,8 +90,8 @@ class DescriptionPage extends Component {
 
  function mapDispatchToProps(dispatch){
      return {
-         getMovie: id => getMovieById(id),
-         getMovieList: (genres) => getMovies("", "", "", "asc", genres)
+         getMovie: id => dispatch(getMovieById(id)),
+         getMovieList: (genres) => dispatch(getMovies("", "", "", "asc", genres))
     } 
  }
 

@@ -18,8 +18,8 @@ class SearchPage extends Component {
         super(props);
         this.state = {
             query: "",
-            movieList: [],
-            total: 0
+            logo: 'netflixroulete',
+            searchButtonText : "Search"
         },
 
         this.onSearchClick = this.onSearchClick.bind(this);
@@ -27,13 +27,17 @@ class SearchPage extends Component {
     }
 
     componentDidMount(){
-        const {navigationFilters, queryString, searchFilters} = this.props;
-        updateMovieList(navigationFilters, queryString, searchFilters);
+        const {navigationFilters, queryString, searchFilters, updateMovies} = this.props;
+        updateMovies(navigationFilters, queryString, searchFilters);
     }
     
-    componentWillUpdate(){
-         const {navigationFilters, queryString, searchFilters} = this.props;
-         updateMovieList(navigationFilters, queryString, searchFilters);
+    componentDidUpdate(prevProps){
+        const {navigationFilters, queryString, searchFilters, updateMovies} = this.props;
+        if(navigationFilters !== prevProps.navigationFilters ||
+            searchFilters !== prevProps.searchFilters ||
+            queryString !== prevProps.queryString)
+         //const {navigationFilters, queryString, searchFilters} = this.props;
+         updateMovies(navigationFilters, queryString, searchFilters);
      }
 
     onSearchClick(){
@@ -41,7 +45,7 @@ class SearchPage extends Component {
         getQuery(this.state.query);
 
         //const {navigationFilters, queryString, searchFilters} = this.props;
-        updateMovieList(navigationFilters, this.state.query, searchFilters);
+        //updateMovieList(navigationFilters, this.state.query, searchFilters);
     }
 
     handleChange(event){
@@ -49,23 +53,23 @@ class SearchPage extends Component {
     }
 
     render(){
-        const {logo, searchButtonText, updateFilterButtons, movies, searchFilters, navigationFilters} = this.props;
-        const {total} = this.state;
+        const {searchButtonText, updateFilterButtons, movies, searchFilters, navigationFilters} = this.props;
+        //const {total} = this.state;
 
         return(
         <>
             <Header>
-                <Logo logo = {logo}/>
+                <Logo logo = {this.state.logo}/>
                 <Search searchButtonText={searchButtonText} onSearchClick={this.onSearchClick} handleChange={this.handleChange}/>
             </Header>
             <Box>
-                <p>{total} movie found</p>
+                <p>{/*movies.length*/0} movie found</p>
                 <SearchNavigation updateFilterButtons={updateFilterButtons}/>
             </Box>
             <Main movieList={movies}/>
             <Footer>
                 <Box>
-                <Logo logo = {logo}/>
+                <Logo logo = {this.state.logo}/>
                 </Box>
             </Footer>
         </>
@@ -83,7 +87,8 @@ function mapStateToProps(store) {
 
   function mapDispatchToProps(dispatch) {
     return {
-        getQuery: currentQuery => dispatch(changeQuery(currentQuery))
+        getQuery: currentQuery => dispatch(changeQuery(currentQuery)),
+        updateMovies: (navigationFilters, queryString, searchFilters) => dispatch(updateMovieList(navigationFilters, queryString, searchFilters))
     }
    }  
 
