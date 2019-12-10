@@ -10,7 +10,7 @@ import store from "../redux/store"
 
 import {connect} from 'react-redux';
 import {changeQuery} from "../redux/actions"
-import {getMovies, getCheckedFilterButton} from "../redux/actions/get"
+import {getMovies, getCheckedFilterButton, updateMovieList} from "../redux/actions/get"
 
 
 class SearchPage extends Component {
@@ -24,51 +24,45 @@ class SearchPage extends Component {
 
         this.onSearchClick = this.onSearchClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        //this.getCheckedFilterButton = this.getCheckedFilterButton.bind(this);
-        //this.props.getMovieList(getMovies("", "vote_average", "title", ""));
-        //this.filterMoviesByParamAndQuery = this.filterMoviesByParamAndQuery.bind(this);
-        //this.getMovies = this.getMovies.bind(this);
-        //this.getMovies("vote_average", "", "title");
     }
 
     componentDidMount(){
-        //const movies = getMovies("", "vote_average", "title", "");
-        const {query, navigationFilterInfo, searchFilterInfo} = this.props;
-        const sortBy = getCheckedFilterButton(navigationFilterInfo);
-        const searchBy = getCheckedFilterButton(searchFilterInfo);
-        //this.props.getMovieList("", "vote_average", "title", "");
-        this.props.getMovieList(/*query*/"kill", sortBy, searchBy, "")
+        const {navigationFilters, queryString, searchFilters} = this.props;
+        updateMovieList(navigationFilters, queryString, searchFilters);
     }
+    
+    // componentWillUpdate(){
+    //     const {navigationFilters, queryString, searchFilters} = this.props;
+    //     updateMovieList(navigationFilters, queryString, searchFilters);
+    // }
 
     onSearchClick(){
-        // const {query, filters: {searchFilterInfo}} = this.props;
-        // var currentFilter = this.getCheckedFilterButton(searchFilterInfo);
-        // this.getMovies("vote_average", query, currentFilter);
-        this.props.getQuery(this.state.query);
+        const {navigationFilters, getQuery, searchFilters} = this.props;
+        getQuery(this.state.query);
+
+        //const {navigationFilters, queryString, searchFilters} = this.props;
+        updateMovieList(navigationFilters, this.state.query, searchFilters);
     }
 
     handleChange(event){
-    this.setState({query: event.target.value});
+        this.setState({query: event.target.value});
     }
 
     render(){
-        const {logo, searchButtonText, updateFilterButtons, movieList, searchFilterInfo, navigationFilterInfo} = this.props;
+        const {logo, searchButtonText, updateFilterButtons, movies, searchFilters, navigationFilters} = this.props;
         const {total} = this.state;
-
-        //const searchBy = this.getCheckedFilterButton(navigationFilterInfo).replace(' ', '_').toLowerCase();
-        //this.props.getMovieList(this.props.query, "vote_average", searchBy, "")
 
         return(
         <>
             <Header>
                 <Logo logo = {logo}/>
-                <Search searchButtonText={searchButtonText} /*movieList={movieList}*/ onSearchClick={this.onSearchClick} handleChange={this.handleChange} /*updateFilterButtons={updateFilterButtons}*//>
+                <Search searchButtonText={searchButtonText} onSearchClick={this.onSearchClick} handleChange={this.handleChange}/>
             </Header>
             <Box>
                 <p>{total} movie found</p>
                 <SearchNavigation updateFilterButtons={updateFilterButtons}/>
             </Box>
-            <Main movieList={/*sortedMovies*/movieList}/>
+            <Main movieList={movies}/>
             <Footer>
                 <Box>
                 <Logo logo = {logo}/>
@@ -80,16 +74,15 @@ class SearchPage extends Component {
 
 function mapStateToProps(store) {
     return {
-      movieList: store.movieState.movieList,
-      searchFilterInfo: store.filterState.searchFilterInfo,
-      navigationFilterInfo: store.filterState.navigationFilterInfo,
-      query: store.movieState.query
+      movies: store.movieState.movieList,
+      searchFilters: store.filterState.searchFilterInfo,
+      navigationFilters: store.filterState.navigationFilterInfo,
+      queryString: store.filterState.query
     };
   }
 
   function mapDispatchToProps(dispatch) {
     return {
-        getMovieList: (query, sortBy, searchBy, filter) => getMovies(query, sortBy, searchBy, filter, dispatch),
         getQuery: currentQuery => dispatch(changeQuery(currentQuery))
     }
    }  

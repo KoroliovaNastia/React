@@ -3,9 +3,9 @@ import store from "../store"
 
 const apiURL = "https://reactjs-cdp.herokuapp.com/movies";
 
-export function getMovies(query, sortBy, searchBy, filter){
+export function getMovies(query, sortBy, searchBy, sortOrder, filter){
 
-    let URL = apiURL + '?search=' + query + '&searchBy=' + searchBy + '&sortBy=' + sortBy + '&filter=' + filter;
+    let URL = apiURL + '?search=' + query + '&searchBy=' + searchBy + '&sortBy=' + sortBy + '&sortOrder=' + sortOrder + '&filter=' + filter;
     
     const data = null
     //return dispatch => {
@@ -45,5 +45,11 @@ export function getMovieById(movieId){
 }
 
 export function getCheckedFilterButton(filterInfo){
-    return filterInfo.buttonList.filter(filter => filter.checked)[0].text.replace(' ', '_').toLowerCase();
+    return filterInfo.buttonList.filter(filter => filter.checked)[0].field;
+}
+
+export function updateMovieList(navigationFilterInfo, query, searchFilterInfo){
+    const sortBy = getCheckedFilterButton(navigationFilterInfo);
+    const searchBy = getCheckedFilterButton(searchFilterInfo);
+    getMovies(query, sortBy, searchBy, "asc","");
 }

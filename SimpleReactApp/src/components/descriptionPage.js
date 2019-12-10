@@ -26,6 +26,10 @@ class DescriptionPage extends Component {
         const {movieId, movie, getMovie, getMovieList} = this.props;
         getMovie(movieId)
     }
+    componentDidUpdate(){
+        const {movieId, movie, getMovie, getMovieList} = this.props;
+        getMovieList(movie.genres)
+    }
 
     filterMoviesByGenre(mainMovie){
         const {movieList, setIsShowing} = this.props;
@@ -43,7 +47,7 @@ class DescriptionPage extends Component {
 
         if(movie === null) return <p>No film</p>
 
-        getMovieList(movie.genres)
+        //getMovieList(movie.genres)
 
         //const filteredMovies = getMovies("", "", "", movie.genres, null)
         //const movie = movieList.find(movie => movie.id === movieId);
@@ -83,7 +87,7 @@ class DescriptionPage extends Component {
  function mapDispatchToProps(dispatch){
      return {
          getMovie: id => getMovieById(id),
-         getMovieList: (genres) => getMovies("", "", "", genres)
+         getMovieList: (genres) => getMovies("", "", "", "asc", genres)
     } 
  }
 
