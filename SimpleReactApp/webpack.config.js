@@ -3,8 +3,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = (env) => {
     return{
+        devServer: {
+            historyApiFallback: true,
+          },
         //context: path.join(__dirname, 'src'),
-
+        //historyApiFallback: true,
         entry: './src/app.js',
         
         output: {

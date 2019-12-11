@@ -7,6 +7,8 @@ import Search from './search';
 import SearchNavigation from './searchNavigation';
 import Box from './box';
 import store from "../redux/store"
+import { withRouter } from 'react-router-dom'
+import queryString from 'query-string'
 
 import {connect} from 'react-redux';
 import {changeQuery} from "../redux/actions"
@@ -27,21 +29,26 @@ class SearchPage extends Component {
     }
 
     componentDidMount(){
-        const {navigationFilters, queryString, searchFilters, updateMovies} = this.props;
-        updateMovies(navigationFilters, queryString, searchFilters);
+        const params = new URLSearchParams(this.props.location.search);
+        const query = params.get('query');
+        this.props.getQuery(query);
+        //this.setState({query: params.get('query')})
+        //const {navigationFilters, queryString, searchFilters, updateMovies} = this.props;
+        //updateMovies(navigationFilters, queryString, searchFilters);
     }
     
     componentDidUpdate(prevProps){
         const {navigationFilters, queryString, searchFilters, updateMovies} = this.props;
         if(navigationFilters !== prevProps.navigationFilters ||
             searchFilters !== prevProps.searchFilters ||
-            queryString !== prevProps.queryString)
+            queryString !== prevProps.queryString){
          //const {navigationFilters, queryString, searchFilters} = this.props;
-         updateMovies(navigationFilters, queryString, searchFilters);
+            updateMovies(navigationFilters, queryString, searchFilters);
+        }
      }
 
     onSearchClick(){
-        const {navigationFilters, getQuery, searchFilters} = this.props;
+        const {getQuery} = this.props;
         getQuery(this.state.query);
 
         //const {navigationFilters, queryString, searchFilters} = this.props;
@@ -92,4 +99,4 @@ function mapStateToProps(store) {
     }
    }  
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));

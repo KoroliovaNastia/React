@@ -8,6 +8,7 @@ import Main from './main'
 import store from '../redux/store'
 //import {setMovie} from "../redux/actions"
 import {getMovies, getMovieById} from "../redux/actions/get"
+import { withRouter } from 'react-router-dom'
 
 import {connect} from 'react-redux';
 
@@ -27,12 +28,17 @@ class DescriptionPage extends Component {
     }
 
     componentDidMount(){
-        const { movie, getMovie, getMovieList} = this.props;
-        getMovie(this.state.movieId)
+        const { movieId, getMovie} = this.props;
+        getMovie(movieId)
     }
-    componentDidUpdate(){
-        const {movie, getMovie, getMovieList} = this.props;
-        getMovieList(movie.genres)
+    componentDidUpdate(prevProps){
+        const {movie, movieId, getMovieList, getMovie} = this.props;
+        if(movieId !== prevProps.movieId){
+            getMovie(movieId)
+        }
+        if(movie !== prevProps.movie) {
+            getMovieList(movie.genres)
+        }
     }
 
     filterMoviesByGenre(mainMovie){
@@ -48,7 +54,6 @@ class DescriptionPage extends Component {
 
     render() {
         const {movie, movieList, getMovieList} = this.props;
-
         if(movie === null) return <p>No film</p>
 
         //getMovieList(movie.genres)
@@ -79,12 +84,13 @@ class DescriptionPage extends Component {
     }
 }
 
- function mapStateToProps(store){
+ function mapStateToProps(store, ownProps){
 
      //const filteredMovies = getMovies("", "", "", store.movie.genre[0])
      return {
        movieList: store.movieState.filteredMoviesByGenre,
-       movie: store.movieState.movie
+       movie: store.movieState.movie,
+       movieId: Number(ownProps.match.params.id)
      };
  }
 
@@ -97,4 +103,4 @@ class DescriptionPage extends Component {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DescriptionPage)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DescriptionPage))

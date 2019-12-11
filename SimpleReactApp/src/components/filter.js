@@ -3,6 +3,7 @@ import FilterButton from './filterButton';
 import { connect } from 'react-redux';
 import { updateFilters } from "../redux/actions/";
 import { getMovies, updateMovieList } from "../redux/actions/get";
+import { withRouter } from 'react-router-dom'
 
 class Filter extends Component{
     constructor(props){
@@ -10,10 +11,26 @@ class Filter extends Component{
         this.toggleChange = this.toggleChange.bind(this)
     }
 
-    // componentDidMount(){
-    //     const {navigationFilters, query, searchFilters} = this.props;
-    //     updateMovieList(navigationFilters, query, searchFilters);
-    //  }
+    componentDidMount(){
+        const params = new URLSearchParams(this.props.location.search);
+        const searchBy = params.get('searchBy');
+        const sortBy = params.get('sortBy');
+
+        const {navigationFilters, searchFilters} = this.props.
+        //if(sortBy !== null && )
+
+        //const sortOrder = params.get('sortOrder');
+        //const {navigationFilters, query, searchFilters} = this.props;
+        //updateMovieList(navigationFilters, query, searchFilters);
+    }
+
+    componentDidUpdate(prevProps){
+        const {navigationFilters, query, searchFilters} = this.props;
+        if(navigationFilters !== prevProps.navigationFilters ||
+            searchFilters !== prevProps.searchFilters){
+                updateMovieList(navigationFilters, query, searchFilters);
+            }
+    }
 
     toggleChange(checkedButton){
 
@@ -63,4 +80,4 @@ function mapDispatchToProps(dispatch) {
     }
    }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Filter))

@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux'
 import {CHANGE_NAVIGATION_FILTERS, CHANGE_SEARCH_FILTERS, SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY, FILTERED_BY_GENRE} from "../constants/action-types"
+import {routerReducer} from 'react-router-redux'
 
 const initialMovieState = {
     movieList: null,
@@ -41,7 +42,8 @@ function filterReducer(state = initialFilterState, action){
 
 const rootReducer = combineReducers({
     movieState: movieReducer,
-    filterState: filterReducer
+    filterState: filterReducer,
+    routing: routerReducer
 });
 
 export default rootReducer

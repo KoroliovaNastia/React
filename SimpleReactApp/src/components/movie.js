@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import Image from "./image";
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
 
 class Movie extends Component {
     render(){
-        const {poster_path, title, genres, release_date, vote_average} = this.props.movie;
+        const {id, poster_path, title, genres, release_date, vote_average} = this.props.movie;
         return (
             <div className='movie'>
                 <Image image={poster_path} />
-                <p>{title}</p>
+                <Link to={`/film/${id}`}>{title}</Link>
                 <ul>
                     {genres.map( genre => <p key={title + genre}>{genre}</p>)}
                 </ul>
@@ -18,4 +20,4 @@ class Movie extends Component {
     }
 }
 
-export default Movie
+export default withRouter(Movie)
