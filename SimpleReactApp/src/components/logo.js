@@ -1,11 +1,18 @@
 import React from 'react'
+import {connect} from 'react-redux';
 
-const Logo = ({logo}) => (
+const Logo = ({appLogo}) => (
     <div className="logo">
         <p /*className={logoStyle().logo*}*/>
-        {logo}
+        {appLogo}
         </p>
     </div>
 );
 
-export default Logo
+function mapStateToProps(store) {
+    return {
+      appLogo: store.appState.logo
+    };
+  }
+
+export default connect(mapStateToProps)(Logo)

@@ -5,7 +5,7 @@ class FilterButton extends Component {
         const {data, data:{text, checked}, toggleChange} = this.props;
         return (
             <label>
-                <input /*className={[logoStyle().button, logoStyle().filterButton].join(' ')}*/ type='checkbox' data-cy={text} checked={checked === true} onChange={() => toggleChange(data)}/>
+                <input type='checkbox' data-cy={text} checked={checked === true} onChange={() => toggleChange(data)}/>
                 {text}
             </label>
         );

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Image from './image'
+import {connect} from 'react-redux';
 
 class MovieDescription extends Component {
     render(){
@@ -20,4 +21,10 @@ class MovieDescription extends Component {
     }
 }
 
-export default MovieDescription
+function mapStateToProps(store){
+    return {
+      movie: store.movieState.movie,
+    };
+}
+
+export default connect(mapStateToProps)(MovieDescription)

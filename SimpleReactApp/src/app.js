@@ -4,8 +4,6 @@ import Root from "../src/components/root";
 import store from "./redux/store";
 import {Provider} from "react-redux";
 
-//const store = createStore(rootReducer);
-
 ReactDOM.render(
   <Provider store={store}>
     <Root />

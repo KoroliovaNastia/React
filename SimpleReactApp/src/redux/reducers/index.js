@@ -4,14 +4,18 @@ import {routerReducer} from 'react-router-redux'
 
 const initialMovieState = {
     movieList: null,
-    movie: null,
-    //filteredMoviesByGenre: null
+    movie: null
 }
 
 const initialFilterState = {
     searchFilterInfo: {type: "CHANGE_SEARCH_FILTERS", title : "search by", buttonList: [{id: "b1", text: "title", field: "title", checked: true}, {id: "b2", text: "genre", field: "genres", checked: false}]},
     navigationFilterInfo: {type: "CHANGE_NAVIGATION_FILTERS", title: "sort by", buttonList: [{id: "f1", text: "Release date", field: "release_date", checked: true}, {id: "f2", text: "rating", field: "vote_average", checked: false}]},
     query: ""
+}
+
+const initialAppState = {
+    searchButtonText : "Search",
+    logo: 'netflixroulete'
 }
 
 function movieReducer(state = initialMovieState, action){
@@ -21,9 +25,7 @@ function movieReducer(state = initialMovieState, action){
     if (action.type === SET_MOVIE) {
         return {...state, movie: action.movie};
     }
-    // if (action.type === FILTERED_BY_GENRE) {
-    //     return {...state, filteredMoviesByGenre: action.filteredMovies}
-    // }
+
     return state;
 }
 
@@ -40,9 +42,14 @@ function filterReducer(state = initialFilterState, action){
     return state;
 }
 
+function appReducer(state = initialAppState, action){
+    return state;
+}
+
 const rootReducer = combineReducers({
     movieState: movieReducer,
     filterState: filterReducer,
+    appState: appReducer,
     routing: routerReducer
 });
 

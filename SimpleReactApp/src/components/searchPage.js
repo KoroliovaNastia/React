@@ -6,24 +6,18 @@ import Header from './header';
 import Search from './search';
 import SearchNavigation from './searchNavigation';
 import Box from './box';
-import store from "../redux/store"
 import { withRouter } from 'react-router-dom'
-import queryString from 'query-string'
 import { updateFilters } from "../redux/actions/";
 
 import {connect} from 'react-redux';
-import {changeQuery} from "../redux/actions"
-import {getMovies, getCheckedFilterButton, updateMovieList} from "../redux/actions/get"
+import {updateMovieList} from "../redux/actions/get"
 import {CHANGE_NAVIGATION_FILTERS, CHANGE_SEARCH_FILTERS} from "../redux/constants/action-types"
 
 
 class SearchPage extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            logo: 'netflixroulete',
-            searchButtonText : "Search"
-        },
+
         this.updateFilterByUrl = this.updateFilterByUrl.bind(this);
     }
 
@@ -86,22 +80,20 @@ class SearchPage extends Component {
     }
 
     render(){
-        const {searchButtonText, updateFilterButtons, movies, searchFilters, navigationFilters} = this.props;
-
         return(
         <>
             <Header>
-                <Logo logo = {this.state.logo}/>
-                <Search searchButtonText={searchButtonText} onSearchClick={this.onSearchClick} handleChange={this.handleChange}/>
+                <Logo/>
+                <Search/>
             </Header>
             <Box>
-                <p>{/*movies.length*/0} movie found</p>
-                <SearchNavigation updateFilterButtons={updateFilterButtons}/>
+                {/* <p>{0} movie found</p> */}
+                <SearchNavigation/>
             </Box>
-            <Main movieList={movies}/>
+            <Main/>
             <Footer>
                 <Box>
-                <Logo logo = {this.state.logo}/>
+                <Logo/>
                 </Box>
             </Footer>
         </>

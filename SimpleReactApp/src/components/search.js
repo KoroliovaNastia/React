@@ -49,7 +49,7 @@ class Search extends Component {
                     <button className="search-button" data-cy="search" onClick={this.onSearchClick}>{searchButtonText}</button>
                 </div>
                 <div style={filter}>
-                    <Filter title={title} buttons={buttonList} type={type} updateFilterButtons={updateFilterButtons}/>
+                    <Filter title={title} buttons={buttonList} type={type}/>
                 </div>
             </>
         );
@@ -59,7 +59,8 @@ class Search extends Component {
 function mapStateToProps(store) {
     return {
         filterInfo: store.filterState.searchFilterInfo,
-        query: store.filterState.query
+        query: store.filterState.query,
+        searchButtonText: store.appState.searchButtonText
     };
   }
 

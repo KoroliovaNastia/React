@@ -1,8 +1,6 @@
 import React, { Component} from "react";
 import Movie from './movie';
 import {connect} from "react-redux";
-import store from "../redux/store";
-
 
 class Main extends Component {
 
@@ -33,11 +31,10 @@ class Main extends Component {
     }
 }
 
-// const mapStateToProps = function(store) {
-//     return {
-//       movieList: store.movieState.movieList
-//     };
-//   }
+const mapStateToProps = function(store) {
+    return {
+      movieList: store.movieState.movieList
+    };
+  }
 
-// export default connect(mapStateToProps)(Main)
-export default Main
+export default connect(mapStateToProps)(Main)
