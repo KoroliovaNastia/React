@@ -16,11 +16,11 @@ export function getMovies(query, sortBy, searchBy, sortOrder, filter){
                 'Content-Type': 'application/json'
             }
         }).then((response) => { response.json().then((result) => { 
-            if(filter){
-                dispatch(setFilteredMovies(result.data));
-            } else {
+            // if(filter){
+            //     dispatch(setFilteredMovies(result.data));
+            // } else {
                 dispatch(searchResults(result.data));
-            }
+            //}
         })
     }); 
     }

@@ -1,6 +1,7 @@
 import React, { Component} from "react";
 import Filter from './filter';
 import {connect} from 'react-redux';
+import {changeQuery} from "../redux/actions"
 
 
 const ENTER_KEY = 13;
@@ -8,13 +9,21 @@ const ENTER_KEY = 13;
 class Search extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            query: "",
+        }
+        this.onSearchClick = this.onSearchClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    /*onEnterClick(event) {
-        var updatedList = movieList; 
-        this.props.onChangeList(updatedList);
-    }*/
+    handleChange(event){
+        this.setState({query: event.target.value});
+    }
 
+    onSearchClick(){
+        const {getQuery} = this.props;
+        getQuery(this.state.query);
+    }
     render() {
         let input = {
             width: "600px",
@@ -31,12 +40,13 @@ class Search extends Component {
             position: "absolute"
         }
 
-        const {searchButtonText, handleChange, onSearchClick, updateFilterButtons, query, filterInfo:{title, buttonList, type}} = this.props;
+        const {searchButtonText, updateFilterButtons, filterInfo:{title, buttonList, type}} = this.props;
+        const {query} = this.state;
         return (
             <>
                 <div className="uk-search">
-                    <input style={input} className="uk-search-field" type="search" placeholder="SEARCH" value={query} onChange={handleChange}/>
-                    <button className="search-button" data-cy="search" onClick={onSearchClick}>{searchButtonText}</button>
+                    <input style={input} className="uk-search-field" type="search" placeholder="SEARCH" value={query} onChange={this.handleChange}/>
+                    <button className="search-button" data-cy="search" onClick={this.onSearchClick}>{searchButtonText}</button>
                 </div>
                 <div style={filter}>
                     <Filter title={title} buttons={buttonList} type={type} updateFilterButtons={updateFilterButtons}/>
@@ -49,8 +59,14 @@ class Search extends Component {
 function mapStateToProps(store) {
     return {
         filterInfo: store.filterState.searchFilterInfo,
-        query: store.movieState.query
+        query: store.filterState.query
     };
   }
 
-export default connect(mapStateToProps)(Search)
+  function mapDispatchToProps(dispatch) {
+    return {
+        getQuery: currentQuery => dispatch(changeQuery(currentQuery))
+    }
+   }  
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

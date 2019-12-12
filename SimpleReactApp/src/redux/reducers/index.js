@@ -5,7 +5,7 @@ import {routerReducer} from 'react-router-redux'
 const initialMovieState = {
     movieList: null,
     movie: null,
-    filteredMoviesByGenre: null
+    //filteredMoviesByGenre: null
 }
 
 const initialFilterState = {
@@ -21,9 +21,9 @@ function movieReducer(state = initialMovieState, action){
     if (action.type === SET_MOVIE) {
         return {...state, movie: action.movie};
     }
-    if (action.type === FILTERED_BY_GENRE) {
-        return {...state, filteredMoviesByGenre: action.filteredMovies}
-    }
+    // if (action.type === FILTERED_BY_GENRE) {
+    //     return {...state, filteredMoviesByGenre: action.filteredMovies}
+    // }
     return state;
 }
 

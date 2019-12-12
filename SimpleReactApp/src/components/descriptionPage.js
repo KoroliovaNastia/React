@@ -88,7 +88,7 @@ class DescriptionPage extends Component {
 
      //const filteredMovies = getMovies("", "", "", store.movie.genre[0])
      return {
-       movieList: store.movieState.filteredMoviesByGenre,
+       movieList: store.movieState.movieList,
        movie: store.movieState.movie,
        movieId: Number(ownProps.match.params.id)
      };
