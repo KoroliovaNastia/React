@@ -1,13 +1,11 @@
-import {searchResults, setMovie, setFilteredMovies} from "./index"
-//import store from "../store"
+import {updateMovies, setMovie} from "./index"
 
 const apiURL = "https://reactjs-cdp.herokuapp.com/movies";
 
-export function getMovies(query, sortBy, searchBy, sortOrder, filter){
+export function searchMovies(query, sortBy, searchBy, sortOrder, filter){
 
     let URL = apiURL + '?search=' + query + '&searchBy=' + searchBy + '&sortBy=' + sortBy + '&sortOrder=' + sortOrder + '&filter=' + filter;
     
-    //const data = null
     return dispatch => {
         fetch(URL, {
             method: 'GET',
@@ -16,11 +14,7 @@ export function getMovies(query, sortBy, searchBy, sortOrder, filter){
                 'Content-Type': 'application/json'
             }
         }).then((response) => { response.json().then((result) => { 
-            // if(filter){
-            //     dispatch(setFilteredMovies(result.data));
-            // } else {
-                dispatch(searchResults(result.data));
-            //}
+                dispatch(updateMovies(result.data));
         })
     }); 
     }
@@ -52,6 +46,6 @@ export function updateMovieList(navigationFilterInfo, query, searchFilterInfo){
     const sortBy = getCheckedFilterButton(navigationFilterInfo);
     const searchBy = getCheckedFilterButton(searchFilterInfo);
     return dispatch => {
-        dispatch(getMovies(query, sortBy, searchBy, "asc",""));
+        dispatch(searchMovies(query, sortBy, searchBy, "asc",""));
     }
 }

@@ -7,7 +7,7 @@ export function updateFilters(type, filters) {
     }
   };
 
-export function searchResults(movieList) {
+export function updateMovies(movieList) {
     return {
         type: SEARCH_RESULTS,
         movieList
@@ -25,12 +25,5 @@ export function changeQuery(query){
     return {
         type: CHANGE_QUERY,
         query
-    }
-}
-
-export function setFilteredMovies(filteredMovies) {
-    return {
-        type: FILTERED_BY_GENRE,
-        filteredMovies
     }
 }

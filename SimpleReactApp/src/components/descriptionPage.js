@@ -5,7 +5,7 @@ import MovieDescription from './movieDescription'
 import Box from './box'
 import Footer from './footer'
 import Main from './main'
-import {getMovies, getMovieById} from "../redux/actions/get"
+import {searchMovies, getMovieById} from "../redux/actions/get"
 import {Link} from 'react-router-dom'
 
 import {connect} from 'react-redux';
@@ -21,12 +21,12 @@ class DescriptionPage extends Component {
         getMovie(movieId)
     }
     componentDidUpdate(prevProps){
-        const {movie, movieId, getMovieList, getMovie} = this.props;
+        const {movie, movieId, updateMovieList, getMovie} = this.props;
         if(movieId !== prevProps.movieId){
             getMovie(movieId)
         }
         if(movie !== prevProps.movie) {
-            getMovieList(movie.genres)
+            updateMovieList(movie.genres)
         }
     }
 
@@ -76,7 +76,7 @@ class DescriptionPage extends Component {
  function mapDispatchToProps(dispatch){
      return {
          getMovie: id => dispatch(getMovieById(id)),
-         getMovieList: (genres) => dispatch(getMovies("", "", "", "asc", genres))
+         updateMovieList: (genres) => dispatch(searchMovies("", "", "", "asc", genres))
     } 
  }
 

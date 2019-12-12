@@ -40,7 +40,7 @@ class Search extends Component {
             position: "absolute"
         }
 
-        const {searchButtonText, updateFilterButtons, filterInfo:{title, buttonList, type}} = this.props;
+        const {searchButtonText, filterInfo:{title, buttonList, type}} = this.props;
         const {query} = this.state;
         return (
             <>

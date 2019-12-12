@@ -20,7 +20,7 @@ class ErrorBoundary extends Component {
             return (
                 <>
                     <h2>Oops.... something went wrong.</h2>
-                    <details style={{ whiteSpace: 'pre-wrap' }}>
+                    <details /*style={{ whiteSpace: 'pre-wrap' }}*/>
                         {error && error.toString()}
                         <br />
                         {errorInfo.componentStackS}
