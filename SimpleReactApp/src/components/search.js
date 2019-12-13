@@ -3,9 +3,6 @@ import Filter from './filter';
 import {connect} from 'react-redux';
 import {changeQuery} from "../redux/actions"
 
-
-const ENTER_KEY = 13;
-
 class Search extends Component {
     constructor(props) {
         super(props);
@@ -25,30 +22,15 @@ class Search extends Component {
         getQuery(this.state.query);
     }
     render() {
-        let input = {
-            width: "600px",
-            padding: "11px 45px",
-            backgroundColor: "#424242",
-            border: "none",
-            marginRight: "10px",
-            borderRadius: "3px"
-        }
-
-        let filter ={
-            width: "768px",
-            marginTop: "50px",
-            position: "absolute"
-        }
-
         const {searchButtonText, filterInfo:{title, buttonList, type}} = this.props;
         const {query} = this.state;
         return (
             <>
-                <div className="uk-search">
-                    <input style={input} className="uk-search-field" type="search" placeholder="SEARCH" value={query} onChange={this.handleChange}/>
-                    <button className="search-button" data-cy="search" onClick={this.onSearchClick}>{searchButtonText}</button>
+                <div>
+                    <input type="search" placeholder="SEARCH" value={query} onChange={this.handleChange}/>
+                    <button data-cy="search" onClick={this.onSearchClick}>{searchButtonText}</button>
                 </div>
-                <div style={filter}>
+                <div>
                     <Filter title={title} buttons={buttonList} type={type}/>
                 </div>
             </>

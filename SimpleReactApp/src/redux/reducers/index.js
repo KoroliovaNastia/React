@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {CHANGE_NAVIGATION_FILTERS, CHANGE_SEARCH_FILTERS, SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY, FILTERED_BY_GENRE} from "../constants/action-types"
+import {CHANGE_NAVIGATION_FILTERS, CHANGE_SEARCH_FILTERS, SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types"
 import {routerReducer} from 'react-router-redux'
 
 const initialMovieState = {

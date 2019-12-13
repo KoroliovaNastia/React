@@ -30,17 +30,6 @@ class DescriptionPage extends Component {
         }
     }
 
-    filterMoviesByGenre(mainMovie){
-        const {movieList, setIsShowing} = this.props;
-
-        const filteredMovies = movieList.filter(movie => movie.id !== mainMovie.id).map(movie => {
-            const isShowing = movie.genre === mainMovie.genre;
-            return setIsShowing(movie, isShowing)}
-            )
-        
-        return filteredMovies;    
-    }
-
     render() {
         const {movie} = this.props;
         if(movie === null) return <p>No film</p>
@@ -48,8 +37,8 @@ class DescriptionPage extends Component {
         <>
             <Header>
                 <Logo/>
-                <Link to={`/search`}></Link>
-                <MovieDescription movie={movie}/>
+                <Link to={`/search`}>Search page</Link>
+                <MovieDescription/>
             </Header>
             <Box>
                 <p>Films by {movie.genres.map( (genre, index) => <span key={movie.title + index}>{genre + " "}</span> )}genres</p>

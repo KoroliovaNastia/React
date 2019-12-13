@@ -11,7 +11,6 @@ import { updateFilters } from "../redux/actions/";
 
 import {connect} from 'react-redux';
 import {updateMovieList} from "../redux/actions/get"
-import {CHANGE_NAVIGATION_FILTERS, CHANGE_SEARCH_FILTERS} from "../redux/constants/action-types"
 
 
 class SearchPage extends Component {
@@ -19,9 +18,11 @@ class SearchPage extends Component {
         super(props);
 
         this.updateFilterByUrl = this.updateFilterByUrl.bind(this);
+        this.updateFilterUrl = this.updateFilterUrl.bind(this);
     }
 
     componentDidMount(){
+        const {navigationFilters, searchFilters, queryString, updateMovies} = this.props;
         const params = new URLSearchParams(this.props.location.search);
         const query = params.get('query');
         if (query !== null){
@@ -30,34 +31,28 @@ class SearchPage extends Component {
         const searchBy = params.get("searchBy");
         const sortBy = params.get("sortBy");
         if( searchBy !== undefined && searchBy !== null && searchBy !== "" ){
-            this.updateFilterByUrl(CHANGE_SEARCH_FILTERS, searchBy);
+            this.updateFilterByUrl(searchFilters, searchBy);
         }
 
         if( sortBy !== undefined && sortBy !== null && sortBy !== "" ){
-            this.updateFilterByUrl(CHANGE_NAVIGATION_FILTERS, sortBy);
+            this.updateFilterByUrl(navigationFilters, sortBy);
         }
-        const {navigationFilters, queryString, searchFilters, updateMovies} = this.props;
+
         updateMovies(navigationFilters, queryString, searchFilters);
     }
 
-    updateFilterByUrl(type, query){
-         const {navigationFilters, searchFilters, updateFilterButtons} = this.props;
-
-         if (type === CHANGE_NAVIGATION_FILTERS){
-            const navigationButtons = navigationFilters.buttonList.map(button => { return {...button, checked: (button.field === query)}})
-            updateFilterButtons(type, navigationButtons)
-         }
-
-         if (type === CHANGE_SEARCH_FILTERS){
-            const searchButtons = searchFilters.buttonList.map(button => { return {...button, checked: (button.field === query)}})
-            updateFilterButtons(type, searchButtons);
-        }
+    updateFilterByUrl(filterButtons, query){
+        const {updateFilterButtons} = this.props;
+        const updatedButtons = filterButtons.buttonList.map(button => { return {...button, checked: (button.field === query)}})
+        updateFilterButtons(filterButtons.type, updatedButtons)
     }
 
-    updateFilterUrl(filter, query)
+    updateFilterUrl(params, querySet)
     {
-        const params = new URLSearchParams(this.props.location.search);
-        params.set(filter, query);
+        querySet.forEach(element => {
+            params.set(element.filter, element.query)
+        });
+
         this.props.history.push(`?${params.toString()}`);
     }  
     
@@ -69,8 +64,10 @@ class SearchPage extends Component {
 
             updateMovies(navigationFilters, queryString, searchFilters);
             const params = new URLSearchParams(this.props.location.search);
-            params.set("sortBy", navigationFilters.buttonList.find(button => button.checked === true).field)
-            params.set("searchBy", searchFilters.buttonList.find(button => button.checked === true).field)
+            const querySet = [{filter: "sortBy", query: navigationFilters.buttonList.find(button => button.checked === true).field},
+                              {filter: "searchBy", query: searchFilters.buttonList.find(button => button.checked === true).field}]
+
+            this.updateFilterUrl(params, querySet);
             this.props.history.push(`?${params.toString()}`);
         }
      }

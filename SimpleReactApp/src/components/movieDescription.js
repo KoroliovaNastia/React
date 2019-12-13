@@ -3,8 +3,12 @@ import Image from './image'
 import {connect} from 'react-redux';
 
 class MovieDescription extends Component {
+    constructor(props){
+        super(props);
+    }
+    
     render(){
-        const {poster_path, title, release_date, vote_average, duration, description} = this.props.movie;
+        const {poster_path, title, release_date, vote_average, runtime, description} = this.props.movie;
         return(
             <>
                 <Image image={poster_path}/>
@@ -13,7 +17,7 @@ class MovieDescription extends Component {
                     <p>{vote_average}</p>
                 </div>
                 <div>
-                    <p>{release_date} year {duration} min</p>
+                    <p>{release_date} year {runtime} min</p>
                     <p>{description}</p>
                 </div>
             </>

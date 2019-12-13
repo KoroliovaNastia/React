@@ -18,22 +18,13 @@ class Filter extends Component{
 
     render(){
         const {title, buttons} = this.props;
-        // let style = {
-        //     textTransform: "uppercase",
-        //     fontSize: "16px",
-        //     color: "fff important!",
-        //     display: "inline-block"
-        // }
-        // let formStyle = {
-        //     display: "inline-block",
-        //     marginLeft: "10px"
-        // }
+
         return(
             <div className="filter-container">
-                <div /*style={style}*/>
+                <div>
                     <p>{title}</p>
                 </div>
-                <div /*style={formStyle}*/>
+                <div>
                     {buttons.map((button) => <FilterButton key={button.id} data={button} toggleChange={this.toggleChange}/>)}
                 </div>
             </div>

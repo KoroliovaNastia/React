@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import Image from "./image";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom'
+import {connect} from 'react-redux';
 
 class Movie extends Component {
+    constructor(props){
+        super(props);
+    }
+
     render(){
         const {id, poster_path, title, genres, release_date, vote_average} = this.props.movie;
         return (

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 const Logo = ({appLogo}) => (
     <div className="logo">
-        <p /*className={logoStyle().logo*}*/>
+        <p>
         {appLogo}
         </p>
     </div>
