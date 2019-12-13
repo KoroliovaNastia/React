@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducers/index";
 import {persistReducer, persistStore} from 'redux-persist'
 import thunk from 'redux-thunk'
-import { AsyncResource } from "async_hooks";
+import storage from 'redux-persist/lib/storage';
 
 
 const persistConfig = {
@@ -13,10 +13,9 @@ const persistConfig = {
 
 const pReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(
+export const store = createStore(
     pReducer,
-    applyMiddleware(thunk, autoRehydrate)
+    applyMiddleware(thunk)
 );
 
-const persistor = persistStore(store/*, { storage: AsyncResource}*/);
-export default {persistor,  store}
+export const persistor = persistStore(store);
