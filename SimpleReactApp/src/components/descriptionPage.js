@@ -62,7 +62,7 @@ class DescriptionPage extends Component {
      };
  }
 
- function mapDispatchToProps(dispatch){
+ export const mapDispatchToProps = (dispatch) => {
      return {
          getMovie: id => dispatch(getMovieById(id)),
          updateMovieList: (genres) => dispatch(searchMovies("", "", "", "asc", genres))

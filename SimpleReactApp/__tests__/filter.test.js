@@ -4,17 +4,25 @@ import { shallowToJson } from 'enzyme-to-json';
 import FilterButton from '../src/components/filterButton';
 import Filter from '../src/components/filter';
 import Adapter from 'enzyme-adapter-react-16';
+import configureStore from 'redux-mock-store';
 
 configure({ adapter: new Adapter() });
 
-describe('Filter component', () => {
-    const buttonList = [{id: "btn1", text: "first test button", checked: true}, {id: "btn2", text: "second test button", checked: false}];
-    const title = "test filter";
-    const type = "sort by";
-    const updateFilterButtons = jest.fn();
+const mockStore = configureStore();
+const initialStore = {
+    filterState: {
+        searchFilterInfo: {type: "CHANGE_SEARCH_FILTERS", title : "search by", buttonList: [{id: "b1", text: "title", field: "title", checked: true}, {id: "b2", text: "genre", field: "genres", checked: false}]},
+        navigationFilterInfo: {type: "CHANGE_NAVIGATION_FILTERS", title: "sort by", buttonList: [{id: "f1", text: "Release date", field: "release_date", checked: true}, {id: "f2", text: "rating", field: "vote_average", checked: false}]},
+        query: ""
+    }
+}
 
+const store = mockStore(initialStore);
+
+describe('Filter component', () => {
+    const {title, buttonList, type } = initialStore.filterState.searchFilterInfo;
     it('should render correctly', () => {
-        const component = shallow(<Filter title={title} buttons={buttonList} type={type} updateFilterButtons={updateFilterButtons}/>);
+        const component = shallow(<Filter store={store} title={title} buttons={buttonList} type={type}/>);
         expect(shallowToJson(component)).toMatchSnapshot();
     })
 })

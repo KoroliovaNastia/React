@@ -1,5 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `
+<ErrorBoundary>
+  <BrowserRouter>
+    <Switch>
+      <Redirect
+        exact={true}
+        from="/"
+        to="/search"
+      />
+      <Route
+        component={[Function]}
+        name="search"
+        path="/search"
+      />
+      <Route
+        component={
+          Object {
+            "$$typeof": Symbol(react.memo),
+            "WrappedComponent": [Function],
+            "compare": null,
+            "displayName": "Connect(DescriptionPage)",
+            "type": [Function],
+          }
+        }
+        name="film"
+        path="/film/:id"
+      />
+      <Route
+        component={[Function]}
+        path="*"
+      />
+    </Switch>
+  </BrowserRouter>
+</ErrorBoundary>
+`;
+
 exports[`User should render correctly 1`] = `
 <span>
   User: 

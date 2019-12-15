@@ -18,7 +18,7 @@ const initialAppState = {
     logo: 'netflixroulete'
 }
 
-function movieReducer(state = initialMovieState, action){
+export function movieReducer(state = initialMovieState, action){
     if (action.type === SEARCH_RESULTS) {
         return { ...state, movieList: action.movieList};
     }
@@ -29,7 +29,7 @@ function movieReducer(state = initialMovieState, action){
     return state;
 }
 
-function filterReducer(state = initialFilterState, action){
+export function filterReducer(state = initialFilterState, action){
     if (action.type === CHANGE_SEARCH_FILTERS){
         return { ...state, searchFilterInfo: { ...state.searchFilterInfo, buttonList: action.filters}}
     }

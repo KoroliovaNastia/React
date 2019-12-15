@@ -18,11 +18,12 @@ describe('User', () => {
 
 describe('Root component', () => {
         const wrapper = shallow(<Root></Root>)
-        const instance = wrapper.instance();
+        //const instance = wrapper.instance();
+        expect(shallowToJson(wrapper)).toMatchSnapshot();
 
-     it('should set isShowing for movies correctly', () => {
-         const movie = instance.state.movieList[2];
-         const result = instance.setIsShowing(movie, "false");
-         expect(result.isShowing).toEqual("false");
-     })
+    //  it('should set isShowing for movies correctly', () => {
+    //      const movie = instance.state.movieList[2];
+    //      const result = instance.setIsShowing(movie, "false");
+    //      expect(result.isShowing).toEqual("false");
+    //  })
 })

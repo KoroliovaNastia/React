@@ -27,8 +27,8 @@ class Search extends Component {
         return (
             <>
                 <div>
-                    <input type="search" placeholder="SEARCH" value={query} onChange={this.handleChange}/>
-                    <button data-cy="search" onClick={this.onSearchClick}>{searchButtonText}</button>
+                    <input type="search" placeholder="SEARCH" className='search-field' value={query} onChange={this.handleChange}/>
+                    <button className='search-button' data-cy="search" onClick={this.onSearchClick}>{searchButtonText}</button>
                 </div>
                 <div>
                     <Filter title={title} buttons={buttonList} type={type}/>

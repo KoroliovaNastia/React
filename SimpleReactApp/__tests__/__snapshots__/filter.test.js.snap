@@ -1,53 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Filter component should render correctly 1`] = `
-<div
-  className="filter-container"
+<ContextProvider
+  value={null}
 >
-  <div
-    style={
-      Object {
-        "color": "fff important!",
-        "display": "inline-block",
-        "fontSize": "16px",
-        "textTransform": "uppercase",
-      }
-    }
-  >
-    <p>
-      test filter
-    </p>
-  </div>
-  <div
-    style={
-      Object {
-        "display": "inline-block",
-        "marginLeft": "10px",
-      }
-    }
-  >
-    <FilterButton
-      data={
+  <Filter
+    buttons={
+      Array [
         Object {
           "checked": true,
-          "id": "btn1",
-          "text": "first test button",
-        }
-      }
-      key="btn1"
-      toggleChange={[Function]}
-    />
-    <FilterButton
-      data={
+          "field": "title",
+          "id": "b1",
+          "text": "title",
+        },
         Object {
           "checked": false,
-          "id": "btn2",
-          "text": "second test button",
-        }
+          "field": "genres",
+          "id": "b2",
+          "text": "genre",
+        },
+      ]
+    }
+    navigationFilters={
+      Object {
+        "buttonList": Array [
+          Object {
+            "checked": true,
+            "field": "release_date",
+            "id": "f1",
+            "text": "Release date",
+          },
+          Object {
+            "checked": false,
+            "field": "vote_average",
+            "id": "f2",
+            "text": "rating",
+          },
+        ],
+        "title": "sort by",
+        "type": "CHANGE_NAVIGATION_FILTERS",
       }
-      key="btn2"
-      toggleChange={[Function]}
-    />
-  </div>
-</div>
+    }
+    query=""
+    searchFilters={
+      Object {
+        "buttonList": Array [
+          Object {
+            "checked": true,
+            "field": "title",
+            "id": "b1",
+            "text": "title",
+          },
+          Object {
+            "checked": false,
+            "field": "genres",
+            "id": "b2",
+            "text": "genre",
+          },
+        ],
+        "title": "search by",
+        "type": "CHANGE_SEARCH_FILTERS",
+      }
+    }
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
+    title="search by"
+    type="CHANGE_SEARCH_FILTERS"
+    updateFilterButtons={[Function]}
+  />
+</ContextProvider>
 `;

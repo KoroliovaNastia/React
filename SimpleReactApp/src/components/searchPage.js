@@ -68,13 +68,9 @@ class SearchPage extends Component {
                               {filter: "searchBy", query: searchFilters.buttonList.find(button => button.checked === true).field}]
 
             this.updateFilterUrl(params, querySet);
-            this.props.history.push(`?${params.toString()}`);
+            //this.props.history.push(`?${params.toString()}`);
         }
      }
-
-    handleChange(event){
-        this.setState({query: event.target.value});
-    }
 
     render(){
         return(
@@ -97,7 +93,7 @@ class SearchPage extends Component {
     )}
 }
 
-function mapStateToProps(store) {
+export function mapStateToProps(store) {
     return {
       movies: store.movieState.movieList,
       searchFilters: store.filterState.searchFilterInfo,
@@ -106,7 +102,7 @@ function mapStateToProps(store) {
     };
   }
 
-  function mapDispatchToProps(dispatch) {
+  export function mapDispatchToProps(dispatch) {
     return {
         updateFilterButtons: (type, buttons) => dispatch(updateFilters(type, buttons)),
         updateMovies: (navigationFilters, queryString, searchFilters) => dispatch(updateMovieList(navigationFilters, queryString, searchFilters))

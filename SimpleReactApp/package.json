@@ -20,6 +20,7 @@
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
     "express": "^4.17.1",
+    "fetch-mock": "^8.0.1",
     "jest": "^24.9.0",
     "jss": "^10.0.0",
     "query-string": "^6.9.0",
@@ -33,10 +34,13 @@
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.4",
     "redux-persist": "^6.0.0",
     "redux-persist-immutable": "^4.3.1",
     "redux-swagger-client": "^2.1.1",
     "redux-thunk": "^2.3.0",
+    "sinon": "^7.5.0",
+    "sinon-test": "^2.4.1",
     "webpack": "^4.41.2"
   },
   "devDependencies": {
@@ -63,6 +67,8 @@
     "collectCoverageFrom": [
       "**/src/*.{js,jsx}",
       "**/src/components/**",
+      "**/src/redux/**",
+      "!**/src/redux/store.js",
       "!**/src/index.js",
       "!**/src/app.js",
       "!**/src/components/netflixTheme.js"

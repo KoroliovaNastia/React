@@ -1,85 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Movie component should be render correctly 1`] = `
-<Movie
-  movie={
-    Object {
-      "description": "lorem ipsum lorem ipsum loremipsum",
-      "duration": "154",
-      "genre": "Horror",
-      "id": "m1",
-      "image": "",
-      "rating": 5,
-      "release_date": 2019,
-      "title": "title",
-    }
-  }
+<div
+  className="movie"
 >
-  <div
-    className="movie"
+  <Image />
+  <Link
+    to="/film/1"
   >
-    <Image
-      image=""
+    Not yet...
+  </Link>
+  <ul>
+    <p
+      key="Not yet...Adventure"
     >
-      <img
-        src=""
-      />
-    </Image>
-    <p>
-      title
+      Adventure
     </p>
-    <p>
-      Horror
-    </p>
-    <p>
-      2019
-    </p>
-    <p>
-      5
-    </p>
-  </div>
-</Movie>
+  </ul>
+  <p>
+    2022
+  </p>
+  <p>
+    5
+  </p>
+</div>
 `;
 
 exports[`Movie description component should be render correctly 1`] = `
-<MovieDescription
-  movie={
+<Connect(MovieDescription)
+  store={
     Object {
-      "description": "lorem ipsum lorem ipsum loremipsum",
-      "duration": "154",
-      "genre": "Horror",
-      "id": "m1",
-      "image": "",
-      "rating": 5,
-      "release_date": 2019,
-      "title": "title",
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
     }
   }
 >
-  <Image
-    image=""
+  <MovieDescription
+    dispatch={[Function]}
+    movie={
+      Object {
+        "description": "",
+        "genres": Array [
+          "Adventure",
+        ],
+        "id": "1",
+        "image": "../src/images/movie-default.jpg",
+        "release_date": "2022",
+        "runtime": 154,
+        "title": "Not yet...",
+        "vote_average": 5,
+      }
+    }
+    store={
+      Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      }
+    }
   >
-    <img
-      src=""
-    />
-  </Image>
-  <div>
-    <p>
-      title
-    </p>
-    <p>
-      5
-    </p>
-  </div>
-  <div>
-    <p>
-       year 
-      154
-       min
-    </p>
-    <p>
-      lorem ipsum lorem ipsum loremipsum
-    </p>
-  </div>
-</MovieDescription>
+    <Image>
+      <img />
+    </Image>
+    <div>
+      <p>
+        Not yet...
+      </p>
+      <p>
+        5
+      </p>
+    </div>
+    <div>
+      <p>
+        2022
+         year 
+        154
+         min
+      </p>
+      <p />
+    </div>
+  </MovieDescription>
+</Connect(MovieDescription)>
 `;

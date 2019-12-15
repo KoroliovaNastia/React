@@ -1,205 +1,549 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DescriptionPage component should render correctly 1`] = `
-<DescriptionPage
-  logo="netflixroulete"
-  movieId="1"
-  movieList={
-    Array [
-      Object {
-        "description": "lorem ipsum lorem ipsum",
-        "duration": "154",
-        "genre": "Adventure",
-        "id": "1",
-        "image": "../src/images/movie-default.jpg",
-        "isShowing": true,
-        "rating": "5.0",
-        "release_date": "2022",
-        "title": "Not yet...",
-      },
-      Object {
-        "description": "lorem ipsum lorem ipsum",
-        "duration": "154",
-        "genre": "Horror",
-        "id": "2",
-        "image": "../src/images/movie-default.jpg",
-        "isShowing": true,
-        "rating": "4.1",
-        "release_date": "2020",
-        "title": "Soon...",
-      },
-    ]
-  }
-  setIsShowing={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "description": "lorem ipsum lorem ipsum",
-            "duration": "154",
-            "genre": "Horror",
-            "id": "2",
-            "image": "../src/images/movie-default.jpg",
-            "isShowing": true,
-            "rating": "4.1",
-            "release_date": "2020",
-            "title": "Soon...",
-          },
-          false,
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [MockFunction] {
+        "calls": Array [
+          Array [
+            [Function],
+          ],
         ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": Object {
-            "description": "lorem ipsum lorem ipsum",
-            "duration": "154",
-            "genre": "Horror",
-            "id": "2",
-            "image": "../src/images/movie-default.jpg",
-            "isShowing": false,
-            "rating": "4.1",
-            "release_date": "2020",
-            "title": "Soon...",
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
           },
-        },
-      ],
+        ],
+      },
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
     }
   }
 >
-  <Header>
-    <div
-      className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
-      style={
+  <BrowserRouter>
+    <Router
+      history={
         Object {
-          "backgroundColor": "#2323237f",
-          "backgroundImage": "url(test-file-stub)",
-          "minWidth": "1200px",
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
         }
       }
-      uk-img="true"
     >
-      <Logo
-        logo="netflixroulete"
-      >
-        <div
-          className="logo"
-        >
-          <p>
-            netflixroulete
-          </p>
-        </div>
-      </Logo>
-      <button />
-      <MovieDescription
-        movie={
+      <Connect(DescriptionPage)
+        match={
           Object {
-            "description": "lorem ipsum lorem ipsum",
-            "duration": "154",
-            "genre": "Adventure",
-            "id": "1",
-            "image": "../src/images/movie-default.jpg",
-            "isShowing": true,
-            "rating": "5.0",
-            "release_date": "2022",
-            "title": "Not yet...",
+            "params": Object {
+              "id": 1,
+            },
           }
         }
       >
-        <Image
-          image="../src/images/movie-default.jpg"
-        >
-          <img
-            src="../src/images/movie-default.jpg"
-          />
-        </Image>
-        <div>
-          <p>
-            Not yet...
-          </p>
-          <p>
-            5.0
-          </p>
-        </div>
-        <div>
-          <p>
-             year 
-            154
-             min
-          </p>
-          <p>
-            lorem ipsum lorem ipsum
-          </p>
-        </div>
-      </MovieDescription>
-    </div>
-  </Header>
-  <Box>
-    <div
-      style={
-        Object {
-          "backgroundColor": "#555555",
-          "height": "65px",
-        }
-      }
-    >
-      <p>
-        Films by 
-        Adventure
-         genre
-      </p>
-    </div>
-  </Box>
-  <Main
-    movieList={
-      Array [
-        Object {
-          "description": "lorem ipsum lorem ipsum",
-          "duration": "154",
-          "genre": "Horror",
-          "id": "2",
-          "image": "../src/images/movie-default.jpg",
-          "isShowing": false,
-          "rating": "4.1",
-          "release_date": "2020",
-          "title": "Soon...",
-        },
-      ]
-    }
-  >
-    <div
-      className="container"
-    >
-      <div
-        className="row"
-      />
-    </div>
-  </Main>
-  <Footer>
-    <footer>
-      <Box>
-        <div
-          style={
+        <DescriptionPage
+          getMovie={[Function]}
+          match={
             Object {
-              "backgroundColor": "#555555",
-              "height": "65px",
+              "params": Object {
+                "id": 1,
+              },
             }
           }
+          movie={
+            Object {
+              "description": "",
+              "genres": Array [
+                "Adventure",
+              ],
+              "id": "1",
+              "image": "../src/images/movie-default.jpg",
+              "release_date": "2022",
+              "runtime": 154,
+              "title": "Not yet...",
+              "vote_average": 5,
+            }
+          }
+          movieId={1}
+          movieList={
+            Array [
+              Object {
+                "description": "",
+                "genres": Array [
+                  "Adventure",
+                ],
+                "id": "1",
+                "image": "../src/images/movie-default.jpg",
+                "release_date": "2022",
+                "runtime": 154,
+                "title": "Not yet...",
+                "vote_average": 5,
+              },
+              Object {
+                "description": "",
+                "genres": Array [
+                  "Horror",
+                ],
+                "id": "2",
+                "image": "../src/images/movie-default.jpg",
+                "release_date": "2020",
+                "runtime": 154,
+                "title": "Soon...",
+                "vote_average": 4,
+              },
+            ]
+          }
+          updateMovieList={[Function]}
         >
-          <Logo
-            logo="netflixroulete"
-          >
+          <Header>
             <div
-              className="logo"
+              uk-img="true"
             >
+              <Connect(Logo)>
+                <Logo
+                  appLogo="netflixroulete"
+                  dispatch={
+                    [MockFunction] {
+                      "calls": Array [
+                        Array [
+                          [Function],
+                        ],
+                      ],
+                      "results": Array [
+                        Object {
+                          "type": "return",
+                          "value": undefined,
+                        },
+                      ],
+                    }
+                  }
+                >
+                  <div
+                    className="logo"
+                  >
+                    <p>
+                      netflixroulete
+                    </p>
+                  </div>
+                </Logo>
+              </Connect(Logo)>
+              <Link
+                to="/search"
+              >
+                <LinkAnchor
+                  href="/search"
+                  navigate={[Function]}
+                >
+                  <a
+                    href="/search"
+                    onClick={[Function]}
+                  >
+                    Search page
+                  </a>
+                </LinkAnchor>
+              </Link>
+              <Connect(MovieDescription)>
+                <MovieDescription
+                  dispatch={
+                    [MockFunction] {
+                      "calls": Array [
+                        Array [
+                          [Function],
+                        ],
+                      ],
+                      "results": Array [
+                        Object {
+                          "type": "return",
+                          "value": undefined,
+                        },
+                      ],
+                    }
+                  }
+                  movie={
+                    Object {
+                      "description": "",
+                      "genres": Array [
+                        "Adventure",
+                      ],
+                      "id": "1",
+                      "image": "../src/images/movie-default.jpg",
+                      "release_date": "2022",
+                      "runtime": 154,
+                      "title": "Not yet...",
+                      "vote_average": 5,
+                    }
+                  }
+                >
+                  <Image>
+                    <img />
+                  </Image>
+                  <div>
+                    <p>
+                      Not yet...
+                    </p>
+                    <p>
+                      5
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      2022
+                       year 
+                      154
+                       min
+                    </p>
+                    <p />
+                  </div>
+                </MovieDescription>
+              </Connect(MovieDescription)>
+            </div>
+          </Header>
+          <Box>
+            <div>
               <p>
-                netflixroulete
+                Films by 
+                <span
+                  key="Not yet...0"
+                >
+                  Adventure 
+                </span>
+                genres
               </p>
             </div>
-          </Logo>
-        </div>
-      </Box>
-    </footer>
-  </Footer>
-</DescriptionPage>
+          </Box>
+          <Connect(Main)>
+            <Main
+              dispatch={
+                [MockFunction] {
+                  "calls": Array [
+                    Array [
+                      [Function],
+                    ],
+                  ],
+                  "results": Array [
+                    Object {
+                      "type": "return",
+                      "value": undefined,
+                    },
+                  ],
+                }
+              }
+              movieList={
+                Array [
+                  Object {
+                    "description": "",
+                    "genres": Array [
+                      "Adventure",
+                    ],
+                    "id": "1",
+                    "image": "../src/images/movie-default.jpg",
+                    "release_date": "2022",
+                    "runtime": 154,
+                    "title": "Not yet...",
+                    "vote_average": 5,
+                  },
+                  Object {
+                    "description": "",
+                    "genres": Array [
+                      "Horror",
+                    ],
+                    "id": "2",
+                    "image": "../src/images/movie-default.jpg",
+                    "release_date": "2020",
+                    "runtime": 154,
+                    "title": "Soon...",
+                    "vote_average": 4,
+                  },
+                ]
+              }
+            >
+              <div
+                className="container"
+              >
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-lg-3"
+                    key="1"
+                  >
+                    <withRouter(Movie)
+                      key="1"
+                      movie={
+                        Object {
+                          "description": "",
+                          "genres": Array [
+                            "Adventure",
+                          ],
+                          "id": "1",
+                          "image": "../src/images/movie-default.jpg",
+                          "release_date": "2022",
+                          "runtime": 154,
+                          "title": "Not yet...",
+                          "vote_average": 5,
+                        }
+                      }
+                    >
+                      <Movie
+                        history={
+                          Object {
+                            "action": "POP",
+                            "block": [Function],
+                            "createHref": [Function],
+                            "go": [Function],
+                            "goBack": [Function],
+                            "goForward": [Function],
+                            "length": 1,
+                            "listen": [Function],
+                            "location": Object {
+                              "hash": "",
+                              "pathname": "/",
+                              "search": "",
+                              "state": undefined,
+                            },
+                            "push": [Function],
+                            "replace": [Function],
+                          }
+                        }
+                        location={
+                          Object {
+                            "hash": "",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          }
+                        }
+                        match={
+                          Object {
+                            "isExact": true,
+                            "params": Object {},
+                            "path": "/",
+                            "url": "/",
+                          }
+                        }
+                        movie={
+                          Object {
+                            "description": "",
+                            "genres": Array [
+                              "Adventure",
+                            ],
+                            "id": "1",
+                            "image": "../src/images/movie-default.jpg",
+                            "release_date": "2022",
+                            "runtime": 154,
+                            "title": "Not yet...",
+                            "vote_average": 5,
+                          }
+                        }
+                      >
+                        <div
+                          className="movie"
+                        >
+                          <Image>
+                            <img />
+                          </Image>
+                          <Link
+                            to="/film/1"
+                          >
+                            <LinkAnchor
+                              href="/film/1"
+                              navigate={[Function]}
+                            >
+                              <a
+                                href="/film/1"
+                                onClick={[Function]}
+                              >
+                                Not yet...
+                              </a>
+                            </LinkAnchor>
+                          </Link>
+                          <ul>
+                            <p
+                              key="Not yet...Adventure"
+                            >
+                              Adventure
+                            </p>
+                          </ul>
+                          <p>
+                            2022
+                          </p>
+                          <p>
+                            5
+                          </p>
+                        </div>
+                      </Movie>
+                    </withRouter(Movie)>
+                  </div>
+                  <div
+                    className="col-lg-3"
+                    key="2"
+                  >
+                    <withRouter(Movie)
+                      key="2"
+                      movie={
+                        Object {
+                          "description": "",
+                          "genres": Array [
+                            "Horror",
+                          ],
+                          "id": "2",
+                          "image": "../src/images/movie-default.jpg",
+                          "release_date": "2020",
+                          "runtime": 154,
+                          "title": "Soon...",
+                          "vote_average": 4,
+                        }
+                      }
+                    >
+                      <Movie
+                        history={
+                          Object {
+                            "action": "POP",
+                            "block": [Function],
+                            "createHref": [Function],
+                            "go": [Function],
+                            "goBack": [Function],
+                            "goForward": [Function],
+                            "length": 1,
+                            "listen": [Function],
+                            "location": Object {
+                              "hash": "",
+                              "pathname": "/",
+                              "search": "",
+                              "state": undefined,
+                            },
+                            "push": [Function],
+                            "replace": [Function],
+                          }
+                        }
+                        location={
+                          Object {
+                            "hash": "",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          }
+                        }
+                        match={
+                          Object {
+                            "isExact": true,
+                            "params": Object {},
+                            "path": "/",
+                            "url": "/",
+                          }
+                        }
+                        movie={
+                          Object {
+                            "description": "",
+                            "genres": Array [
+                              "Horror",
+                            ],
+                            "id": "2",
+                            "image": "../src/images/movie-default.jpg",
+                            "release_date": "2020",
+                            "runtime": 154,
+                            "title": "Soon...",
+                            "vote_average": 4,
+                          }
+                        }
+                      >
+                        <div
+                          className="movie"
+                        >
+                          <Image>
+                            <img />
+                          </Image>
+                          <Link
+                            to="/film/2"
+                          >
+                            <LinkAnchor
+                              href="/film/2"
+                              navigate={[Function]}
+                            >
+                              <a
+                                href="/film/2"
+                                onClick={[Function]}
+                              >
+                                Soon...
+                              </a>
+                            </LinkAnchor>
+                          </Link>
+                          <ul>
+                            <p
+                              key="Soon...Horror"
+                            >
+                              Horror
+                            </p>
+                          </ul>
+                          <p>
+                            2020
+                          </p>
+                          <p>
+                            4
+                          </p>
+                        </div>
+                      </Movie>
+                    </withRouter(Movie)>
+                  </div>
+                </div>
+              </div>
+            </Main>
+          </Connect(Main)>
+          <Footer>
+            <footer>
+              <Box>
+                <div>
+                  <Connect(Logo)>
+                    <Logo
+                      appLogo="netflixroulete"
+                      dispatch={
+                        [MockFunction] {
+                          "calls": Array [
+                            Array [
+                              [Function],
+                            ],
+                          ],
+                          "results": Array [
+                            Object {
+                              "type": "return",
+                              "value": undefined,
+                            },
+                          ],
+                        }
+                      }
+                    >
+                      <div
+                        className="logo"
+                      >
+                        <p>
+                          netflixroulete
+                        </p>
+                      </div>
+                    </Logo>
+                  </Connect(Logo)>
+                </div>
+              </Box>
+            </footer>
+          </Footer>
+        </DescriptionPage>
+      </Connect(DescriptionPage)>
+    </Router>
+  </BrowserRouter>
+</Provider>
 `;

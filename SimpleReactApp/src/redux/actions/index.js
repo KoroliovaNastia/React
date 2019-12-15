@@ -1,4 +1,4 @@
-import {SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY, FILTERED_BY_GENRE} from "../constants/action-types";
+import {SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types";
 
 export function updateFilters(type, filters) {
     return { 

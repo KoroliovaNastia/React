@@ -1,231 +1,174 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SearchPage component should render correctly 1`] = `
-<SearchPage
-  filters={
+exports[`Search component should rendeer correctly 1`] = `
+<Provider
+  store={
     Object {
-      "navigationFilterInfo": Object {
-        "buttonList": Array [
+      "clearActions": [Function],
+      "dispatch": [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "filters": Array [],
+              "type": "CHANGE_SEARCH_FILTERS",
+            },
+          ],
+        ],
+        "results": Array [
           Object {
-            "checked": true,
-            "id": "f1",
-            "text": "Release date",
-          },
-          Object {
-            "checked": false,
-            "id": "f2",
-            "text": "rating",
+            "type": "return",
+            "value": undefined,
           },
         ],
-        "title": "sort by",
-        "type": "navigationFilterInfo",
       },
-      "searchFilterInfo": Object {
-        "buttonList": Array [
-          Object {
-            "checked": true,
-            "id": "b1",
-            "text": "title",
-          },
-          Object {
-            "checked": false,
-            "id": "b2",
-            "text": "genre",
-          },
-        ],
-        "title": "search by",
-        "type": "searchFilterInfo",
-      },
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
     }
   }
-  logo="netflixroulete"
-  movieList={
-    Array [
-      Object {
-        "description": "lorem ipsum lorem ipsum",
-        "duration": "153",
-        "genre": "Horror",
-        "id": "2",
-        "image": "../src/images/movie-default.jpg",
-        "isShowing": true,
-        "rating": "4.1",
-        "release_date": "2020",
-        "title": "Soon...",
-      },
-      Object {
-        "description": "lorem ipsum lorem ipsum",
-        "duration": "154",
-        "genre": "Adventure",
-        "id": "1",
-        "image": "../src/images/movie-default.jpg",
-        "isShowing": true,
-        "rating": "5.0",
-        "release_date": "2022",
-        "title": "Not yet...",
-      },
-    ]
-  }
-  searchButtonText="Search"
-  setIsShowing={[MockFunction]}
-  updateFilterButtons={[MockFunction]}
 >
-  <Header>
-    <div
-      className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
-      style={
+  <Connect(Search)
+    getQuery={[Function]}
+  >
+    <Search
+      filterInfo={
         Object {
-          "backgroundColor": "#2323237f",
-          "backgroundImage": "url(test-file-stub)",
-          "minWidth": "1200px",
+          "buttonList": Array [
+            Object {
+              "checked": true,
+              "field": "title",
+              "id": "b1",
+              "text": "title",
+            },
+            Object {
+              "checked": false,
+              "field": "genres",
+              "id": "b2",
+              "text": "genre",
+            },
+          ],
+          "title": "search by",
+          "type": "CHANGE_SEARCH_FILTERS",
         }
       }
-      uk-img="true"
+      getQuery={[Function]}
+      query=""
+      searchButtonText="Search"
     >
-      <Logo
-        logo="netflixroulete"
-      >
-        <div
-          className="logo"
+      <div>
+        <input
+          className="search-field"
+          onChange={[Function]}
+          placeholder="SEARCH"
+          type="search"
+          value=""
+        />
+        <button
+          className="search-button"
+          data-cy="search"
+          onClick={[Function]}
         >
-          <p>
-            netflixroulete
-          </p>
-        </div>
-      </Logo>
-      <Search
-        filterInfo={
-          Object {
-            "buttonList": Array [
+          Search
+        </button>
+      </div>
+      <div>
+        <Connect(Filter)
+          buttons={
+            Array [
               Object {
                 "checked": true,
+                "field": "title",
                 "id": "b1",
                 "text": "title",
               },
               Object {
                 "checked": false,
+                "field": "genres",
                 "id": "b2",
                 "text": "genre",
               },
-            ],
-            "title": "search by",
-            "type": "searchFilterInfo",
+            ]
           }
-        }
-        handleChange={[Function]}
-        movieList={
-          Array [
-            Object {
-              "description": "lorem ipsum lorem ipsum",
-              "duration": "153",
-              "genre": "Horror",
-              "id": "2",
-              "image": "../src/images/movie-default.jpg",
-              "isShowing": true,
-              "rating": "4.1",
-              "release_date": "2020",
-              "title": "Soon...",
-            },
-            Object {
-              "description": "lorem ipsum lorem ipsum",
-              "duration": "154",
-              "genre": "Adventure",
-              "id": "1",
-              "image": "../src/images/movie-default.jpg",
-              "isShowing": true,
-              "rating": "5.0",
-              "release_date": "2022",
-              "title": "Not yet...",
-            },
-          ]
-        }
-        onSearchClick={[Function]}
-        searchButtonText="Search"
-        updateFilterButtons={[MockFunction]}
-      >
-        <div
-          className="uk-search"
-        >
-          <input
-            className="uk-search-field"
-            onChange={[Function]}
-            placeholder="SEARCH"
-            style={
-              Object {
-                "backgroundColor": "#424242",
-                "border": "none",
-                "borderRadius": "3px",
-                "marginRight": "10px",
-                "padding": "11px 45px",
-                "width": "600px",
-              }
-            }
-            type="search"
-          />
-          <button
-            className="search-button"
-            data-cy="search"
-            onClick={[Function]}
-          >
-            Search
-          </button>
-        </div>
-        <div
-          style={
-            Object {
-              "marginTop": "50px",
-              "position": "absolute",
-              "width": "768px",
-            }
-          }
+          title="search by"
+          type="CHANGE_SEARCH_FILTERS"
         >
           <Filter
             buttons={
               Array [
                 Object {
                   "checked": true,
+                  "field": "title",
                   "id": "b1",
                   "text": "title",
                 },
                 Object {
                   "checked": false,
+                  "field": "genres",
                   "id": "b2",
                   "text": "genre",
                 },
               ]
             }
+            navigationFilters={
+              Object {
+                "buttonList": Array [
+                  Object {
+                    "checked": true,
+                    "field": "release_date",
+                    "id": "f1",
+                    "text": "Release date",
+                  },
+                  Object {
+                    "checked": false,
+                    "field": "vote_average",
+                    "id": "f2",
+                    "text": "rating",
+                  },
+                ],
+                "title": "sort by",
+                "type": "CHANGE_NAVIGATION_FILTERS",
+              }
+            }
+            query=""
+            searchFilters={
+              Object {
+                "buttonList": Array [
+                  Object {
+                    "checked": true,
+                    "field": "title",
+                    "id": "b1",
+                    "text": "title",
+                  },
+                  Object {
+                    "checked": false,
+                    "field": "genres",
+                    "id": "b2",
+                    "text": "genre",
+                  },
+                ],
+                "title": "search by",
+                "type": "CHANGE_SEARCH_FILTERS",
+              }
+            }
             title="search by"
-            type="searchFilterInfo"
-            updateFilterButtons={[MockFunction]}
+            type="CHANGE_SEARCH_FILTERS"
+            updateFilterButtons={[Function]}
           >
             <div
               className="filter-container"
             >
-              <div
-                style={
-                  Object {
-                    "color": "fff important!",
-                    "display": "inline-block",
-                    "fontSize": "16px",
-                    "textTransform": "uppercase",
-                  }
-                }
-              >
+              <div>
                 <p>
                   search by
                 </p>
               </div>
-              <div
-                style={
-                  Object {
-                    "display": "inline-block",
-                    "marginLeft": "10px",
-                  }
-                }
-              >
+              <div>
                 <FilterButton
                   data={
                     Object {
                       "checked": true,
+                      "field": "title",
                       "id": "b1",
                       "text": "title",
                     }
@@ -247,6 +190,7 @@ exports[`SearchPage component should render correctly 1`] = `
                   data={
                     Object {
                       "checked": false,
+                      "field": "genres",
                       "id": "b2",
                       "text": "genre",
                     }
@@ -267,92 +211,178 @@ exports[`SearchPage component should render correctly 1`] = `
               </div>
             </div>
           </Filter>
-        </div>
-      </Search>
-    </div>
-  </Header>
-  <Box>
-    <div
-      style={
+        </Connect(Filter)>
+      </div>
+    </Search>
+  </Connect(Search)>
+</Provider>
+`;
+
+exports[`SearchNavigation component should render correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [MockFunction] {
+        "calls": Array [
+          Array [
+            Object {
+              "filters": Array [],
+              "type": "CHANGE_SEARCH_FILTERS",
+            },
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      },
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(SearchNavigation)>
+    <SearchNavigation
+      dispatch={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "filters": Array [],
+                "type": "CHANGE_SEARCH_FILTERS",
+              },
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      filterInfo={
         Object {
-          "backgroundColor": "#555555",
-          "height": "65px",
+          "buttonList": Array [
+            Object {
+              "checked": true,
+              "field": "release_date",
+              "id": "f1",
+              "text": "Release date",
+            },
+            Object {
+              "checked": false,
+              "field": "vote_average",
+              "id": "f2",
+              "text": "rating",
+            },
+          ],
+          "title": "sort by",
+          "type": "CHANGE_NAVIGATION_FILTERS",
         }
       }
     >
-      <p>
-        2
-         movie found
-      </p>
-      <SearchNavigation
-        filterInfo={
-          Object {
-            "buttonList": Array [
-              Object {
-                "checked": true,
-                "id": "f1",
-                "text": "Release date",
-              },
-              Object {
-                "checked": false,
-                "id": "f2",
-                "text": "rating",
-              },
-            ],
-            "title": "sort by",
-            "type": "navigationFilterInfo",
-          }
+      <Connect(Filter)
+        buttons={
+          Array [
+            Object {
+              "checked": true,
+              "field": "release_date",
+              "id": "f1",
+              "text": "Release date",
+            },
+            Object {
+              "checked": false,
+              "field": "vote_average",
+              "id": "f2",
+              "text": "rating",
+            },
+          ]
         }
-        updateFilterButtons={[MockFunction]}
+        title="sort by"
+        type="CHANGE_NAVIGATION_FILTERS"
       >
         <Filter
           buttons={
             Array [
               Object {
                 "checked": true,
+                "field": "release_date",
                 "id": "f1",
                 "text": "Release date",
               },
               Object {
                 "checked": false,
+                "field": "vote_average",
                 "id": "f2",
                 "text": "rating",
               },
             ]
           }
+          navigationFilters={
+            Object {
+              "buttonList": Array [
+                Object {
+                  "checked": true,
+                  "field": "release_date",
+                  "id": "f1",
+                  "text": "Release date",
+                },
+                Object {
+                  "checked": false,
+                  "field": "vote_average",
+                  "id": "f2",
+                  "text": "rating",
+                },
+              ],
+              "title": "sort by",
+              "type": "CHANGE_NAVIGATION_FILTERS",
+            }
+          }
+          query=""
+          searchFilters={
+            Object {
+              "buttonList": Array [
+                Object {
+                  "checked": true,
+                  "field": "title",
+                  "id": "b1",
+                  "text": "title",
+                },
+                Object {
+                  "checked": false,
+                  "field": "genres",
+                  "id": "b2",
+                  "text": "genre",
+                },
+              ],
+              "title": "search by",
+              "type": "CHANGE_SEARCH_FILTERS",
+            }
+          }
           title="sort by"
-          type="navigationFilterInfo"
-          updateFilterButtons={[MockFunction]}
+          type="CHANGE_NAVIGATION_FILTERS"
+          updateFilterButtons={[Function]}
         >
           <div
             className="filter-container"
           >
-            <div
-              style={
-                Object {
-                  "color": "fff important!",
-                  "display": "inline-block",
-                  "fontSize": "16px",
-                  "textTransform": "uppercase",
-                }
-              }
-            >
+            <div>
               <p>
                 sort by
               </p>
             </div>
-            <div
-              style={
-                Object {
-                  "display": "inline-block",
-                  "marginLeft": "10px",
-                }
-              }
-            >
+            <div>
               <FilterButton
                 data={
                   Object {
                     "checked": true,
+                    "field": "release_date",
                     "id": "f1",
                     "text": "Release date",
                   }
@@ -374,6 +404,7 @@ exports[`SearchPage component should render correctly 1`] = `
                 data={
                   Object {
                     "checked": false,
+                    "field": "vote_average",
                     "id": "f2",
                     "text": "rating",
                   }
@@ -394,161 +425,747 @@ exports[`SearchPage component should render correctly 1`] = `
             </div>
           </div>
         </Filter>
-      </SearchNavigation>
-    </div>
-  </Box>
-  <Main
-    movieList={
-      Array [
-        Object {
-          "description": "lorem ipsum lorem ipsum",
-          "duration": "153",
-          "genre": "Horror",
-          "id": "2",
-          "image": "../src/images/movie-default.jpg",
-          "isShowing": true,
-          "rating": "4.1",
-          "release_date": "2020",
-          "title": "Soon...",
-        },
-        Object {
-          "description": "lorem ipsum lorem ipsum",
-          "duration": "154",
-          "genre": "Adventure",
-          "id": "1",
-          "image": "../src/images/movie-default.jpg",
-          "isShowing": true,
-          "rating": "5.0",
-          "release_date": "2022",
-          "title": "Not yet...",
-        },
-      ]
+      </Connect(Filter)>
+    </SearchNavigation>
+  </Connect(SearchNavigation)>
+</Provider>
+`;
+
+exports[`SearchPage component should render correctly 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [MockFunction],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
     }
-  >
-    <div
-      className="container"
+  }
+>
+  <BrowserRouter>
+    <Router
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "createHref": [Function],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
     >
-      <div
-        className="row"
-      >
-        <div
-          className="col-lg-4"
-          key="2"
-        >
-          <Movie
-            key="2"
-            movie={
-              Object {
-                "description": "lorem ipsum lorem ipsum",
-                "duration": "153",
-                "genre": "Horror",
-                "id": "2",
-                "image": "../src/images/movie-default.jpg",
-                "isShowing": true,
-                "rating": "4.1",
-                "release_date": "2020",
-                "title": "Soon...",
-              }
-            }
-          >
-            <div
-              className="movie"
-            >
-              <Image
-                image="../src/images/movie-default.jpg"
-              >
-                <img
-                  src="../src/images/movie-default.jpg"
-                />
-              </Image>
-              <p>
-                Soon...
-              </p>
-              <p>
-                Horror
-              </p>
-              <p>
-                2020
-              </p>
-              <p>
-                4.1
-              </p>
-            </div>
-          </Movie>
-        </div>
-        <div
-          className="col-lg-4"
-          key="1"
-        >
-          <Movie
-            key="1"
-            movie={
-              Object {
-                "description": "lorem ipsum lorem ipsum",
-                "duration": "154",
-                "genre": "Adventure",
-                "id": "1",
-                "image": "../src/images/movie-default.jpg",
-                "isShowing": true,
-                "rating": "5.0",
-                "release_date": "2022",
-                "title": "Not yet...",
-              }
-            }
-          >
-            <div
-              className="movie"
-            >
-              <Image
-                image="../src/images/movie-default.jpg"
-              >
-                <img
-                  src="../src/images/movie-default.jpg"
-                />
-              </Image>
-              <p>
-                Not yet...
-              </p>
-              <p>
-                Adventure
-              </p>
-              <p>
-                2022
-              </p>
-              <p>
-                5.0
-              </p>
-            </div>
-          </Movie>
-        </div>
-      </div>
-    </div>
-  </Main>
-  <Footer>
-    <footer>
-      <Box>
-        <div
-          style={
-            Object {
-              "backgroundColor": "#555555",
-              "height": "65px",
-            }
+      <SearchPage
+        location={
+          Object {
+            "search": "",
           }
-        >
-          <Logo
-            logo="netflixroulete"
+        }
+        store={
+          Object {
+            "clearActions": [Function],
+            "dispatch": [MockFunction],
+            "getActions": [Function],
+            "getState": [Function],
+            "replaceReducer": [Function],
+            "subscribe": [Function],
+          }
+        }
+        updateFilterButtons={[MockFunction]}
+        updateFilterByUrl={[MockFunction]}
+        updateFilterUrl={[MockFunction]}
+        updateMovies={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                undefined,
+                undefined,
+                undefined,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+      >
+        <Header>
+          <div
+            uk-img="true"
+          >
+            <Connect(Logo)>
+              <Logo
+                appLogo="netflixroulete"
+                dispatch={[MockFunction]}
+              >
+                <div
+                  className="logo"
+                >
+                  <p>
+                    netflixroulete
+                  </p>
+                </div>
+              </Logo>
+            </Connect(Logo)>
+            <Connect(Search)>
+              <Search
+                filterInfo={
+                  Object {
+                    "buttonList": Array [
+                      Object {
+                        "checked": true,
+                        "field": "title",
+                        "id": "b1",
+                        "text": "title",
+                      },
+                      Object {
+                        "checked": false,
+                        "field": "genres",
+                        "id": "b2",
+                        "text": "genre",
+                      },
+                    ],
+                    "title": "search by",
+                    "type": "CHANGE_SEARCH_FILTERS",
+                  }
+                }
+                getQuery={[Function]}
+                query=""
+                searchButtonText="Search"
+              >
+                <div>
+                  <input
+                    className="search-field"
+                    onChange={[Function]}
+                    placeholder="SEARCH"
+                    type="search"
+                    value=""
+                  />
+                  <button
+                    className="search-button"
+                    data-cy="search"
+                    onClick={[Function]}
+                  >
+                    Search
+                  </button>
+                </div>
+                <div>
+                  <Connect(Filter)
+                    buttons={
+                      Array [
+                        Object {
+                          "checked": true,
+                          "field": "title",
+                          "id": "b1",
+                          "text": "title",
+                        },
+                        Object {
+                          "checked": false,
+                          "field": "genres",
+                          "id": "b2",
+                          "text": "genre",
+                        },
+                      ]
+                    }
+                    title="search by"
+                    type="CHANGE_SEARCH_FILTERS"
+                  >
+                    <Filter
+                      buttons={
+                        Array [
+                          Object {
+                            "checked": true,
+                            "field": "title",
+                            "id": "b1",
+                            "text": "title",
+                          },
+                          Object {
+                            "checked": false,
+                            "field": "genres",
+                            "id": "b2",
+                            "text": "genre",
+                          },
+                        ]
+                      }
+                      navigationFilters={
+                        Object {
+                          "buttonList": Array [
+                            Object {
+                              "checked": true,
+                              "field": "release_date",
+                              "id": "f1",
+                              "text": "Release date",
+                            },
+                            Object {
+                              "checked": false,
+                              "field": "vote_average",
+                              "id": "f2",
+                              "text": "rating",
+                            },
+                          ],
+                          "title": "sort by",
+                          "type": "CHANGE_NAVIGATION_FILTERS",
+                        }
+                      }
+                      query=""
+                      searchFilters={
+                        Object {
+                          "buttonList": Array [
+                            Object {
+                              "checked": true,
+                              "field": "title",
+                              "id": "b1",
+                              "text": "title",
+                            },
+                            Object {
+                              "checked": false,
+                              "field": "genres",
+                              "id": "b2",
+                              "text": "genre",
+                            },
+                          ],
+                          "title": "search by",
+                          "type": "CHANGE_SEARCH_FILTERS",
+                        }
+                      }
+                      title="search by"
+                      type="CHANGE_SEARCH_FILTERS"
+                      updateFilterButtons={[Function]}
+                    >
+                      <div
+                        className="filter-container"
+                      >
+                        <div>
+                          <p>
+                            search by
+                          </p>
+                        </div>
+                        <div>
+                          <FilterButton
+                            data={
+                              Object {
+                                "checked": true,
+                                "field": "title",
+                                "id": "b1",
+                                "text": "title",
+                              }
+                            }
+                            key="b1"
+                            toggleChange={[Function]}
+                          >
+                            <label>
+                              <input
+                                checked={true}
+                                data-cy="title"
+                                onChange={[Function]}
+                                type="checkbox"
+                              />
+                              title
+                            </label>
+                          </FilterButton>
+                          <FilterButton
+                            data={
+                              Object {
+                                "checked": false,
+                                "field": "genres",
+                                "id": "b2",
+                                "text": "genre",
+                              }
+                            }
+                            key="b2"
+                            toggleChange={[Function]}
+                          >
+                            <label>
+                              <input
+                                checked={false}
+                                data-cy="genre"
+                                onChange={[Function]}
+                                type="checkbox"
+                              />
+                              genre
+                            </label>
+                          </FilterButton>
+                        </div>
+                      </div>
+                    </Filter>
+                  </Connect(Filter)>
+                </div>
+              </Search>
+            </Connect(Search)>
+          </div>
+        </Header>
+        <Box>
+          <div>
+            <Connect(SearchNavigation)>
+              <SearchNavigation
+                dispatch={[MockFunction]}
+                filterInfo={
+                  Object {
+                    "buttonList": Array [
+                      Object {
+                        "checked": true,
+                        "field": "release_date",
+                        "id": "f1",
+                        "text": "Release date",
+                      },
+                      Object {
+                        "checked": false,
+                        "field": "vote_average",
+                        "id": "f2",
+                        "text": "rating",
+                      },
+                    ],
+                    "title": "sort by",
+                    "type": "CHANGE_NAVIGATION_FILTERS",
+                  }
+                }
+              >
+                <Connect(Filter)
+                  buttons={
+                    Array [
+                      Object {
+                        "checked": true,
+                        "field": "release_date",
+                        "id": "f1",
+                        "text": "Release date",
+                      },
+                      Object {
+                        "checked": false,
+                        "field": "vote_average",
+                        "id": "f2",
+                        "text": "rating",
+                      },
+                    ]
+                  }
+                  title="sort by"
+                  type="CHANGE_NAVIGATION_FILTERS"
+                >
+                  <Filter
+                    buttons={
+                      Array [
+                        Object {
+                          "checked": true,
+                          "field": "release_date",
+                          "id": "f1",
+                          "text": "Release date",
+                        },
+                        Object {
+                          "checked": false,
+                          "field": "vote_average",
+                          "id": "f2",
+                          "text": "rating",
+                        },
+                      ]
+                    }
+                    navigationFilters={
+                      Object {
+                        "buttonList": Array [
+                          Object {
+                            "checked": true,
+                            "field": "release_date",
+                            "id": "f1",
+                            "text": "Release date",
+                          },
+                          Object {
+                            "checked": false,
+                            "field": "vote_average",
+                            "id": "f2",
+                            "text": "rating",
+                          },
+                        ],
+                        "title": "sort by",
+                        "type": "CHANGE_NAVIGATION_FILTERS",
+                      }
+                    }
+                    query=""
+                    searchFilters={
+                      Object {
+                        "buttonList": Array [
+                          Object {
+                            "checked": true,
+                            "field": "title",
+                            "id": "b1",
+                            "text": "title",
+                          },
+                          Object {
+                            "checked": false,
+                            "field": "genres",
+                            "id": "b2",
+                            "text": "genre",
+                          },
+                        ],
+                        "title": "search by",
+                        "type": "CHANGE_SEARCH_FILTERS",
+                      }
+                    }
+                    title="sort by"
+                    type="CHANGE_NAVIGATION_FILTERS"
+                    updateFilterButtons={[Function]}
+                  >
+                    <div
+                      className="filter-container"
+                    >
+                      <div>
+                        <p>
+                          sort by
+                        </p>
+                      </div>
+                      <div>
+                        <FilterButton
+                          data={
+                            Object {
+                              "checked": true,
+                              "field": "release_date",
+                              "id": "f1",
+                              "text": "Release date",
+                            }
+                          }
+                          key="f1"
+                          toggleChange={[Function]}
+                        >
+                          <label>
+                            <input
+                              checked={true}
+                              data-cy="Release date"
+                              onChange={[Function]}
+                              type="checkbox"
+                            />
+                            Release date
+                          </label>
+                        </FilterButton>
+                        <FilterButton
+                          data={
+                            Object {
+                              "checked": false,
+                              "field": "vote_average",
+                              "id": "f2",
+                              "text": "rating",
+                            }
+                          }
+                          key="f2"
+                          toggleChange={[Function]}
+                        >
+                          <label>
+                            <input
+                              checked={false}
+                              data-cy="rating"
+                              onChange={[Function]}
+                              type="checkbox"
+                            />
+                            rating
+                          </label>
+                        </FilterButton>
+                      </div>
+                    </div>
+                  </Filter>
+                </Connect(Filter)>
+              </SearchNavigation>
+            </Connect(SearchNavigation)>
+          </div>
+        </Box>
+        <Connect(Main)>
+          <Main
+            dispatch={[MockFunction]}
+            movieList={
+              Array [
+                Object {
+                  "description": "",
+                  "genres": Array [
+                    "Adventure",
+                  ],
+                  "id": "1",
+                  "image": "../src/images/movie-default.jpg",
+                  "release_date": "2022",
+                  "runtime": 154,
+                  "title": "Not yet...",
+                  "vote_average": 5,
+                },
+                Object {
+                  "description": "",
+                  "genres": Array [
+                    "Horror",
+                  ],
+                  "id": "2",
+                  "image": "../src/images/movie-default.jpg",
+                  "release_date": "2020",
+                  "runtime": 154,
+                  "title": "Soon...",
+                  "vote_average": 4,
+                },
+              ]
+            }
           >
             <div
-              className="logo"
+              className="container"
             >
-              <p>
-                netflixroulete
-              </p>
+              <div
+                className="row"
+              >
+                <div
+                  className="col-lg-3"
+                  key="1"
+                >
+                  <withRouter(Movie)
+                    key="1"
+                    movie={
+                      Object {
+                        "description": "",
+                        "genres": Array [
+                          "Adventure",
+                        ],
+                        "id": "1",
+                        "image": "../src/images/movie-default.jpg",
+                        "release_date": "2022",
+                        "runtime": 154,
+                        "title": "Not yet...",
+                        "vote_average": 5,
+                      }
+                    }
+                  >
+                    <Movie
+                      history={
+                        Object {
+                          "action": "POP",
+                          "block": [Function],
+                          "createHref": [Function],
+                          "go": [Function],
+                          "goBack": [Function],
+                          "goForward": [Function],
+                          "length": 1,
+                          "listen": [Function],
+                          "location": Object {
+                            "hash": "",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          },
+                          "push": [Function],
+                          "replace": [Function],
+                        }
+                      }
+                      location={
+                        Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        }
+                      }
+                      match={
+                        Object {
+                          "isExact": true,
+                          "params": Object {},
+                          "path": "/",
+                          "url": "/",
+                        }
+                      }
+                      movie={
+                        Object {
+                          "description": "",
+                          "genres": Array [
+                            "Adventure",
+                          ],
+                          "id": "1",
+                          "image": "../src/images/movie-default.jpg",
+                          "release_date": "2022",
+                          "runtime": 154,
+                          "title": "Not yet...",
+                          "vote_average": 5,
+                        }
+                      }
+                    >
+                      <div
+                        className="movie"
+                      >
+                        <Image>
+                          <img />
+                        </Image>
+                        <Link
+                          to="/film/1"
+                        >
+                          <LinkAnchor
+                            href="/film/1"
+                            navigate={[Function]}
+                          >
+                            <a
+                              href="/film/1"
+                              onClick={[Function]}
+                            >
+                              Not yet...
+                            </a>
+                          </LinkAnchor>
+                        </Link>
+                        <ul>
+                          <p
+                            key="Not yet...Adventure"
+                          >
+                            Adventure
+                          </p>
+                        </ul>
+                        <p>
+                          2022
+                        </p>
+                        <p>
+                          5
+                        </p>
+                      </div>
+                    </Movie>
+                  </withRouter(Movie)>
+                </div>
+                <div
+                  className="col-lg-3"
+                  key="2"
+                >
+                  <withRouter(Movie)
+                    key="2"
+                    movie={
+                      Object {
+                        "description": "",
+                        "genres": Array [
+                          "Horror",
+                        ],
+                        "id": "2",
+                        "image": "../src/images/movie-default.jpg",
+                        "release_date": "2020",
+                        "runtime": 154,
+                        "title": "Soon...",
+                        "vote_average": 4,
+                      }
+                    }
+                  >
+                    <Movie
+                      history={
+                        Object {
+                          "action": "POP",
+                          "block": [Function],
+                          "createHref": [Function],
+                          "go": [Function],
+                          "goBack": [Function],
+                          "goForward": [Function],
+                          "length": 1,
+                          "listen": [Function],
+                          "location": Object {
+                            "hash": "",
+                            "pathname": "/",
+                            "search": "",
+                            "state": undefined,
+                          },
+                          "push": [Function],
+                          "replace": [Function],
+                        }
+                      }
+                      location={
+                        Object {
+                          "hash": "",
+                          "pathname": "/",
+                          "search": "",
+                          "state": undefined,
+                        }
+                      }
+                      match={
+                        Object {
+                          "isExact": true,
+                          "params": Object {},
+                          "path": "/",
+                          "url": "/",
+                        }
+                      }
+                      movie={
+                        Object {
+                          "description": "",
+                          "genres": Array [
+                            "Horror",
+                          ],
+                          "id": "2",
+                          "image": "../src/images/movie-default.jpg",
+                          "release_date": "2020",
+                          "runtime": 154,
+                          "title": "Soon...",
+                          "vote_average": 4,
+                        }
+                      }
+                    >
+                      <div
+                        className="movie"
+                      >
+                        <Image>
+                          <img />
+                        </Image>
+                        <Link
+                          to="/film/2"
+                        >
+                          <LinkAnchor
+                            href="/film/2"
+                            navigate={[Function]}
+                          >
+                            <a
+                              href="/film/2"
+                              onClick={[Function]}
+                            >
+                              Soon...
+                            </a>
+                          </LinkAnchor>
+                        </Link>
+                        <ul>
+                          <p
+                            key="Soon...Horror"
+                          >
+                            Horror
+                          </p>
+                        </ul>
+                        <p>
+                          2020
+                        </p>
+                        <p>
+                          4
+                        </p>
+                      </div>
+                    </Movie>
+                  </withRouter(Movie)>
+                </div>
+              </div>
             </div>
-          </Logo>
-        </div>
-      </Box>
-    </footer>
-  </Footer>
-</SearchPage>
+          </Main>
+        </Connect(Main)>
+        <Footer>
+          <footer>
+            <Box>
+              <div>
+                <Connect(Logo)>
+                  <Logo
+                    appLogo="netflixroulete"
+                    dispatch={[MockFunction]}
+                  >
+                    <div
+                      className="logo"
+                    >
+                      <p>
+                        netflixroulete
+                      </p>
+                    </div>
+                  </Logo>
+                </Connect(Logo)>
+              </div>
+            </Box>
+          </footer>
+        </Footer>
+      </SearchPage>
+    </Router>
+  </BrowserRouter>
+</Provider>
 `;
