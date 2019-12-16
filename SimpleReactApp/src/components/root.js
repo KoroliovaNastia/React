@@ -2,7 +2,7 @@ import React, { Component} from "react";
 import SearchPage from './searchPage';
 import DescriptionPage from './descriptionPage';
 import ErrorBoundary from './errorBoundary';
-import {MemoryRouter, BrowserRouter as Router, Redirect, Switch, Route, Link} from 'react-router-dom';
+import {StaticRouter as Router, Redirect, Switch, Route, Link} from 'react-router-dom';
 
 import '../css/main.css';
 
@@ -13,7 +13,7 @@ class Root extends Component {
     super();
   }
 
-  render() {;
+  render() {
     const {history} = this.props;
     return (
       <ErrorBoundary>

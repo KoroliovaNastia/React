@@ -1,5 +1,5 @@
 import React from 'react';
-import headerImage from '../images/header-image.jpg';
+//import headerImage from '../images/header-image.jpg';
 
 // const  searchStyle = {
 //     minWidth: "1200px",

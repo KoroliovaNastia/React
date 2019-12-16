@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "SimpleReactApp",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js --env.NODE_ENV=development",
     "build": "webpack",
     "test": "jest",
     "test:coverage": "set CI=true && jest --coverage",
@@ -11,7 +11,9 @@
     "build-prod": "webpack --env.NODE_ENV=production",
     "start-local": "npx webpack-dev-server --env.NODE_ENV=development",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "export": "next export",
+    "next": "next build"
   },
   "dependencies": {
     "chai": "^4.2.0",
@@ -23,6 +25,7 @@
     "fetch-mock": "^8.0.1",
     "jest": "^24.9.0",
     "jss": "^10.0.0",
+    "next": "^9.1.5",
     "query-string": "^6.9.0",
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0-beta.15",

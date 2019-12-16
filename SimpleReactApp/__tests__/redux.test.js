@@ -31,53 +31,6 @@ describe('redux actions', () => {
         expect(reduxActions.changeQuery(query)).toEqual(expectedAction)
     })
 
-    //it('should update movieList in store', () => {
-        // fetchMock.get('/movies', {
-        //     movieList: {movies : ['new movies']},
-        //     method: 'GET',
-        //     headers: {
-        //         Accept: 'application/json',
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-
-        // const expectedAction = {type: types.SEARCH_RESULTS, movieList: {movies : ['new movies']}}
-        // const store = mockStore({ movieList: [], dispatch: jest.fn() })
-
-        // return store.dispatch(actions.searchMovies('', '', '', '', '')).then((data) => {
-        //     expect(store.getActions()).toEqual(expectedAction)
-        // })
-       // const r = actions.searchMovies('', '', '', 'asc', '')
-        //store.dispatch = r
-       // store.dispatch(r);
-        //expect(store.getActions()).toEqual(null);
-    //})
-
-    // it('should getMovie', () => {
-    //     // fetchMock.get('/movies/1', {
-    //     //     movie: {movie: {id: 1}},
-    //     //     headers: {
-    //     //         Accept: 'application/json',
-    //     //         'Content-Type': 'application/json',
-    //     //         movieId: 1
-    //     //     },
-    //     //     response: {
-    //     //         movieId: 1,
-    //     //         headers: {
-    //     //           ['Content-Type']: 'application/json'
-    //     //         },
-    //     //         body: {movie: {id: 1}},
-    //     //         sendAsJson: true
-    //     //       }
-    //     // })
-
-    //     const expectedAction = {type: types.SET_MOVIE, movie: {movie: {id: 1}}}
-    //     const store = mockStore({movie: [], dispatch: jest.fn()  })
-
-    //     const response = store.dispatch(actions.getMovieById(1))
-    //     expect(store.getActions()).toEqual(expectedAction)
-        
-    // })
 })
 
 describe('movie reducer', () => {
