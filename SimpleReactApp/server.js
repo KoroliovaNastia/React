@@ -1,51 +1,57 @@
+import React from "react";
+import Root from "../src/components/root";
+import {store, persistor} from "./redux/store";
+import {Provider} from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react';
+
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
-const next = require('next');
-
-const dev = process.env.NODE_ENV !== 'production'
-
 const port = process.env.PORT || 5000;
 
 const app = express();
-//const app = next({dev})
-//const handle = app.getRequestHandler()
+app.use('/dist', express.static('dist'));
+app.use(handleRender)
 
-//app.prepare().then(() => {
-//     const server = express();
-//     // server.get('/film/:id', (req, res) => {
-//     //     const rendered = 
-//     //     const actualPage = '/post';
-//     //     const queryParams = {id: req.params.id }
-//     //     app.render(req, res, actualPage, queryParams)
-//     // })
-//     server.get('*', (req, res) => {
-//         // const rendered= renderToString(<Root />)
-//         // //const output = renderHTML(rendered);
-//         // res.send(output);
-//         // res.end();
-//         //res.send()
-//         return handle(req, res)
-//     })
+function handleRender(req, res) {
+    const html = renderToString(
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+            <Root />
+            </PersistGate>
+        </Provider>
+    )
 
-//     server.listen(port, (err) => {
-//         if(err){ throw err }
-//         console.log('> Ready on http://localhost:5000')
-//     })
-// }).catch((ex) => {
-//     console.error(ex.stack)
-//     process.exit(1)
-// })
+    const preloadedState = store.getState()
+    res.send(renderFullPage(html, preloadedState))
+}
 
+function renderFullPage(html, preloadedState){
+    return `
+    <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <title>React Application</title>
+            </head>
+            <body>
+                <div id="root">${html}</div>
+                <script>
+                    window.__PRELOADED_STATE__=${JSON.stringify(preloadedState).replace(
+                        /</g,
+                        '\\u003c'
+                    )}
+                </script>
+                <script src="/dist/bundle.js"></script>
+            </body>
+        </html>
+    `
+}
 
-app.get('/', (req, res) => {
-    const theHtml = `<html><head><title>My First SSR</title></head><body><h1>My First Server Side Render</h1><div id="reactele">{{{reactele}}}</div><script src="/app.js" charset="utf-8"></script><script src="/vendor.js" charset="utf-8"></script></body></html>`;
-    res.send(theHtml);
-});
-  
-// app.get('/about', (req, res) => {
-//     res.send('About page. Nice.');
-// });
 
 app.listen(port, () => {
     console.log("Server running at %d", port);

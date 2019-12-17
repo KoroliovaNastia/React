@@ -1,15 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM, {hydrate} from "react-dom";
 import Root from "../src/components/root";
-import {store, persistor} from "./redux/store";
+import store from "./redux/store";
 import {Provider} from "react-redux";
-import { PersistGate } from 'redux-persist/integration/react';
 
-ReactDOM.render(
+//ReactDOM.render(
+  hydrate(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <Root />
-    </PersistGate>
+    <Root />
   </Provider>
   , 
   document.getElementById("root"));

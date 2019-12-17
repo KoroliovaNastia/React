@@ -12,10 +12,13 @@ const persistConfig = {
 }
 
 const pReducer = persistReducer(persistConfig, rootReducer);
+const preloadedState = window.__PRELOADED_STATE__
 
+delete window.__PRELOADED_STATE__
 export const store = createStore(
     pReducer,
-    applyMiddleware(thunk)
+    applyMiddleware(thunk),
+    preloadedState
 );
 
 export const persistor = persistStore(store);
