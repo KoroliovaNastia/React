@@ -16,7 +16,7 @@ app.use('/dist', Express.static('dist'));
 app.use(handleRender)
 
 function handleRender(req, res) {
-    const context = {};
+    //const context = {};
     const store = configureStore();
 
     // const html = await renderToStringAsync(
@@ -27,24 +27,24 @@ function handleRender(req, res) {
     // )
     //renderRoot(store, context, req.url);
     store.runSaga().toPromise().then(() => {
-        const html = renderRoot(store, context, req.url)
+        const html = renderRoot(store, /*context,*/ req.url)
 
-        if(context.url){
-            res.writeHead(302, {Location: context.url});
-            res.end();
-            return;
-        }
+        // if(context.url){
+        //     res.writeHead(302, {Location: context.url});
+        //     res.end();
+        //     return;
+        // }
         
         const preloadedState = store.getState()
         res.send(renderFullPage(html, preloadedState))
     });
 }
 
-/*async*/ function renderRoot(store, context, location){
+/*async*/ function renderRoot(store, /*context,*/ location){
     //const html =await renderToStringAsync(
         const html = renderToString(
             <Provider store={store}>
-                <Root context={context} location={location} Router={StaticRouter}/>
+                <Root /*context={context}*/ location={location} Router={StaticRouter}/>
             </Provider>
         )
         return html;

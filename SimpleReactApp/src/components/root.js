@@ -20,10 +20,10 @@ class Root extends Component{
     super(props)
   }
   render(){
-    const {Router, location, context, history} = this.props
+    const {Router, location,/* context,*/ history} = this.props
     return (
       <ErrorBoundary>
-        <Router history={history} location={location} context={context}>
+        <Router history={history} location={location} /*context={context}*/>
           {/*<Suspense fallback={<Loading />}>*/}
             <Switch>
                 <Redirect exact from='/' to="/search"/>
