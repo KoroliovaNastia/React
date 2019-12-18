@@ -1,8 +1,8 @@
 import React, { Component, lazy, Suspense} from "react";
-// import SearchPage from './searchPage';
-// import DescriptionPage from './descriptionPage';
+ import SearchPage from './searchPage';
+ import DescriptionPage from './descriptionPage';
 import ErrorBoundary from './errorBoundary';
-import {StaticRouter as Router, Redirect, Switch, Route, Link} from 'react-router-dom';
+import {Redirect, Switch, Route, Link} from 'react-router-dom';
 
 import '../css/main.css';
 
@@ -12,31 +12,29 @@ const Loading = () =>
     <span class="sr-only">Loading...</span>
   </div>
 
-const LazySearch = lazy(() => import('./searchPage'))
-const LazyDescription = lazy(() =>import('./descriptionPage'))
+//const LazySearch = lazy(() => import('./searchPage'))
+//const LazyDescription = lazy(() =>import('./descriptionPage'))
 
-class Root extends Component {
+class Root extends Component{ 
   constructor(props){
-    super(props);
+    super(props)
   }
-
-  render() {
-    const {history} = this.props;
+  render(){
+    const {Router, location, context, history} = this.props
     return (
       <ErrorBoundary>
-        <Router history={history}>
-          <Suspense fallback={<Loading />}>
+        <Router history={history} location={location} context={context}>
+          {/*<Suspense fallback={<Loading />}>*/}
             <Switch>
                 <Redirect exact from='/' to="/search"/>
-                <Route path="/search" component={LazySearch}/>
-                <Route path="/film/:id" component={LazyDescription}/>
+                <Route path="/search" /*component={LazySearch}*/ component={SearchPage}/>
+                <Route path="/film/:id" /*component={LazyDescription}*/ component={DescriptionPage}/>
                 <Route path="*" component={NotFound}/>
             </Switch>
-          </Suspense>
+          {/*</Suspense>*/}
         </Router>
       </ErrorBoundary>
-    );
-  }
+)}
 }
-
+  
 export default Root

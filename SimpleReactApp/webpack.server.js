@@ -7,7 +7,7 @@ module.exports = env => {
     //mode:'production',
     devtool:'source-map',
     target: 'web',
-    entry: {server: ['./src/app.js']},
+    entry: {server: ['./src/serverApp.js']},
     output: {
         filename: 'bundle.js',
         path: path.join(__dirname, 'dist'),

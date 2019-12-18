@@ -1,23 +1,18 @@
 import React from "react";
-import ReactDOM, {hydrate} from "react-dom";
+import ReactDOM from "react-dom";
 import Root from "../src/components/root";
-//import store from "./redux/store";
-import {Provider} from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import rootReducer from "../src/redux/reducers/index";
+import {configureStore, persistor} from "./redux/store";
+import { Provider } from "react-redux";
+import { BrowserRouter } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 
-//let preloadedState
+const store = configureStore()
 
-    // if (typeof window !== 'undefined') {
-    const preloadedState = window.__PRELOADED_STATE__
-    delete window.__PRELOADED_STATE__
-
-    const store = createStore(rootReducer, preloadedState)
-
-//ReactDOM.render(
-  hydrate(
+ReactDOM.render(
   <Provider store={store}>
-    <Root />
+    <PersistGate loading={null} persistor={persistor}>
+      <Root Router={BrowserRouter}/>
+    </PersistGate>
   </Provider>
   , 
   document.getElementById("root"));
