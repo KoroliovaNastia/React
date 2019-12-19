@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import {CHANGE_NAVIGATION_FILTERS, CHANGE_SEARCH_FILTERS, SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types"
+import {CHANGE_NAVIGATION_FILTERS, CHANGE_SEARCH_FILTERS, UPDATE_MOVIES, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types"
 import {routerReducer} from 'react-router-redux'
 
 const initialMovieState = {
@@ -19,7 +19,7 @@ const initialAppState = {
 }
 
 export function movieReducer(state = initialMovieState, action){
-    if (action.type === SEARCH_RESULTS) {
+    if (action.type === UPDATE_MOVIES) {
         return { ...state, movieList: action.movieList};
     }
     if (action.type === SET_MOVIE) {

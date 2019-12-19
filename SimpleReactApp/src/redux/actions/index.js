@@ -1,4 +1,4 @@
-import {SEARCH_RESULTS, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types";
+import {UPDATE_MOVIES, SET_MOVIE, CHANGE_QUERY} from "../constants/action-types";
 
 export function updateFilters(type, filters) {
     return { 
@@ -9,7 +9,7 @@ export function updateFilters(type, filters) {
 
 export function updateMovies(movieList) {
     return {
-        type: SEARCH_RESULTS,
+        type: UPDATE_MOVIES,
         movieList
     }
 };

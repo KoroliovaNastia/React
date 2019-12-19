@@ -8,6 +8,8 @@ import {renderToStringAsync} from 'react-async-ssr'
 import Express from 'express';
 import {createStore} from 'redux';
 import {StaticRouter} from 'react-router-dom';
+import { matchRoutes } from 'react-router-config';
+import {routes} from "./src/components/routes";
 
 const port = process.env.PORT || 5000;
 
@@ -16,35 +18,36 @@ app.use('/dist', Express.static('dist'));
 app.use(handleRender)
 
 function handleRender(req, res) {
-    //const context = {};
+    const params = req.params[0].split('/');
+    const id = params[2];
+    const context = {};
     const store = configureStore();
 
-    // const html = await renderToStringAsync(
-    // //const html = renderToString(
-    //     <Provider store={store}>
-    //         <Root context={context} location={req.url} Router={StaticRouter}/>
-    //     </Provider>
-    // )
-    //renderRoot(store, context, req.url);
-    store.runSaga().toPromise().then(() => {
-        const html = renderRoot(store, /*context,*/ req.url)
+    const promises = [];
+    routes.some(route => {
+        const match = matchRoutes(req.path, route);
+        if(match) promises.push(route.l)
+    })
+    //const routes = matchRoutes(routes, req.path);
 
-        // if(context.url){
-        //     res.writeHead(302, {Location: context.url});
-        //     res.end();
-        //     return;
-        // }
-        
+    const html = renderRoot(store, context, req.url)
+    console.log(context)
+
+    if(context.url){
+        return res.redirect(301, context.url);
+    }else{
         const preloadedState = store.getState()
+        console.log(html)
         res.send(renderFullPage(html, preloadedState))
-    });
+    }
+        
 }
 
-/*async*/ function renderRoot(store, /*context,*/ location){
+/*async*/ function renderRoot(store, context, location){
     //const html =await renderToStringAsync(
         const html = renderToString(
             <Provider store={store}>
-                <Root /*context={context}*/ location={location} Router={StaticRouter}/>
+                <Root context={context} location={location} Router={StaticRouter}/>
             </Provider>
         )
         return html;
@@ -66,10 +69,7 @@ function renderFullPage(html, preloadedState){
             <body>
                 <div id="root">${html}</div>
                 <script>
-                    window.PRELOADED_STATE=${JSON.stringify(preloadedState).replace(
-                        /</g,
-                        '\\u003c'
-                    )}
+                    window.PRELOADED_STATE=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
                 </script>
                 <script src="/dist/bundle.js"></script>
             </body>
