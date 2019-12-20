@@ -1,5 +1,10 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Image = ({image}) => (<img src={image}></img>);
+const Image = ({ image }) => (<img src={image} alt="" />);
 
-export default Image
+export default Image;
+
+Image.propTypes = {
+  image: PropTypes.string.isRequired,
+};

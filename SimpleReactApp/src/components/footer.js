@@ -1,5 +1,10 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Footer = ({children}) => (<footer>{children}</footer>)
+const Footer = ({ children }) => (<footer>{children}</footer>);
 
-export default Footer
+export default Footer;
+
+Footer.propTypes = {
+  children: PropTypes.objectOf(Array).isRequired,
+};

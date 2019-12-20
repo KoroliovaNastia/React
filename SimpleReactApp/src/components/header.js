@@ -1,16 +1,21 @@
 import React from 'react';
-//import headerImage from '../images/header-image.jpg';
+import PropTypes from 'prop-types';
+// import headerImage from '../images/header-image.jpg';
 
 // const  searchStyle = {
 //     minWidth: "1200px",
 //     backgroundImage: 'url('+ headerImage +')',
-//     backgroundColor: '#2323237f' 
+//     backgroundColor: '#2323237f'
 // };
 
-const Header = ({children}) => (
-    <div uk-img="true">
-        {children}
-    </div>
-)
+const Header = ({ children }) => (
+  <div uk-img="true">
+    {children}
+  </div>
+);
 
-export default Header
+export default Header;
+
+Header.propTypes = {
+  children: PropTypes.objectOf(Array).isRequired,
+};

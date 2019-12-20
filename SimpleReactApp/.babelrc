@@ -1,6 +1,7 @@
 {
     "presets": [["@babel/preset-env", { "targets": { "node": "current" } }],
-    "@babel/preset-react"],
+    "@babel/preset-react",
+    "flow"],
     "plugins": [
         "@babel/plugin-proposal-class-properties"]
     //"plugins": ["istanbul"]

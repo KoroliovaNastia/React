@@ -1,4 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Footer from './footer';
 import Main from './main';
 import Logo from './logo';
@@ -6,107 +9,131 @@ import Header from './header';
 import Search from './search';
 import SearchNavigation from './searchNavigation';
 import Box from './box';
-import { withRouter } from 'react-router-dom'
-import { updateFilters } from "../redux/actions/";
+import { updateFilters, changeQuery } from '../redux/actions';
 
-import {connect} from 'react-redux';
-import {updateMovieList} from "../redux/actions/get"
+import { updateMovieList } from '../redux/actions/get';
 
 
 class SearchPage extends Component {
-    constructor(props){
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.updateFilterByUrl = this.updateFilterByUrl.bind(this);
-        this.updateFilterUrl = this.updateFilterUrl.bind(this);
+    this.updateFilterByUrl = this.updateFilterByUrl.bind(this);
+    this.updateFilterUrl = this.updateFilterUrl.bind(this);
+  }
+
+  componentDidMount() {
+    const {
+      navigationFilters, searchFilters, queryString, updateMovies, location, getQuery,
+    } = this.props;
+    const params = new URLSearchParams(location.search);
+    const query = params.get('query');
+    if (query !== null) {
+      getQuery(query);
+    }
+    const searchBy = params.get('searchBy');
+    const sortBy = params.get('sortBy');
+    if (searchBy !== undefined && searchBy !== null && searchBy !== '') {
+      this.updateFilterByUrl(searchFilters, searchBy);
     }
 
-    componentDidMount(){
-        const {navigationFilters, searchFilters, queryString, updateMovies} = this.props;
-        const params = new URLSearchParams(this.props.location.search);
-        const query = params.get('query');
-        if (query !== null){
-            this.props.getQuery(query);
-        }
-        const searchBy = params.get("searchBy");
-        const sortBy = params.get("sortBy");
-        if( searchBy !== undefined && searchBy !== null && searchBy !== "" ){
-            this.updateFilterByUrl(searchFilters, searchBy);
-        }
-
-        if( sortBy !== undefined && sortBy !== null && sortBy !== "" ){
-            this.updateFilterByUrl(navigationFilters, sortBy);
-        }
-
-        updateMovies(navigationFilters, queryString, searchFilters);
+    if (sortBy !== undefined && sortBy !== null && sortBy !== '') {
+      this.updateFilterByUrl(navigationFilters, sortBy);
     }
 
-    updateFilterByUrl(filterButtons, query){
-        const {updateFilterButtons} = this.props;
-        const updatedButtons = filterButtons.buttonList.map(button => { return {...button, checked: (button.field === query)}})
-        updateFilterButtons(filterButtons.type, updatedButtons)
+    updateMovies(navigationFilters, queryString, searchFilters);
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      navigationFilters, queryString, searchFilters, updateMovies, location,
+    } = this.props;
+    if (navigationFilters !== prevProps.navigationFilters
+            || searchFilters !== prevProps.searchFilters
+            || queryString !== prevProps.queryString) {
+      updateMovies(navigationFilters, queryString, searchFilters);
+      const params = new URLSearchParams(location.search);
+      const querySet = [{
+        filter: 'sortBy',
+        query: navigationFilters.buttonList.find((button) => button.checked === true).field,
+      },
+      { filter: 'searchBy', query: searchFilters.buttonList.find((button) => button.checked === true).field }];
+
+      this.updateFilterUrl(params, querySet);
     }
+  }
 
-    updateFilterUrl(params, querySet)
-    {
-        querySet.forEach(element => {
-            params.set(element.filter, element.query)
-        });
+  updateFilterUrl(params, querySet) {
+    const { history } = this.props;
+    querySet.forEach((element) => {
+      params.set(element.filter, element.query);
+    });
 
-        this.props.history.push(`?${params.toString()}`);
-    }  
-    
-    componentDidUpdate(prevProps){
-        const {navigationFilters, queryString, searchFilters, updateMovies} = this.props;
-        if(navigationFilters !== prevProps.navigationFilters ||
-            searchFilters !== prevProps.searchFilters ||
-            queryString !== prevProps.queryString) {
+    history.push(`?${params.toString()}`);
+  }
 
-            updateMovies(navigationFilters, queryString, searchFilters);
-            const params = new URLSearchParams(this.props.location.search);
-            const querySet = [{filter: "sortBy", query: navigationFilters.buttonList.find(button => button.checked === true).field},
-                              {filter: "searchBy", query: searchFilters.buttonList.find(button => button.checked === true).field}]
+  updateFilterByUrl(filterButtons, query) {
+    const { updateFilterButtons } = this.props;
+    const updatedButtons = filterButtons.buttonList.map((button) => ({ ...button, checked: (button.field === query) }));
+    updateFilterButtons(filterButtons.type, updatedButtons);
+  }
 
-            this.updateFilterUrl(params, querySet);
-            //this.props.history.push(`?${params.toString()}`);
-        }
-     }
-
-    render(){
-        return(
-        <>
-            <Header>
-                <Logo/>
-                <Search/>
-            </Header>
-            <Box>
-                {/* <p>{0} movie found</p> */}
-                <SearchNavigation/>
-            </Box>
-            <Main/>
-            <Footer>
-                <Box>
-                <Logo/>
-                </Box>
-            </Footer>
-        </>
-    )}
+  render() {
+    return (
+      <>
+        <Header>
+          <Logo />
+          <Search />
+        </Header>
+        <Box>
+          <SearchNavigation />
+        </Box>
+        <Main />
+        <Footer>
+          <Box>
+            <Logo />
+          </Box>
+        </Footer>
+      </>
+    );
+  }
 }
 
 export function mapStateToProps(store) {
-    return {
-      movies: store.movieState.movieList,
-      searchFilters: store.filterState.searchFilterInfo,
-      navigationFilters: store.filterState.navigationFilterInfo,
-      queryString: store.filterState.query
-    };
-  }
+  return {
+    searchFilters: store.filterState.searchFilterInfo,
+    navigationFilters: store.filterState.navigationFilterInfo,
+    queryString: store.filterState.query,
+  };
+}
 
-  export function mapDispatchToProps(dispatch) {
-    return {
-        updateFilterButtons: (type, buttons) => dispatch(updateFilters(type, buttons)),
-        updateMovies: (navigationFilters, queryString, searchFilters) => dispatch(updateMovieList(navigationFilters, queryString, searchFilters))
-    }
-   }  
+export function mapDispatchToProps(dispatch) {
+  return {
+    updateFilterButtons: (type, buttons) => dispatch(updateFilters(type, buttons)),
+    updateMovies: (navigationFilters, queryString, searchFilters) => dispatch(
+      updateMovieList(navigationFilters, queryString, searchFilters),
+    ),
+    getQuery: (currentQuery) => dispatch(changeQuery(currentQuery)),
+  };
+}
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));
+
+SearchPage.propTypes = {
+  navigationFilters: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    buttonList: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  searchFilters: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    buttonList: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  queryString: PropTypes.string.isRequired,
+  location: PropTypes.objectOf(PropTypes.opject).isRequired,
+  history: PropTypes.objectOf(PropTypes.opject).isRequired,
+  updateFilterButtons: PropTypes.func.isRequired,
+  updateMovies: PropTypes.func.isRequired,
+  getQuery: PropTypes.func.isRequired,
+};

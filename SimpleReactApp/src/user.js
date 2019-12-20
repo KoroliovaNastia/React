@@ -1,14 +1,21 @@
-import React, { Component, PureComponent } from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class User extends Component {
-    render() {
-      const { firstName, lastName } = this.props;
-      return (
-        <span>
-          User: {firstName} {lastName}
-        </span>
-      );
-    }
-  }
+function User({ firstName, lastName }) {
+  return (
+    <span>
+        User:
+      {' '}
+      {firstName}
+      {' '}
+      {lastName}
+    </span>
+  );
+}
 
-  export default User  
+User.propTypes = {
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+};
+
+export default User;

@@ -1,60 +1,39 @@
-import React from "react";
-import Root from "./src/components/root";
-import {configureStore} from "./src/redux/store";
-import {Provider} from "react-redux";
-import { PersistGate } from 'redux-persist/integration/react';
+import React from 'react';
+import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
-import {renderToStringAsync} from 'react-async-ssr'
 import Express from 'express';
-import {createStore} from 'redux';
-import {StaticRouter} from 'react-router-dom';
-import { matchRoutes } from 'react-router-config';
-import {routes} from "./src/components/routes";
+import {
+  StaticRouter, matchPath, Switch, Route,
+} from 'react-router-dom';
+import { configureStore } from './src/redux/store';
+import Routes from './src/components/routes';
 
 const port = process.env.PORT || 5000;
 
 const app = Express();
-app.use('/dist', Express.static('dist'));
-app.use(handleRender)
 
-function handleRender(req, res) {
-    const params = req.params[0].split('/');
-    const id = params[2];
-    const context = {};
-    const store = configureStore();
+function renderRoot(store, context, location, route) {
+  const html = renderToString(
 
-    const promises = [];
-    routes.some(route => {
-        const match = matchRoutes(req.path, route);
-        if(match) promises.push(route.l)
-    })
-    //const routes = matchRoutes(routes, req.path);
-
-    const html = renderRoot(store, context, req.url)
-    console.log(context)
-
-    if(context.url){
-        return res.redirect(301, context.url);
-    }else{
-        const preloadedState = store.getState()
-        console.log(html)
-        res.send(renderFullPage(html, preloadedState))
-    }
-        
+    <Provider store={store}>
+      <StaticRouter context={context} location={location}>
+        <Switch>
+          <Route
+            key={route.path}
+            path={route.path}
+            component={route.component}
+            exact={route.exact !== false}
+            strict
+          />
+        </Switch>
+      </StaticRouter>
+    </Provider>,
+  );
+  return html;
 }
 
-/*async*/ function renderRoot(store, context, location){
-    //const html =await renderToStringAsync(
-        const html = renderToString(
-            <Provider store={store}>
-                <Root context={context} location={location} Router={StaticRouter}/>
-            </Provider>
-        )
-        return html;
-}
-
-function renderFullPage(html, preloadedState){
-    return `
+function renderFullPage(html, preloadedState) {
+  return `
     <!DOCTYPE html>
         <html lang="en">
             <head>
@@ -63,7 +42,8 @@ function renderFullPage(html, preloadedState){
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
                 
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css" />
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+                integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
                 <title>React Application</title>
             </head>
             <body>
@@ -74,10 +54,25 @@ function renderFullPage(html, preloadedState){
                 <script src="/dist/bundle.js"></script>
             </body>
         </html>
-    `
+    `;
 }
 
+app.use('/dist', Express.static('dist'));
+app.get('*', (req, res) => {
+  const currentRoute = Routes.find((route) => matchPath(req.url, route)) || {};
+  const context = {};
+
+  const store = configureStore();
+  console.log(context);
+  const html = renderRoot(store, context, req.url, currentRoute);
+
+  if (context.url) {
+    return res.redirect(302, { Location: context.url });
+  }
+  const preloadedState = store.getState();
+  return res.send(renderFullPage(html, preloadedState));
+});
 
 app.listen(port, () => {
-    console.log("Server running at %d", port);
+  console.log('Server running at %d', port);
 });

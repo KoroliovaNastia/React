@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Box extends Component{
-    render(){
-        const {children} = this.props;
-        return(
-        <div>
-            {children}
-        </div>
-        )
-    }
+function Box({ children }) {
+  return (
+    <div>
+      {children}
+    </div>
+  );
+}
+
+export default Box;
+
+Box.propTypes = {
+  children: PropTypes.objectOf(Array).isRequired,
 };
-
-export default Box
