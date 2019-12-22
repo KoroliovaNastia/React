@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components'
+/* @flow */
+import * as React from 'react';
+import styled from 'styled-components';
 
 const StyledBox = styled.div`
   background-color: #555555;
@@ -8,16 +8,16 @@ const StyledBox = styled.div`
   text-align: center;
 `;
 
-function Box({ children }) {
+type Props = {
+  children?: React.Node,
+};
+
+function Box(props: Props) {
   return (
     <StyledBox>
-      {children}
+      {props.children}
     </StyledBox>
   );
 }
 
 export default Box;
-
-Box.propTypes = {
-  children: PropTypes.objectOf(Array).isRequired,
-};

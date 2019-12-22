@@ -10,7 +10,8 @@
     },
     "env": {
         "jest":true,
-        "browser": true
+        "browser": true,
+        "flow": true
     },
     "extends": ["airbnb"],
     "ignorePatterns": ["node_modules/", "dist/", ".gitignore", "cypress/"]

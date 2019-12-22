@@ -1,13 +1,23 @@
-import React, { Component } from 'react';
+/* @flow */
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
-class ErrorBoundary extends Component {
-  constructor(props) {
+type Props = {
+  children: React.Node,
+};
+
+type State = {
+  error: Object,
+  errorInfo: Object,
+}
+
+class ErrorBoundary extends React.Component<Props, State> {
+  constructor(props: Props, state: State) {
     super(props);
     this.state = { error: null, errorInfo: null };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Object, errorInfo: Object) {
     this.setState({
       error,
       errorInfo,
@@ -35,7 +45,3 @@ class ErrorBoundary extends Component {
 }
 
 export default ErrorBoundary;
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.objectOf(Array).isRequired,
-};

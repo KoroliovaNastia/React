@@ -1,21 +1,22 @@
+//@flow
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function User({ firstName, lastName }) {
+type Props = {
+  firstName?: string,
+  lastName?: string,
+}
+
+function User(props: Props) {
   return (
     <span>
         User:
       {' '}
-      {firstName}
+      {props.firstName}
       {' '}
-      {lastName}
+      {props.lastName}
     </span>
   );
 }
-
-User.propTypes = {
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
-};
 
 export default User;
