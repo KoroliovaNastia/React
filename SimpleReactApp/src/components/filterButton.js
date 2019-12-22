@@ -14,6 +14,7 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   visibility: hidden;
   margin-right: -13px !important;
+  margin-left: 0px;
 `;
 
 class FilterButton extends Component {

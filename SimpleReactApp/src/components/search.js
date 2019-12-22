@@ -5,7 +5,7 @@ import Filter from './filter';
 import { changeQuery } from '../redux/actions';
 import styled from 'styled-components'
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   background-color: #f65261;
   border-radius: 3px;
   padding: 12px 70px;
@@ -13,7 +13,7 @@ const StyledButton = styled.button`
   border: none;
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   background: #333131cc;
   border-radius: 3px;
   border: none;

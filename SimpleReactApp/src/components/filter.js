@@ -15,7 +15,7 @@ const StyledFilter = styled.div`
   background-color: #120e0e75;
   border-radius: 6px;
   margin: 13px;
-  padding: 8px 0px;
+  padding: 10px 0px;
 `;
 
 const FilterContainer = styled.div`
