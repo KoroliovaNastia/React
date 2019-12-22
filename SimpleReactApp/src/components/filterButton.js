@@ -7,7 +7,7 @@ const StyledLabel = styled.label`
   cursor: pointer;
   border-radius: 6px;
   margin: 0px;
-  background-color: ${props => props.data.checked ? '#f65261' : ''};
+  background-color: ${(props) => (props.data.checked ? '#f65261' : '')};
   display: initial;
 `;
 
@@ -24,11 +24,11 @@ class FilterButton extends Component {
   }
 
   render() {
-    const { data: { text, checked }} = this.props;
+    const { data: { text } } = this.props;
     return (
       <>
         { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
-        <StyledInput type="checkbox" data-cy={text}/>
+        <StyledInput type="checkbox" data-cy={text} />
         <StyledLabel {...this.props}>{text}</StyledLabel>
       </>
     );
@@ -37,10 +37,9 @@ class FilterButton extends Component {
 
 export default FilterButton;
 
-// FilterButton.propTypes = {
-//   data: PropTypes.shape({
-//     text: PropTypes.string.isRequired,
-//     checked: PropTypes.bool.isRequired,
-//   }).isRequired,
-//   toggleChange: PropTypes.func.isRequired,
-// };
+FilterButton.propTypes = {
+  data: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    checked: PropTypes.bool.isRequired,
+  }).isRequired,
+};

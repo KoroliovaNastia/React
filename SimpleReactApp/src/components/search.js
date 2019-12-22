@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import Filter from './filter';
 import { changeQuery } from '../redux/actions';
-import styled from 'styled-components'
 
 export const StyledButton = styled.button`
   background-color: #f65261;
@@ -48,15 +48,15 @@ class Search extends Component {
   }
 
   render() {
-    const { searchButtonText, filterInfo: { title, buttonList, type }} = this.props;
+    const { searchButtonText, filterInfo: { title, buttonList, type } } = this.props;
     const { query } = this.state;
     return (
       <StyledDiv>
-          <StyledInput type="search" placeholder="SEARCH" className="search-field" value={query} onChange={this.handleChange} />
-          <StyledButton type="button" className="search-button" data-cy="search" onClick={this.onSearchClick}>
-            {searchButtonText}
-          </StyledButton>
-          <Filter title={title} buttons={buttonList} type={type} />
+        <StyledInput type="search" placeholder="SEARCH" className="search-field" value={query} onChange={this.handleChange} />
+        <StyledButton type="button" className="search-button" data-cy="search" onClick={this.onSearchClick}>
+          {searchButtonText}
+        </StyledButton>
+        <Filter title={title} buttons={buttonList} type={type} />
       </StyledDiv>
     );
   }
@@ -78,12 +78,12 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
 
-// Search.propTypes = {
-//   filterInfo: PropTypes.shape({
-//     title: PropTypes.string.isRequired,
-//     buttonList: PropTypes.array.isRequired,
-//     type: PropTypes.string.isRequired,
-//   }).isRequired,
-//   getQuery: PropTypes.func.isRequired,
-//   searchButtonText: PropTypes.string.isRequired,
-// };
+Search.propTypes = {
+  filterInfo: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    buttonList: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  getQuery: PropTypes.func.isRequired,
+  searchButtonText: PropTypes.string.isRequired,
+};

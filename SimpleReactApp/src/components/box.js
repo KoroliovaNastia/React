@@ -9,7 +9,7 @@ const StyledBox = styled.div`
 `;
 
 type Props = {
-  children?: React.Node,
+  children: React.Node,
 };
 
 function Box(props: Props) {

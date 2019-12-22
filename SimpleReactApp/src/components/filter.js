@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import FilterButton from './filterButton';
 import { updateFilters } from '../redux/actions';
-import styled from 'styled-components'
 
 const InlineDiv = styled.div`
   display: inline-block;
@@ -15,7 +15,7 @@ const StyledFilter = styled.div`
   background-color: #120e0e75;
   border-radius: 6px;
   margin: 13px;
-  padding: 10px 0px;
+  padding: 10px 3px;
 `;
 
 const FilterContainer = styled.div`
@@ -23,7 +23,7 @@ const FilterContainer = styled.div`
   padding-left: 13px;
 `;
 
-class Filter extends Component {
+class Filter extends React.Component {
   constructor(props) {
     super(props);
     this.toggleChange = this.toggleChange.bind(this);
@@ -44,7 +44,11 @@ class Filter extends Component {
           <p>{title}</p>
         </InlineDiv>
         <StyledFilter>
-          {buttons.map((button) => <InlineDiv key={title+button.id} onClick={() => this.toggleChange(button)}><FilterButton key={button.id} data={button} /></InlineDiv>)}
+          {buttons.map((button) => (
+            <InlineDiv key={title + button.id} onClick={() => this.toggleChange(button)}>
+              <FilterButton key={button.id} data={button} />
+            </InlineDiv>
+          ))}
         </StyledFilter>
       </FilterContainer>
     );
@@ -67,9 +71,9 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
 
-// Filter.propTypes = {
-//   type: PropTypes.string.isRequired,
-//   title: PropTypes.string.isRequired,
-//   updateFilterButtons: PropTypes.func.isRequired,
-//   buttons: PropTypes.objectOf(Array).isRequired,
-// };
+Filter.propTypes = {
+  type: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  updateFilterButtons: PropTypes.func.isRequired,
+  buttons: PropTypes.arrayOf(Object).isRequired,
+};

@@ -1,7 +1,7 @@
 {
     "parser": "babel-eslint",
     "rules": {
-        "max-len": [1, 125, 2, {"ignoreComments": true}],
+        "max-len": [1, 126, 2, {"ignoreComments": true}],
         "id-length": 0,
         "no-console": 0,
         "no-unused-vars": [1, {"vars": "local", "args": "none"}],
@@ -10,9 +10,8 @@
     },
     "env": {
         "jest":true,
-        "browser": true,
-        "flow": true
+        "browser": true
     },
     "extends": ["airbnb"],
-    "ignorePatterns": ["node_modules/", "dist/", ".gitignore", "cypress/"]
+    "ignorePatterns": ["node_modules/", "dist/", ".gitignore", "cypress/", "stories/"]
 }

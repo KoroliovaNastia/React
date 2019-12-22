@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -14,7 +14,7 @@ import { updateFilters, changeQuery } from '../redux/actions';
 import { updateMovieList } from '../redux/actions/get';
 
 
-class SearchPage extends Component {
+class SearchPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -120,21 +120,21 @@ export function mapDispatchToProps(dispatch) {
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));
 
-// SearchPage.propTypes = {
-//   navigationFilters: PropTypes.shape({
-//     title: PropTypes.string.isRequired,
-//     buttonList: PropTypes.array.isRequired,
-//     type: PropTypes.string.isRequired,
-//   }).isRequired,
-//   searchFilters: PropTypes.shape({
-//     title: PropTypes.string.isRequired,
-//     buttonList: PropTypes.array.isRequired,
-//     type: PropTypes.string.isRequired,
-//   }).isRequired,
-//   queryString: PropTypes.string.isRequired,
-//   location: PropTypes.objectOf(PropTypes.opject).isRequired,
-//   history: PropTypes.objectOf(PropTypes.opject).isRequired,
-//   updateFilterButtons: PropTypes.func.isRequired,
-//   updateMovies: PropTypes.func.isRequired,
-//   getQuery: PropTypes.func.isRequired,
-// };
+SearchPage.propTypes = {
+  navigationFilters: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    buttonList: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  searchFilters: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    buttonList: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
+  queryString: PropTypes.string.isRequired,
+  location: PropTypes.objectOf(Object).isRequired,
+  history: PropTypes.objectOf(Object).isRequired,
+  updateFilterButtons: PropTypes.func.isRequired,
+  updateMovies: PropTypes.func.isRequired,
+  getQuery: PropTypes.func.isRequired,
+};

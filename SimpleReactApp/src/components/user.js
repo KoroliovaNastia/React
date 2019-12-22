@@ -1,10 +1,9 @@
-//@flow
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 
 type Props = {
-  firstName?: string,
-  lastName?: string,
+  firstName: string,
+  lastName: string,
 }
 
 function User(props: Props) {

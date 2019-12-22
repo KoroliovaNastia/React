@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import SearchIcon from './searchIcon';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import SearchIcon from './searchIcon';
 import Header from './header';
 import Logo from './logo';
 import MovieDescription from './movieDescription';
@@ -9,9 +9,8 @@ import Box from './box';
 import Footer from './footer';
 import Main from './main';
 import { searchMovies, getMovieById } from '../redux/actions/get';
-import styled from 'styled-components'
 
-class DescriptionPage extends Component {
+class DescriptionPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -42,7 +41,7 @@ class DescriptionPage extends Component {
         <Header>
           <Logo />
           <MovieDescription />
-          <SearchIcon to={'/movies'}/>
+          <SearchIcon to="/movies" />
         </Header>
         <Box>
           <p>
@@ -78,9 +77,13 @@ export const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(DescriptionPage);
 
-// DescriptionPage.propTypes = {
-//   movie: PropTypes.objectOf(PropTypes.object).isRequired,
-//   movieId: PropTypes.number.isRequired,
-//   updateMovieList: PropTypes.func.isRequired,
-//   getMovie: PropTypes.func.isRequired,
-// };
+DescriptionPage.propTypes = {
+  movie: PropTypes.instanceOf(Object),
+  movieId: PropTypes.number.isRequired,
+  updateMovieList: PropTypes.func.isRequired,
+  getMovie: PropTypes.func.isRequired,
+};
+
+DescriptionPage.defaultProps = {
+  movie: null,
+};

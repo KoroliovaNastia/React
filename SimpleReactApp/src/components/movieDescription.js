@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Image from './image';
 import styled from 'styled-components';
+import Image from './image';
 
 const StyledMovie = styled.div`
   background-color: #232323e6;

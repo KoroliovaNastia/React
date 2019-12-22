@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const StyledLogo = styled.div`
   display:inline-block;
@@ -13,11 +13,11 @@ const StyledLogo = styled.div`
 `;
 
 const Logo = ({ appLogo }) => (
-      <StyledLogo className="logo">
-        <p>
-          {appLogo}
-        </p>
-      </StyledLogo>
+  <StyledLogo className="logo">
+    <p>
+      {appLogo}
+    </p>
+  </StyledLogo>
 );
 
 function mapStateToProps(store) {

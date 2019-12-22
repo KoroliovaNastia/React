@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Image from './image';
 import styled from 'styled-components';
+import Image from './image';
 
 const StyledMovie = styled.div`
   height: 620px;

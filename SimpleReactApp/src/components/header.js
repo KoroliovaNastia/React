@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import headerImage from '../images/netflix-4.jpg';
 
 const StyledHeader = styled.div`
