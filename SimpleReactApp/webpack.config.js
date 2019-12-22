@@ -10,8 +10,10 @@ module.exports = (env) => ({
   entry: './src/app.js',
 
   output: {
+    chunkFilename: '[id].result.js',
+    crossOriginLoading: "anonymous",
     filename: 'result.js',
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist/'),
   },
 
   devtool: env.NODE_ENV === 'production' ? 'none' : 'source-map',
@@ -41,15 +43,15 @@ module.exports = (env) => ({
         },
       },
     ],
-    preLoaders: [
-      {
-        test: /\.js$/,
-        loaders: ['eslint'],
-        include: [
-          path.resolve(__dirname, 'src'),
-        ],
-      },
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.js$/,
+    //     loaders: ['eslint'],
+    //     include: [
+    //       path.resolve(__dirname, 'src'),
+    //     ],
+    //   },
+    // ],
   },
   plugins: [
     new HtmlWebpackPlugin({

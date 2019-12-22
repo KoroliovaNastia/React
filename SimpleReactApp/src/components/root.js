@@ -4,6 +4,9 @@ import {
   BrowserRouter as Router, Redirect, Switch, Route,
 } from 'react-router-dom';
 import ErrorBoundary from './errorBoundary';
+import styled from 'styled-components';
+import SearchPage from './searchPage';
+import DescriptionPage from './descriptionPage';
 
 import '../css/main.css';
 
@@ -14,8 +17,13 @@ const Loading = () => (
   </div>
 );
 
-const LazySearch = lazy(() => import('./searchPage'));
-const LazyDescription = lazy(() => import('./descriptionPage'));
+//const SearchPage = lazy(() => import('./searchPage'));
+//const DescriptionPage = lazy(() => import('./descriptionPage'));
+
+const Body = styled.div`
+  background-color: #232323;
+  color: #FFF;
+`;
 
 class Root extends Component {
   constructor(props) {
@@ -26,31 +34,34 @@ class Root extends Component {
   render() {
     const { history } = this.props;
     return (
-      <ErrorBoundary>
-        <Router history={history}>
-          <Suspense fallback={Loading()}>
-            <Switch>
-              <Redirect exact from="/" to="/search" />
-              <Route path="/search" component={LazySearch} />
-              <Route path="/film/:id" component={LazyDescription} />
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </Suspense>
-        </Router>
-      </ErrorBoundary>
+      <Body>
+        <ErrorBoundary>
+          <Router history={history}>
+            <Suspense fallback={Loading()}>
+              <Switch>
+                <Redirect exact from="/" to="/movies" />
+                <Route path="/movies" component={SearchPage} />
+                <Route path="/film/:id" component={DescriptionPage} />
+                <Route path="*" component={NotFound} />
+              </Switch>
+            </Suspense>
+          </Router>
+        </ErrorBoundary>
+      </Body>
     );
   }
 }
 
-Root.propTypes = {
-  context: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-  }),
-  history: PropTypes.string.isRequired,
-};
+// Root.propTypes = {
+//   context: PropTypes.shape({
+//     url: PropTypes.string,
+//   }),
+//   history: PropTypes.string,
+// };
 
-Root.defaultProps = {
-  context: null,
-};
+// Root.defaultProps = {
+//   context: null,
+//   history: undefined,
+// };
 
 export default Root;

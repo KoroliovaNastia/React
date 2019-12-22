@@ -27,7 +27,7 @@ class SearchPage extends Component {
       navigationFilters, searchFilters, queryString, updateMovies, location, getQuery,
     } = this.props;
     const params = new URLSearchParams(location.search);
-    const query = params.get('query');
+    const query = params.get('search');
     if (query !== null) {
       getQuery(query);
     }
@@ -57,7 +57,8 @@ class SearchPage extends Component {
         filter: 'sortBy',
         query: navigationFilters.buttonList.find((button) => button.checked === true).field,
       },
-      { filter: 'searchBy', query: searchFilters.buttonList.find((button) => button.checked === true).field }];
+      { filter: 'searchBy', query: searchFilters.buttonList.find((button) => button.checked === true).field },
+      { filter: 'search', query: queryString }];
 
       this.updateFilterUrl(params, querySet);
     }
@@ -119,21 +120,21 @@ export function mapDispatchToProps(dispatch) {
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));
 
-SearchPage.propTypes = {
-  navigationFilters: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    buttonList: PropTypes.array.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
-  searchFilters: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    buttonList: PropTypes.array.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
-  queryString: PropTypes.string.isRequired,
-  location: PropTypes.objectOf(PropTypes.opject).isRequired,
-  history: PropTypes.objectOf(PropTypes.opject).isRequired,
-  updateFilterButtons: PropTypes.func.isRequired,
-  updateMovies: PropTypes.func.isRequired,
-  getQuery: PropTypes.func.isRequired,
-};
+// SearchPage.propTypes = {
+//   navigationFilters: PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     buttonList: PropTypes.array.isRequired,
+//     type: PropTypes.string.isRequired,
+//   }).isRequired,
+//   searchFilters: PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     buttonList: PropTypes.array.isRequired,
+//     type: PropTypes.string.isRequired,
+//   }).isRequired,
+//   queryString: PropTypes.string.isRequired,
+//   location: PropTypes.objectOf(PropTypes.opject).isRequired,
+//   history: PropTypes.objectOf(PropTypes.opject).isRequired,
+//   updateFilterButtons: PropTypes.func.isRequired,
+//   updateMovies: PropTypes.func.isRequired,
+//   getQuery: PropTypes.func.isRequired,
+// };

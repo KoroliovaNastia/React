@@ -3,6 +3,16 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Image from './image';
+import styled from 'styled-components';
+
+const StyledMovie = styled.div`
+  height: 620px;
+  width: 260px;
+  ul>li {
+    margin:0px;
+    padding:0px;
+  }
+`;
 
 class Movie extends Component {
   constructor(props) {
@@ -17,7 +27,7 @@ class Movie extends Component {
       },
     } = this.props;
     return (
-      <div className="movie">
+      <StyledMovie className="movie">
         <Image image={poster_path} />
         <Link to={`/film/${id}`}>{title}</Link>
         <ul>
@@ -25,7 +35,7 @@ class Movie extends Component {
         </ul>
         <p>{release_date}</p>
         <p>{vote_average}</p>
-      </div>
+      </StyledMovie>
     );
   }
 }

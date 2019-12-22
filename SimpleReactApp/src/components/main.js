@@ -23,7 +23,7 @@ class Main extends Component {
       <div className="container">
         <div className="row">
           {
-            movieList.map((movie) => <div key={movie.id} className="col-lg-3"><Movie key={movie.id} movie={movie} /></div>)
+            movieList.map((movie) => <div key={movie.id} className="col-lg-3 col-md-4"><Movie key={movie.id} movie={movie} /></div>)
           }
         </div>
       </div>
@@ -39,6 +39,6 @@ function mapStateToProps(store) {
 
 export default connect(mapStateToProps)(Main);
 
-Main.propTypes = {
-  movieList: PropTypes.objectOf(Array).isRequired,
-};
+// Main.propTypes = {
+//   movieList: PropTypes.objectOf(PropTypes.object),
+// };

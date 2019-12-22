@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import headerImage from '../images/header-image.jpg';
+import styled from 'styled-components'
+import headerImage from '../images/netflix-4.jpg';
 
-// const  searchStyle = {
-//     minWidth: "1200px",
-//     backgroundImage: 'url('+ headerImage +')',
-//     backgroundColor: '#2323237f'
-// };
+const StyledHeader = styled.div`
+  background: url(${headerImage}) no-repeat;
+  background-color: #2323237f;
+  height: 500px;
+`;
 
 const Header = ({ children }) => (
-  <div uk-img="true">
+  <StyledHeader uk-img="true">
     {children}
-  </div>
+  </StyledHeader>
 );
 
 export default Header;
 
 Header.propTypes = {
-  children: PropTypes.objectOf(Array).isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };

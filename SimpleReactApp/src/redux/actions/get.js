@@ -1,14 +1,17 @@
-import fetch from 'cross-fetch';
+//import fetch from 'cross-fetch';
 import { updateMovies, setMovie } from './index';
 
 export function searchMovies(query, sortBy, searchBy, sortOrder, filter) {
   return (dispatch) => {
-    fetch(`https://reactjs-cdp.herokuapp.com/movies?
-    search=${query}
-    &searchBy=${searchBy}
-    &sortBy=${sortBy}
-    &sortOrder=${sortOrder}
-    &filter=${filter}`, {
+    fetch('https://reactjs-cdp.herokuapp.com/movies?limit=8&search='
+    + query +
+    '&searchBy='
+    + searchBy +
+    '&sortBy='
+    + sortBy +
+    '&sortOrder='
+    + sortOrder +
+    '&filter=' + filter, {
       method: 'GET',
       headers: {
         Accept: 'application/json',

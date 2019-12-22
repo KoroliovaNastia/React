@@ -3,6 +3,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Image from './image';
+import styled from 'styled-components';
+
+const StyledMovie = styled.div`
+  background-color: #232323e6;
+  display: inline-block;
+  width: 78%;
+  padding-left: 50px;
+  margin-left: 90px;
+  margin-top: 40px;
+`;
+
+const Block = styled.div`
+  display: inline-block;
+  width: 60%;
+  margin-left: 50px;
+`;
 
 class MovieDescription extends Component {
   constructor(props) {
@@ -13,17 +29,15 @@ class MovieDescription extends Component {
   render() {
     const {
       movie: {
-        poster_path, title, release_date, vote_average, runtime, description,
+        poster_path, title, release_date, vote_average, runtime, overview,
       },
     } = this.props;
     return (
-      <>
+      <StyledMovie>
         <Image image={poster_path} />
-        <div>
+        <Block>
           <p>{title}</p>
           <p>{vote_average}</p>
-        </div>
-        <div>
           <p>
             {release_date}
             {' '}
@@ -33,9 +47,9 @@ year
             {' '}
 min
           </p>
-          <p>{description}</p>
-        </div>
-      </>
+          <p>{overview}</p>
+        </Block>
+      </StyledMovie>
     );
   }
 }
@@ -55,6 +69,6 @@ MovieDescription.propTypes = {
     release_date: PropTypes.string.isRequired,
     vote_average: PropTypes.number,
     runtime: PropTypes.number,
-    description: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
   }).isRequired,
 };

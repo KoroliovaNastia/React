@@ -12,7 +12,7 @@ const initialMovieState = {
 const initialFilterState = {
   searchFilterInfo: {
     type: 'CHANGE_SEARCH_FILTERS',
-    title: 'search by',
+    title: 'SEARCH BY',
     buttonList: [{
       id: 'b1', text: 'title', field: 'title', checked: true,
     }, {
@@ -21,7 +21,7 @@ const initialFilterState = {
   },
   navigationFilterInfo: {
     type: 'CHANGE_NAVIGATION_FILTERS',
-    title: 'sort by',
+    title: 'SORT BY',
     buttonList: [{
       id: 'f1', text: 'Release date', field: 'release_date', checked: true,
     }, {
@@ -32,7 +32,7 @@ const initialFilterState = {
 };
 
 const initialAppState = {
-  searchButtonText: 'Search',
+  searchButtonText: 'SEARCH',
   logo: 'netflixroulete',
 };
 
