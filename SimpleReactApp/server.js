@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom';
 import { configureStore } from './src/redux/store';
 import Routes from './src/components/routes';
+import SearchPage from './src/components/searchPage';
+import DescriptionPage from './src/components/descriptionPage';
 
 const port = process.env.PORT || 5000;
 
@@ -18,13 +20,8 @@ function renderRoot(store, context, location, route) {
     <Provider store={store}>
       <StaticRouter context={context} location={location}>
         <Switch>
-          <Route
-            key={route.path}
-            path={route.path}
-            component={route.component}
-            exact={route.exact !== false}
-            strict
-          />
+          <Route path="/movies" component={SearchPage} />
+          <Route path="http://localhost:5000/film/:id" component={DescriptionPage} />
         </Switch>
       </StaticRouter>
     </Provider>,
@@ -67,11 +64,14 @@ app.get('*', (req, res) => {
   const html = renderRoot(store, context, req.url, currentRoute);
 
   if (context.url) {
-    return res.redirect(302, { Location: context.url });
+    return res.redirect(301, { Location: context.url });
+  }else{
+    const preloadedState = store.getState();
+    return res.send(renderFullPage(html, preloadedState));
   }
-  const preloadedState = store.getState();
-  return res.send(renderFullPage(html, preloadedState));
 });
+//app.get('/movies*', (req, res) => {});
+//app.get('/film/*', (req, res) => {});
 
 app.listen(port, () => {
   console.log('Server running at %d', port);
