@@ -20,10 +20,11 @@ type Props = {
   to: string,
 }
 
-const SearchIcon = (props: Props) => (
-  <StyledLink to={props.to}>
-    <i className="glyphicon glyphicon-search" />
-  </StyledLink>
-);
+function SearchIcon(props: Props) {
+  const { to } = props;
+    <StyledLink to={to}>
+      <i className="glyphicon glyphicon-search" />
+    </StyledLink>;
+}
 
 export default SearchIcon;

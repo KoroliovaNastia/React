@@ -13,9 +13,10 @@ type Props = {
 };
 
 function Box(props: Props) {
+  const { children } = props;
   return (
     <StyledBox>
-      {props.children}
+      {children}
     </StyledBox>
   );
 }

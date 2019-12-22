@@ -7,13 +7,14 @@ type Props = {
 }
 
 function User(props: Props) {
+  const { firstName, lastName } = props;
   return (
     <span>
         User:
       {' '}
-      {props.firstName}
+      {firstName}
       {' '}
-      {props.lastName}
+      {lastName}
     </span>
   );
 }
