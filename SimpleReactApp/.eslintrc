@@ -6,7 +6,8 @@
         "no-console": 0,
         "no-unused-vars": [1, {"vars": "local", "args": "none"}],
         "strict": 0,
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-props-no-spreading": "off"
     },
     "env": {
         "jest":true,
