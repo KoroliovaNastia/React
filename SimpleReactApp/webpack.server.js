@@ -8,6 +8,7 @@ module.exports = (env) => ({
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -21,6 +22,22 @@ module.exports = (env) => ({
         use: {
           loader: 'url-loader',
         },
+      },
+      {
+        test: /\.(css)$/,
+        include: [
+          path.resolve(__dirname, '../src'),
+        ],
+        use: [
+          {
+            // Interprets `@import` and `url()` like `import/require()` and will resolve them
+            loader: 'css-loader/locals',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]--[hash:base64:5]'
+            }
+          },
+        ],
       },
     ],
   },

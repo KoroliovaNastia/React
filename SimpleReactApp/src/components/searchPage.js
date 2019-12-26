@@ -11,7 +11,7 @@ import SearchNavigation from './searchNavigation';
 import Box from './box';
 import { updateFilters, changeQuery } from '../redux/actions';
 
-import { updateMovieList } from '../redux/actions/get';
+import { updateMovieList, getMovies } from '../redux/actions/get';
 
 
 class SearchPage extends React.Component {
@@ -40,7 +40,7 @@ class SearchPage extends React.Component {
     if (sortBy !== undefined && sortBy !== null && sortBy !== '') {
       this.updateFilterByUrl(navigationFilters, sortBy);
     }
-
+    console.log(params)
     updateMovies(navigationFilters, queryString, searchFilters);
   }
 
@@ -100,6 +100,13 @@ class SearchPage extends React.Component {
   }
 }
 
+const loadData = (path) => {
+  const movies = getMovies(path === '/'? '/movies' : path)
+  return Promise.all([movies]).then((result) => {
+    return {'movieList': result[0], 'movie': null}
+  })
+}
+
 export function mapStateToProps(store) {
   return {
     searchFilters: store.filterState.searchFilterInfo,
@@ -118,7 +125,7 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));
+export default { component: withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage)), loadData };
 
 SearchPage.propTypes = {
   navigationFilters: PropTypes.shape({

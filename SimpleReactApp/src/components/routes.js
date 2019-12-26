@@ -1,26 +1,28 @@
 import React from 'react';
 import SearchPage from './searchPage';
 import DescriptionPage from './descriptionPage';
+import { getMovieById } from '../redux/actions/get';
+import { movie, getAllMovies } from '../redux/actions/get';
 
 const NotFound = () => <p>404 Not found</p>;
 
-const Routes = [
+const routes = [
   {
     path: '/',
     exact: true,
-    component: SearchPage,
+    ...SearchPage,
   },
   {
-    path: '/search',
-    component: SearchPage,
+    path: '/movies*',
+    ...SearchPage,
   },
   {
     path: '/film/:id',
-    component: DescriptionPage,
+    ...DescriptionPage,
   },
   {
     component: NotFound,
   },
 ];
 
-export default Routes;
+export default routes;

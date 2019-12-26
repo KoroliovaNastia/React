@@ -1,30 +1,38 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import Express from 'express';
 import {
   StaticRouter, matchPath, Switch, Route,
 } from 'react-router-dom';
 import { configureStore } from './src/redux/store';
-import Routes from './src/components/routes';
+import routes from './src/components/routes';
 import SearchPage from './src/components/searchPage';
 import DescriptionPage from './src/components/descriptionPage';
+import { renderRoutes, matchRoutes } from 'react-router-config';
+import { updateMovies, setMovie } from './src/redux/actions/index';
 
 const port = process.env.PORT || 5000;
 
 const app = Express();
 
-function renderRoot(store, context, location, route) {
+const initialMovieState = {
+  movieState:{
+    movieList: null,
+    movie: null,
+  }
+};
+
+function renderRoot(store, context, location) {
   const html = renderToString(
 
-    <Provider store={store}>
-      <StaticRouter context={context} location={location}>
-        <Switch>
-          <Route path="/movies" component={SearchPage} />
-          <Route path="http://localhost:5000/film/:id" component={DescriptionPage} />
-        </Switch>
-      </StaticRouter>
-    </Provider>,
+     <Provider store={store}>
+       <StaticRouter context={context} location={location}>
+         <Switch>
+          {renderRoutes(routes)}
+         </Switch>
+       </StaticRouter>
+     </Provider>,
   );
   return html;
 }
@@ -42,36 +50,38 @@ function renderFullPage(html, preloadedState) {
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
                 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
                 <title>React Application</title>
+                <!--<script src="/dist/bundle.js" defer></script>-->
             </head>
             <body>
                 <div id="root">${html}</div>
                 <script>
                     window.PRELOADED_STATE=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
                 </script>
-                <script src="/dist/bundle.js"></script>
             </body>
         </html>
     `;
 }
-
 app.use('/dist', Express.static('dist'));
+app.use('/images', Express.static('images'));
+
 app.get('*', (req, res) => {
-  const currentRoute = Routes.find((route) => matchPath(req.url, route)) || {};
-  const context = {};
 
-  const store = configureStore();
-  console.log(context);
-  const html = renderRoot(store, context, req.url, currentRoute);
+  console.log(req.url)
+   const route = routes.find((route) => matchPath(req.url, route)) || {};
+   const newData = route.loadData(req.url)
 
-  if (context.url) {
-    return res.redirect(301, { Location: context.url });
-  }else{
+   Promise.all([newData]).then((result)=>{
+    const data = result[0];
+    const store = configureStore();
+    store.dispatch(updateMovies(result[0]['movieList']))
+    store.dispatch(setMovie(result[0]['movie']))
+    const context = {};
     const preloadedState = store.getState();
-    return res.send(renderFullPage(html, preloadedState));
-  }
+    const content = renderRoot(store, context, req.url);
+
+    res.send(renderFullPage(content, preloadedState));
+   })
 });
-//app.get('/movies*', (req, res) => {});
-//app.get('/film/*', (req, res) => {});
 
 app.listen(port, () => {
   console.log('Server running at %d', port);

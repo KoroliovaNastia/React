@@ -12,6 +12,7 @@ class Main extends React.Component {
   render() {
     const { movieList } = this.props;
     if (movieList === null || movieList === undefined) {
+      console.log(movieList)
       return (
         <div className="container">
           <h2>No films found</h2>
@@ -43,9 +44,9 @@ function mapStateToProps(store) {
 
 export default connect(mapStateToProps)(Main);
 
-Main.propTypes = {
-  movieList: PropTypes.arrayOf(Object),
-};
+// Main.propTypes = {
+//   movieList: PropTypes.arrayOf(Object),
+// };
 
 Main.defaultProps = {
   movieList: null,

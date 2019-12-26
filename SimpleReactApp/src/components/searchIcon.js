@@ -23,9 +23,11 @@ type Props = {
 
 function SearchIcon(props: Props) {
   const { to } = props;
+  return (
     <StyledLink to={to}>
       <i className="glyphicon glyphicon-search" />
-    </StyledLink>;
+    </StyledLink>
+  )
 }
 
 export default SearchIcon;

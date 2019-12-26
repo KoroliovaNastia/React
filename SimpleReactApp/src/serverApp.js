@@ -8,21 +8,32 @@ import Routes from './components/routes';
 import ErrorBoundary from './components/errorBoundary';
 import SearchPage from './components/searchPage';
 import DescriptionPage from './components/descriptionPage';
+import routes from './components/routes';
+import styled from 'styled-components';
 
+let store;
+store = configureStore(window.PRELOADED_STATE);
+if(store === undefined){
+  store = configureStore();
+}
 
-const store = configureStore(window.PRELOADED_STATE);
+const Body = styled.div`
+  background-color: #232323;
+  color: #FFF;
+`;
 
 hydrate(
   <Provider store={store}>
-    <ErrorBoundary>
-      <StaticRouter>
-        <Switch>
-          <Route path="/" component={SearchPage} />
-          <Route path="/movies" component={SearchPage} />
-          <Route path="/film/:id" component={DescriptionPage} />
-        </Switch>
-      </StaticRouter>
-    </ErrorBoundary>
+    <Body>
+      <ErrorBoundary>
+        <StaticRouter>
+          <Switch>
+          {renderRoutes(routes)}
+          {/* <Route path='*' component={DescriptionPage}/> */}
+          </Switch>
+        </StaticRouter>
+      </ErrorBoundary>
+    </Body>
   </Provider>,
   document.getElementById('root'),
 );

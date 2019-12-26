@@ -7,7 +7,8 @@ import styled from 'styled-components';
 import ErrorBoundary from './errorBoundary';
 import SearchPage from './searchPage';
 import DescriptionPage from './descriptionPage';
-
+import { renderRoutes, matchRoutes } from 'react-router-config';
+import routes from './routes';
 import '../css/main.css';
 
 const NotFound = () => <p>404 Not found</p>;
@@ -40,9 +41,7 @@ class Root extends Component {
             <Suspense fallback={Loading()}>
               <Switch>
                 <Redirect exact from="/" to="/movies" />
-                <Route path="/movies" component={SearchPage} />
-                <Route path="/film/:id" component={DescriptionPage} />
-                <Route path="*" component={NotFound} />
+                {renderRoutes(routes)}
               </Switch>
             </Suspense>
           </Router>
