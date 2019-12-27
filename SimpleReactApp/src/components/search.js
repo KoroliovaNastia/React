@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Filter from './filter';
 import { changeQuery } from '../redux/actions';
+import { makeGetFilterInfo } from '../redux/actions/selectors';
 
 export const StyledButton = styled.button`
   background-color: #f65261;
@@ -64,7 +65,7 @@ class Search extends Component {
 
 function mapStateToProps(store) {
   return {
-    filterInfo: store.filterState.searchFilterInfo,
+    filterInfo: makeGetFilterInfo(store.filterState.searchFilterInfo),
     searchButtonText: store.appState.searchButtonText,
     query: store.filterState.query,
   };

@@ -40,7 +40,7 @@ class SearchPage extends React.Component {
     if (sortBy !== undefined && sortBy !== null && sortBy !== '') {
       this.updateFilterByUrl(navigationFilters, sortBy);
     }
-    console.log(params)
+    console.log(params);
     updateMovies(navigationFilters, queryString, searchFilters);
   }
 
@@ -101,11 +101,9 @@ class SearchPage extends React.Component {
 }
 
 const loadData = (path) => {
-  const movies = getMovies(path === '/'? '/movies' : path)
-  return Promise.all([movies]).then((result) => {
-    return {'movieList': result[0], 'movie': null}
-  })
-}
+  const movies = getMovies(path === '/' ? '/movies' : path);
+  return Promise.all([movies]).then((result) => ({ movieList: result[0], movie: null }));
+};
 
 export function mapStateToProps(store) {
   return {

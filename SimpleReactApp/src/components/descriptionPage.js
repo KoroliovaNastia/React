@@ -8,7 +8,9 @@ import MovieDescription from './movieDescription';
 import Box from './box';
 import Footer from './footer';
 import Main from './main';
-import { searchMovies, getMovieById, movie, getMovies } from '../redux/actions/get';
+import {
+  searchMovies, getMovieById, movie, getMovies,
+} from '../redux/actions/get';
 
 class DescriptionPage extends React.Component {
   constructor(props) {
@@ -65,13 +67,11 @@ const loadData = (path) => {
   const id = path.split('/').pop();
   const mainMovie = movie(id);
   return Promise.all([mainMovie]).then((result) => {
-    console.log()
-    const movies = getMovies(`/movies?limit=8&sortOrder=asc&filter=${result[0].genres}`)
-    return Promise.all([movies]).then((data) => {
-      return {'movieList': data[0], 'movie': result[0]}
-    })
-  })
-}
+    console.log();
+    const movies = getMovies(`/movies?limit=8&sortOrder=asc&filter=${result[0].genres}`);
+    return Promise.all([movies]).then((data) => ({ movieList: data[0], movie: result[0] }));
+  });
+};
 
 function mapStateToProps(store, ownProps) {
   return {

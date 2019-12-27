@@ -4,10 +4,10 @@ import {
   BrowserRouter as Router, Redirect, Switch, Route,
 } from 'react-router-dom';
 import styled from 'styled-components';
+import { renderRoutes, matchRoutes } from 'react-router-config';
 import ErrorBoundary from './errorBoundary';
 import SearchPage from './searchPage';
 import DescriptionPage from './descriptionPage';
-import { renderRoutes, matchRoutes } from 'react-router-config';
 import routes from './routes';
 import '../css/main.css';
 

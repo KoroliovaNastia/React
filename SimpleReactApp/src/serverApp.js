@@ -3,17 +3,17 @@ import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { StaticRouter, Switch, Route } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import styled from 'styled-components';
 import { configureStore } from './redux/store';
 import Routes from './components/routes';
 import ErrorBoundary from './components/errorBoundary';
 import SearchPage from './components/searchPage';
 import DescriptionPage from './components/descriptionPage';
 import routes from './components/routes';
-import styled from 'styled-components';
 
 let store;
 store = configureStore(window.PRELOADED_STATE);
-if(store === undefined){
+if (store === undefined) {
   store = configureStore();
 }
 
@@ -28,8 +28,8 @@ hydrate(
       <ErrorBoundary>
         <StaticRouter>
           <Switch>
-          {renderRoutes(routes)}
-          {/* <Route path='*' component={DescriptionPage}/> */}
+            {renderRoutes(routes)}
+            {/* <Route path='*' component={DescriptionPage}/> */}
           </Switch>
         </StaticRouter>
       </ErrorBoundary>

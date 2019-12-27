@@ -1,38 +1,29 @@
 import React from 'react';
-import { Provider, connect } from 'react-redux';
+import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
 import Express from 'express';
 import {
-  StaticRouter, matchPath, Switch, Route,
+  StaticRouter, matchPath, Switch,
 } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 import { configureStore } from './src/redux/store';
 import routes from './src/components/routes';
-import SearchPage from './src/components/searchPage';
-import DescriptionPage from './src/components/descriptionPage';
-import { renderRoutes, matchRoutes } from 'react-router-config';
 import { updateMovies, setMovie } from './src/redux/actions/index';
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5050;
 
 const app = Express();
-
-const initialMovieState = {
-  movieState:{
-    movieList: null,
-    movie: null,
-  }
-};
 
 function renderRoot(store, context, location) {
   const html = renderToString(
 
-     <Provider store={store}>
-       <StaticRouter context={context} location={location}>
-         <Switch>
+    <Provider store={store}>
+      <StaticRouter context={context} location={location}>
+        <Switch>
           {renderRoutes(routes)}
-         </Switch>
-       </StaticRouter>
-     </Provider>,
+        </Switch>
+      </StaticRouter>
+    </Provider>,
   );
   return html;
 }
@@ -63,24 +54,24 @@ function renderFullPage(html, preloadedState) {
 }
 app.use('/dist', Express.static('dist'));
 app.use('/images', Express.static('images'));
+app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.get('*', (req, res) => {
+  console.log(req.url);
+  const currentRoute = routes.find((route) => matchPath(req.url, route)) || {};
+  const newData = currentRoute.loadData(req.url);
 
-  console.log(req.url)
-   const route = routes.find((route) => matchPath(req.url, route)) || {};
-   const newData = route.loadData(req.url)
-
-   Promise.all([newData]).then((result)=>{
+  Promise.all([newData]).then((result) => {
     const data = result[0];
     const store = configureStore();
-    store.dispatch(updateMovies(result[0]['movieList']))
-    store.dispatch(setMovie(result[0]['movie']))
+    store.dispatch(updateMovies(data.movieList));
+    store.dispatch(setMovie(data.movie));
     const context = {};
     const preloadedState = store.getState();
     const content = renderRoot(store, context, req.url);
 
     res.send(renderFullPage(content, preloadedState));
-   })
+  });
 });
 
 app.listen(port, () => {

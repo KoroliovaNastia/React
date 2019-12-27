@@ -12,7 +12,7 @@ class Main extends React.Component {
   render() {
     const { movieList } = this.props;
     if (movieList === null || movieList === undefined) {
-      console.log(movieList)
+      console.log(movieList);
       return (
         <div className="container">
           <h2>No films found</h2>
