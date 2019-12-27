@@ -1,8 +1,7 @@
 import React from 'react';
-import SearchPage from './searchPage';
-import DescriptionPage from './descriptionPage';
-import { getMovieById, movie, getAllMovies } from '../redux/actions/get';
-
+import SearchPage, { loadSearchData } from './searchPage';
+import DescriptionPage, { loadDescriptionData } from './descriptionPage';
+// import { getMovieById, movie, getAllMovies } from '../redux/actions/get';
 
 const NotFound = () => <p>404 Not found</p>;
 
@@ -10,15 +9,18 @@ const routes = [
   {
     path: '/',
     exact: true,
-    ...SearchPage,
+    component: SearchPage,
+    loadData: (param) => loadSearchData(param),
   },
   {
     path: '/movies*',
-    ...SearchPage,
+    component: SearchPage,
+    loadData: (param) => loadSearchData(param),
   },
   {
     path: '/film/:id',
-    ...DescriptionPage,
+    component: DescriptionPage,
+    loadData: (param) => loadDescriptionData(param),
   },
   {
     component: NotFound,

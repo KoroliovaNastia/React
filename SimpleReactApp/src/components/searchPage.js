@@ -100,8 +100,8 @@ class SearchPage extends React.Component {
   }
 }
 
-const loadData = (path) => {
-  const movies = getMovies(path === '/' ? '/movies' : path);
+export const loadSearchData = (path) => {
+  const movies = getMovies(path === '/' || path === '/movies' ? '/movies?' : path);
   return Promise.all([movies]).then((result) => ({ movieList: result[0], movie: null }));
 };
 
@@ -123,7 +123,7 @@ export function mapDispatchToProps(dispatch) {
   };
 }
 
-export default { component: withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage)), loadData };
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));
 
 SearchPage.propTypes = {
   navigationFilters: PropTypes.shape({

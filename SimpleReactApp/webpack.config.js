@@ -10,8 +10,6 @@ module.exports = (env) => ({
   entry: './src/app.js',
 
   output: {
-    chunkFilename: '[id].result.js',
-    crossOriginLoading: 'anonymous',
     filename: 'result.js',
     path: path.join(__dirname, 'dist/'),
   },

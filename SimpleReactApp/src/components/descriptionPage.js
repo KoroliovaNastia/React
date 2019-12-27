@@ -25,19 +25,19 @@ class DescriptionPage extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      movie, movieId, updateMovieList, getMovie,
+      mainMovie, movieId, updateMovieList, getMovie,
     } = this.props;
     if (movieId !== prevProps.movieId) {
       getMovie(movieId);
     }
-    if (movie !== prevProps.movie) {
-      updateMovieList(movie.genres);
+    if (mainMovie !== prevProps.mainMovie) {
+      updateMovieList(mainMovie.genres);
     }
   }
 
   render() {
-    const { movie } = this.props;
-    if (movie === null) return <p>No film</p>;
+    const { mainMovie } = this.props;
+    if (mainMovie === null) return <p>No film</p>;
     return (
       <>
         <Header>
@@ -48,7 +48,7 @@ class DescriptionPage extends React.Component {
         <Box>
           <p>
 Films by
-            {movie.genres.map((genre) => <span key={movie.title + genre}>{`${genre} `}</span>)}
+            {mainMovie.genres.map((genre) => <span key={mainMovie.title + genre}>{`${genre} `}</span>)}
 genres
           </p>
         </Box>
@@ -63,7 +63,7 @@ genres
   }
 }
 
-const loadData = (path) => {
+export const loadDescriptionData = (path) => {
   const id = path.split('/').pop();
   const mainMovie = movie(id);
   return Promise.all([mainMovie]).then((result) => {
@@ -76,7 +76,7 @@ const loadData = (path) => {
 function mapStateToProps(store, ownProps) {
   return {
     movieList: store.movieState.movieList,
-    movie: store.movieState.movie,
+    mainMovie: store.movieState.movie,
     movieId: Number(ownProps.match.params.id),
   };
 }
@@ -87,15 +87,15 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default { component: connect(mapStateToProps, mapDispatchToProps)(DescriptionPage), loadData };
+export default connect(mapStateToProps, mapDispatchToProps)(DescriptionPage);
 
 DescriptionPage.propTypes = {
-  movie: PropTypes.instanceOf(Object),
+  mainMovie: PropTypes.instanceOf(Object),
   movieId: PropTypes.number.isRequired,
   updateMovieList: PropTypes.func.isRequired,
   getMovie: PropTypes.func.isRequired,
 };
 
 DescriptionPage.defaultProps = {
-  movie: null,
+  mainMovie: null,
 };

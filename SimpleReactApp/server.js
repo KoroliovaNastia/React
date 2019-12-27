@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { renderToString } from 'react-dom/server';
+import styled, { ServerStyleSheet } from 'styled-components';
 import Express from 'express';
 import {
   StaticRouter, matchPath, Switch,
@@ -14,21 +15,29 @@ const port = process.env.PORT || 5050;
 
 const app = Express();
 
-function renderRoot(store, context, location) {
-  const html = renderToString(
+const Body = styled.div`
+  background-color: #232323;
+  color: #FFF;
+`;
 
+function renderRoot(store, context, location) {
+  const sheet = new ServerStyleSheet();
+  const html = renderToString(sheet.collectStyles(
     <Provider store={store}>
-      <StaticRouter context={context} location={location}>
-        <Switch>
-          {renderRoutes(routes)}
-        </Switch>
-      </StaticRouter>
+      <Body>
+        <StaticRouter context={context} location={location}>
+          <Switch>
+            {renderRoutes(routes)}
+          </Switch>
+        </StaticRouter>
+      </Body>
     </Provider>,
-  );
-  return html;
+  ));
+  const styles = sheet.getStyleTags();
+  return { html, styles };
 }
 
-function renderFullPage(html, preloadedState) {
+function renderFullPage(content, preloadedState, location) {
   return `
     <!DOCTYPE html>
         <html lang="en">
@@ -41,13 +50,15 @@ function renderFullPage(html, preloadedState) {
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
                 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
                 <title>React Application</title>
-                <!--<script src="/dist/bundle.js" defer></script>-->
+                ${content.styles}
             </head>
             <body>
-                <div id="root">${html}</div>
+                <div id="root">${content.html}</div>
                 <script>
                     window.PRELOADED_STATE=${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+                    window.URL_PATH="${location}"
                 </script>
+                <script src="/dist/bundle.js"></script>
             </body>
         </html>
     `;
@@ -59,6 +70,7 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 app.get('*', (req, res) => {
   console.log(req.url);
   const currentRoute = routes.find((route) => matchPath(req.url, route)) || {};
+  console.log(currentRoute);
   const newData = currentRoute.loadData(req.url);
 
   Promise.all([newData]).then((result) => {
@@ -68,9 +80,12 @@ app.get('*', (req, res) => {
     store.dispatch(setMovie(data.movie));
     const context = {};
     const preloadedState = store.getState();
+    console.log(preloadedState);
     const content = renderRoot(store, context, req.url);
-
-    res.send(renderFullPage(content, preloadedState));
+    if (context.url) {
+      res.redirect(302, context.url);
+    }
+    res.send(renderFullPage(content, preloadedState, req.url));
   });
 });
 
