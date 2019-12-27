@@ -1,7 +1,7 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import { StaticRouter, Switch /* Route */ } from 'react-router-dom';
+import { BrowserRouter, Switch /* Route */ } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import styled from 'styled-components';
 import { configureStore } from './redux/store';
@@ -25,12 +25,12 @@ hydrate(
   <Provider store={store}>
     <Body>
       <ErrorBoundary>
-        <StaticRouter location={location}>
+        <BrowserRouter location={location}>
           <Switch>
             { renderRoutes(routes) }
             {/* <Route path="*" component={DescriptionPage} /> */}
           </Switch>
-        </StaticRouter>
+        </BrowserRouter>
       </ErrorBoundary>
     </Body>
   </Provider>,

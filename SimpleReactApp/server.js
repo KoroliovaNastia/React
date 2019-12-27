@@ -70,7 +70,6 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 app.get('*', (req, res) => {
   console.log(req.url);
   const currentRoute = routes.find((route) => matchPath(req.url, route)) || {};
-  console.log(currentRoute);
   const newData = currentRoute.loadData(req.url);
 
   Promise.all([newData]).then((result) => {
